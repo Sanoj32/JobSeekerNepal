@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pravat</title>
+    <title>vatPra</title>
     <script src="https://use.fontawesome.com/b0f225cc8a.js"></script>
 
     <!-- Fonts -->
