@@ -43,7 +43,6 @@
                                 placeholder="Type a keyword eg: laravel, mysql ,NodeJS, python etc">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
-                                <?= $job->id ?>
                             </button>
                         </div>
                     </div>
