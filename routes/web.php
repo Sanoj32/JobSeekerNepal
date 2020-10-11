@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/update', 'JobsController@update');
+Route::get('/update', 'JobsController@store');
 
 Auth::routes();
 
