@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>vatPra</title>
+  
+    <title>It job seeker</title>
+    
     <script src="https://use.fontawesome.com/b0f225cc8a.js"></script>
 
     <!-- Fonts -->
@@ -23,6 +25,7 @@
             <div class="flex-center position-ref full-height">
                 @if (Route::has('login'))
                     <div class="top-right links">
+                        <a href="{{ url('/update') }}">Update data </a>
                         @auth
                             <a href="{{ url('/home') }}">Home</a>
                         @else
