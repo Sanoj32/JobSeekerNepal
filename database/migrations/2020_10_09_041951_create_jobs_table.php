@@ -26,7 +26,7 @@ class CreateJobsTable extends Migration
             $table->string('deadline')->nullable(); //Application deadline
             $table->string('education')->nullable();
             $table->string('experience')->nullable();
-            $table->string('skills')->nullable();
+            $table->text('skills')->nullable();
             $table->text('desc')->nullable(); //description of the job
             $table->text('desc1')->nullable();
             $table->text('desc2')->nullable();
