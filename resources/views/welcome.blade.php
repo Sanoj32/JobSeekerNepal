@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  
     <title>It job seeker</title>
+    
     <script src="https://use.fontawesome.com/b0f225cc8a.js"></script>
 
     <!-- Fonts -->
