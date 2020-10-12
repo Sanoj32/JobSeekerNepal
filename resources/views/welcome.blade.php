@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
+
     <title>It job seeker</title>
-    
+
     <script src="https://use.fontawesome.com/b0f225cc8a.js"></script>
 
     <!-- Fonts -->
@@ -41,10 +41,14 @@
                 <div class="content">
                     <div class="wrap">
                         <div class="search">
-                            <input type="text" class="searchTerm" placeholder="Type a keyword eg: laravel, mysql ,NodeJS, python etc">
-                            <button type="submit" class="searchButton">
-                                <i class="fa fa-search"></i>
-                            </button>
+                            <form action="/search" method="GET" role="search">
+                                {{ csrf_field() }}
+                                <input type="text" class="searchTerm" name="searchText" placeholder="Search users">
+                                <button type="submit" class="searchButton">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

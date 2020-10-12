@@ -20,7 +20,7 @@ class JobsController extends Controller
             // echo '</pre>';
             foreach ($jsondata as $data) {
                 $storedjobs = Jobs::all();
-                $c = 0; // if c=0 It means the url is a unique url and filters duplicate jobs from same site
+                $c = 0; // if c=0 It means the url is a unique url from that site and filters duplicate jobs from same site
                 foreach ($storedjobs as $storedjob) {
                     if ($data['Page_URL'] == $storedjob['url']) {
                         $c = 1;
@@ -49,7 +49,21 @@ class JobsController extends Controller
                     $jobs->save();
                 }
             }
-            return redirect('/');
         }
+        return redirect('/');
+    }
+    public function search()
+    {
+        $searchText = $_GET['searchText'];
+        $jobs = Jobs::where('name', 'LIKE', '%' . $searchText . '%')
+            ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
+            ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
+            ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
+            ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
+            ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
+            ->orwhere('desc4', 'LIKE', '%' . $searchText . '%')
+            ->get();
+        dd($jobs);
+        return view('results', compact('jobs'));
     }
 }

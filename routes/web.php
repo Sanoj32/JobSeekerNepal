@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/update', 'JobsController@store');
-
+Route::get('/search', 'JobsController@search');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
