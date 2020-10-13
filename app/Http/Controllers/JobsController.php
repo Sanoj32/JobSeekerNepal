@@ -63,7 +63,7 @@ class JobsController extends Controller
             ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
             ->orwhere('desc4', 'LIKE', '%' . $searchText . '%')
             ->get();
-        dd($jobs);
-        return view('results', compact('jobs'));
+
+        // return view('results', compact('jobs'));
     }
 }
