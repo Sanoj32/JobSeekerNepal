@@ -9,10 +9,10 @@ class comments extends Model
     protected $guarded = [''];
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
     public function jobs()
     {
-        $this->belongsTo(Jobs::class);
+        return $this->belongsTo(Jobs::class);
     }
 }

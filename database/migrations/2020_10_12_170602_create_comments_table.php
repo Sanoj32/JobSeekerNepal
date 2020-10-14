@@ -18,7 +18,6 @@ class CreateCommentsTable extends Migration
             $table->text('body');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('jobs_id');
-
             $table->timestamps();
 
             $table->index('user_id');

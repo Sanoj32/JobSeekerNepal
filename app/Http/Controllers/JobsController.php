@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Collection;
+
+use Illuminate\Support\Str;
+
+
 use App\Jobs;
 
 class JobsController extends Controller
@@ -46,6 +51,7 @@ class JobsController extends Controller
                     $jobs['desc3'] = $data['desc3'] ?? "";
                     $jobs['desc4'] = $data['desc4'] ?? "";
                     $jobs['url'] = $data['Page_URL'] ?? "";
+                    $jobs['relevancy'] = 0;
                     $jobs->save();
                 }
             }
@@ -63,7 +69,28 @@ class JobsController extends Controller
             ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
             ->orwhere('desc4', 'LIKE', '%' . $searchText . '%')
             ->get();
-
-        // return view('results', compact('jobs'));
+        foreach ($jobs as $job) {
+            $job->relevacny = 0;
+            $name = Str::lower($job->name); //the job name in lowercase
+            $search = Str::lower($searchText);  //the searchText in lower case
+            if (Str::contains($name, $search)) {  // check if a string contains a substring
+                // echo $job->name;
+                // echo "this contains the search word on name";
+                // echo "<br>";
+                $job->relevancy += 100;
+                // echo  $job->relevancy;
+                // echo "<br>";
+                // echo "<br>";
+                // echo "<br>";
+            }
+            $skills = Str::lower($job->skills); // skills to lower case
+            if (Str::contains($job->skills, $searchText)) {
+                // echo $job->skills;
+                // echo "this contains the search word on name";
+                // echo "<br>";
+                $job->relevancy += 50;
+            }
+        }
+        return view('search', compact('jobs'));
     }
 }

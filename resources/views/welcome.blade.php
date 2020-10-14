@@ -43,12 +43,11 @@
                         <div class="search">
                             <form action="/search" method="GET" role="search">
                                 {{ csrf_field() }}
-                                <input type="text" class="searchTerm" name="searchText" placeholder="Search users">
+                                <input type="text" class="searchTerm" required name="searchText" placeholder="Enter a key word like laravel, mysql, frontend etc">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </form>
-
                         </div>
                     </div>
                 </div>
