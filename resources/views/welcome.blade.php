@@ -54,15 +54,7 @@
 
                 <div class="filter-result">
                     <br>
-<<<<<<< HEAD
-                    <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php
-
-use Illuminate\Support\Facades\DB;
-
-echo DB::table('jobs')->count(); ?></span> job openings</p>
-=======
                     <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo DB::table('jobs')->count(); ?></span> total job openings</p>
->>>>>>> 11d32d1f094264c8b9c4f6b7595eacbe901cc4ef
 
                     @if(!empty($jobs))
                     <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:blue;">{{$count}}</span> jobs that matched your search for <span style="font-weight: bold "> {{$searchText}}</span></p>
