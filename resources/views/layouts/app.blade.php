@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>IT Job Seeker</title>
+    <link rel="icon" href="images/jobs.png">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

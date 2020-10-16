@@ -9,7 +9,7 @@ class JobsController extends Controller
 {
     public function store()
     {
-        $websites = array('\jobsnepal.json', '\merocareer.json', '\kumarijobs.json', '\merojob.json');
+        $websites = array('\linkedin.json', '\jobsnepal.json', '\merocareer.json', '\kumarijobs.json', '\merojobs.json');
         foreach ($websites as $website) {
             $jsondata = file_get_contents(public_path("jsondata") . $website);
             $jsondata = json_decode($jsondata, true);
@@ -80,6 +80,6 @@ class JobsController extends Controller
         }
         $count = $jobs->count();
         $jobs = $jobs->sortByDesc('relevancy');
-        return view('welcome', compact('jobs', 'count'));
+        return view('welcome', compact('jobs', 'count', 'searchText'));
     }
 }
