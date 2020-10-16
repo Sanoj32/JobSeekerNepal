@@ -78,6 +78,8 @@ class JobsController extends Controller
                 $job->relevancy += 50;
             }
         }
-        return view('welcome', compact('jobs'));
+        $count = $jobs->count();
+        $jobs = $jobs->sortByDesc('relevancy');
+        return view('welcome', compact('jobs', 'count'));
     }
 }

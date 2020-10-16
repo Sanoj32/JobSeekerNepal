@@ -53,32 +53,38 @@
                 </form>
 
                 <div class="filter-result">
+                    <br>
                     <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo DB::table('jobs')->count(); ?></span> job openings</p>
 
                     @if(!empty($jobs))
+                    <p class="mb-30 ff-montserrat"> There are <span style="font-weight: bold;">{{$count}}</span> jobs that matched your search</p>
+
                     @foreach($jobs as $job)
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
-                            <div class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
-                                FD
-                            </div>
                             <div class="job-content">
                                 <h5 class="text-center text-md-left"> {{ $job->name }}</h5>
                                 <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
-                                    <li class="mr-md-4">
-                                        <i class="zmdi zmdi-pin mr-2"></i> {{$job->address}}
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-pin mr-2 "></i> {{$job->address}}
                                     </li>
-                                    <li class="mr-md-4">
+                                    <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-money mr-2"></i> {{$job->salary}}
                                     </li>
-                                    <li class="mr-md-4">
+                                    <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-time mr-2"></i> {{$job->time}}
+                                    </li>
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-case-check"></i> {{$job->company}}
+                                    </li>
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-timer"></i> {{$job->deadline}}
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="job-right my-4 flex-shrink-0">
-                            <a href="#" class="btn d-block w-100 d-sm-inline-block btn-light">Apply now</a>
+                            <a href="{{$job->url}}" class="btn d-block w-100 d-sm-inline-block btn-light">Apply now</a>
                         </div>
                     </div>
                     @endforeach
@@ -88,7 +94,7 @@
             </div>
 
             <!-- START Pagination -->
-            <nav aria-label="Page navigation">
+            <!-- <nav aria-label="Page navigation">
                 <ul class="pagination pagination-reset justify-content-center">
                     <li class="page-item disabled">
                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
@@ -106,7 +112,7 @@
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
             <!-- END Pagination -->
         </div>
     </div>
