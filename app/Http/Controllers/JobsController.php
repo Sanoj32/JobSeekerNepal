@@ -78,6 +78,6 @@ class JobsController extends Controller
                 $job->relevancy += 50;
             }
         }
-        return view('search', compact('jobs'));
+        return view('welcome', compact('jobs'));
     }
 }
