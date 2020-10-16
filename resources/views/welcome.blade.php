@@ -1,60 +1,121 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
 
-
-    <title>It job seeker</title>
-
-    <script src="https://use.fontawesome.com/b0f225cc8a.js"></script>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <!-- Css -->
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/searchbar.css') }}" />
-    <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
-
-</head>
-
-<body>
-    <div class="container">
-        <div class="hero">
-            <div class="flex-center position-ref full-height">
-                @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{ url('/update') }}">Update data </a>
-                    @auth
-                    <a href="{{ url('/home') }}">Home</a>
-                    @else
-                    <a href="{{ route('login') }}">Login</a>
-
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                    @endif
-                    @endauth
-                </div>
-
-                @endif
-                <div class="content">
-                    <div class="wrap">
-                        <div class="search">
-                            <form action="/search" method="GET" role="search">
-                                {{ csrf_field() }}
-                                <input type="text" class="searchTerm" name="searchText" placeholder="Search users">
-                                <button type="submit" class="searchButton">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto mb-4">
+            <div class="section-title text-center ">
+                <h3 class="top-c-sep">Grow your career with us </h3>
+                <p>IT and communication job from over 7 sites in a single website.</p>
             </div>
         </div>
     </div>
-</body>
 
-</html>
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="career-search mb-60">
+
+                <form action="/search" class="career-form mb-60">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 my-3">
+                            <div class="input-group position-relative">
+                                <input type="text" class="form-control" placeholder="Enter Your Keywords" id="searchText" name="searchText" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 my-3">
+                            <div class="select-container">
+                                <select class="custom-select">
+                                    <option selected="">Location</option>
+                                    <option value="1">Jaipur</option>
+                                    <option value="2">Pune</option>
+                                    <option value="3">Bangalore</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 my-3">
+                            <div class="select-container">
+                                <select class="custom-select">
+                                    <option selected="">Select Job Type</option>
+                                    <option value="1">Ui designer</option>
+                                    <option value="2">JS developer</option>
+                                    <option value="3">Web developer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 my-3">
+                            <button type="submit" class="btn btn-lg btn-block btn-light btn-custom" id="contact-submit">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="filter-result">
+                    <br>
+                    <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo DB::table('jobs')->count(); ?></span> job openings</p>
+
+                    @if(!empty($jobs))
+                    <p class="mb-30 ff-montserrat"> There are <span style="font-weight: bold;">{{$count}}</span> jobs that matched your search</p>
+
+                    @foreach($jobs as $job)
+                    <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
+                        <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+                            <div class="job-content">
+                                <h5 class="text-center text-md-left"> {{ $job->name }}</h5>
+                                <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-pin mr-2 "></i> {{$job->address}}
+                                    </li>
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-money mr-2"></i> {{$job->salary}}
+                                    </li>
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-time mr-2"></i> {{$job->time}}
+                                    </li>
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-case-check"></i> {{$job->company}}
+                                    </li>
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-timer"></i> {{$job->deadline}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="job-right my-4 flex-shrink-0">
+                            <a href="{{$job->url}}" class="btn d-block w-100 d-sm-inline-block btn-light">Apply now</a>
+                        </div>
+                    </div>
+                    @endforeach
+                    @endif
+
+                </div>
+            </div>
+
+            <!-- START Pagination -->
+            <!-- <nav aria-label="Page navigation">
+                <ul class="pagination pagination-reset justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                            <i class="zmdi zmdi-long-arrow-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item d-none d-md-inline-block"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item d-none d-md-inline-block"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">8</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="zmdi zmdi-long-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav> -->
+            <!-- END Pagination -->
+        </div>
+    </div>
+
+</div>
+@endsection
