@@ -32,7 +32,7 @@ class CreateJobsTable extends Migration
             $table->text('desc2')->nullable();
             $table->text('desc3')->nullable();
             $table->text('desc4')->nullable();
-            $table->string('url')->nullable();
+            $table->text('url')->nullable();
             $table->integer('relevancy'); // The relevancy of the search results
             $table->timestamps();
         });

@@ -54,14 +54,18 @@
 
                 <div class="filter-result">
                     <br>
+<<<<<<< HEAD
                     <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php
 
 use Illuminate\Support\Facades\DB;
 
 echo DB::table('jobs')->count(); ?></span> job openings</p>
+=======
+                    <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo DB::table('jobs')->count(); ?></span> total job openings</p>
+>>>>>>> 11d32d1f094264c8b9c4f6b7595eacbe901cc4ef
 
                     @if(!empty($jobs))
-                    <p class="mb-30 ff-montserrat"> There are <span style="font-weight: bold;">{{$count}}</span> jobs that matched your search</p>
+                    <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:blue;">{{$count}}</span> jobs that matched your search for <span style="font-weight: bold "> {{$searchText}}</span></p>
 
                     @foreach($jobs as $job)
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
@@ -79,10 +83,10 @@ echo DB::table('jobs')->count(); ?></span> job openings</p>
                                         <i class="zmdi zmdi-time mr-2"></i> {{$job->time}}
                                     </li>
                                     <li class="mr-md-4 pt-3 pr-3">
-                                        <i class="zmdi zmdi-case-check"></i> {{$job->company}}
+                                        <i class="zmdi zmdi-case-check mr-2"></i> {{$job->company}}
                                     </li>
                                     <li class="mr-md-4 pt-3 pr-3">
-                                        <i class="zmdi zmdi-timer"></i> {{$job->deadline}}
+                                        <i class="zmdi zmdi-timer mr-2"></i> {{$job->deadline}}
                                     </li>
                                 </ul>
                             </div>
