@@ -52,6 +52,23 @@ class JobsController extends Controller
                 }
             }
         }
+        $jobs = Jobs::all();
+        foreach ($jobs as $job) {
+            $test = $job;
+            $time = $test->deadline;
+            $time = strtotime($time);
+            $newformat = date('Y-m-d', $time);
+            echo $newformat . '<br>';
+            $comparison = date('1970-01-01');
+            if (!($newformat == $comparison)) {
+                $job->truedeadline = $newformat;
+                echo $newformat . '<br>';
+                echo $job->truedeadline . '<br>';
+                echo ("not equal to 1970") . '<br>' . '<br>' . '<br>';
+                $job->save();
+            }
+        }
+        dd('end');
         return redirect('/');
     }
     public function search()
@@ -81,5 +98,9 @@ class JobsController extends Controller
         $count = $jobs->count();
         $jobs = $jobs->sortByDesc('relevancy');
         return view('welcome', compact('jobs', 'count', 'searchText'));
+    }
+    public function test()
+    {
+        return view('test');
     }
 }

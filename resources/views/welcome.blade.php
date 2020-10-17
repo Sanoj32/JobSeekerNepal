@@ -63,28 +63,43 @@
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="job-content">
-                                <h5 class="text-center text-md-left"> {{ $job->name }}</h5>
+                                <h5 style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> {{ $job->name }}</h5>
                                 <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
+                                    @if(!empty($job->address))
                                     <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-pin mr-2 "></i> {{$job->address}}
                                     </li>
+                                    @endif
+                                    @if(!empty($job->level))
+                                    <li class="mr-md-4 pt-3 pr-3">
+                                        <i class="zmdi zmdi-star mr-2 "></i> {{$job->level}}
+                                    </li>
+                                    @endif
+                                    @if(!empty($job->salary))
                                     <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-money mr-2"></i> {{$job->salary}}
                                     </li>
+                                    @endif
+                                    @if(!empty($job->time))
                                     <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-time mr-2"></i> {{$job->time}}
                                     </li>
+                                    @endif
+                                    @if(!empty($job->company))
                                     <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-case-check mr-2"></i> {{$job->company}}
                                     </li>
+                                    @endif
+                                    @if(!empty($job->deadline))
                                     <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-timer mr-2"></i> {{$job->deadline}}
                                     </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
                         <div class="job-right my-4 flex-shrink-0">
-                            <a href="{{$job->url}}" class="btn d-block w-100 d-sm-inline-block btn-light">Apply now</a>
+                            <a href="{{$job->url}}" class="btn btn-success mb-5 mt-0" target="_blank">Apply now</a>
                         </div>
                     </div>
                     @endforeach
