@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 Route::get('/update', 'JobsController@store');
 Route::get('/search', 'JobsController@search');
+Route::get('/test', 'JobsController@test');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

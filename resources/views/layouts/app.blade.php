@@ -43,6 +43,7 @@ use Illuminate\Support\Facades\DB;
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         Refrences
+                        <a href="/test">Testing</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

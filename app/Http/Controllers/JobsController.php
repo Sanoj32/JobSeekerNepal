@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Jobs;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class JobsController extends Controller
 {
@@ -41,16 +43,44 @@ class JobsController extends Controller
                     $jobs['education'] = $data['education'] ?? "";
                     $jobs['experience'] = $data['experience'] ?? "";
                     $jobs['skills'] = $data['skills'] ?? "";
+                    $jobs['skills'] = $data['skills'] ?? "";
                     $jobs['desc'] = $data['desc'] ?? "";
                     $jobs['desc1'] = $data['desc1'] ?? "";
                     $jobs['desc2'] = $data['desc2'] ?? "";
                     $jobs['desc3'] = $data['desc3'] ?? "";
                     $jobs['desc4'] = $data['desc4'] ?? "";
                     $jobs['url'] = $data['Page_URL'] ?? "";
-                    $jobs['relevancy'] = 0;
+                    $jobs['isExpired'] = false;
+                    $jobs['relevancy'] = 10;
                     $jobs->save();
                 }
+            } // saved one data
+        } //end of whole data collection from different websites 
+        $jobs = Jobs::all(); //catagroize legitimate dates and calculate exact date
+        $datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
+        foreach ($jobs as $job) {
+            $deadline = $job->deadline;
+            $deadline = strtotime($deadline);
+            $deadline = date('Y-m-d', $deadline); //formats the date into Y-m-d format
+            $comparison = date('1970-01-01');
+            if (!($deadline == $comparison)) {
+                $job->truedeadline = $deadline; //deadline is true deadline of the job
+                $datenow->format('Y-m-d');
+                if ($deadline < $datenow) {
+                    $job->isExpired = true;
+                }
+                $job->save();
             }
+        }
+        $jobs = Jobs::where('url', 'like', '%merojob%')->get();
+        foreach ($jobs as $job) {
+            $deadline = $job->deadline;
+            $arr = explode('(', $deadline);
+            $date = $arr[0];
+            $actualdate = strtotime($date);
+            $realdate = date('Y-m-d', $actualdate);
+            $job->truedeadline = $realdate;
+            $job->save();
         }
         return redirect('/');
     }
@@ -59,6 +89,7 @@ class JobsController extends Controller
         $searchText = $_GET['searchText'];
         $jobs = Jobs::where('name', 'LIKE', '%' . $searchText . '%')
             ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
+            ->orwhere('skills1', 'LIKE', '%' . $searchText . '%')
             ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
             ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
             ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
@@ -74,12 +105,23 @@ class JobsController extends Controller
                 $job->relevancy += 100;
             }
             $skills = Str::lower($job->skills); // skills to lower case
-            if (Str::contains($job->skills, $searchText)) {
-                $job->relevancy += 50;
+            if (Str::contains($skills, $searchText)) {
+                $job->relevancy += 40;
+            }
+            $skills1 = Str::lower($job->skills1); // skills to lower case
+            if (Str::contains($skills1, $searchText)) {
+                $job->relevancy += 40;
+            }
+            if ($job->isExpired == true) {
+                $job->relevancy = 0;
             }
         }
-        $count = $jobs->count();
+        $count = $jobs->where('isExpired', '=', 'false')->count();
         $jobs = $jobs->sortByDesc('relevancy');
         return view('welcome', compact('jobs', 'count', 'searchText'));
+    }
+    public function test()
+    {
+        return view('test');
     }
 }
