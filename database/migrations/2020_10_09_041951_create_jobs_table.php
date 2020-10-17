@@ -23,7 +23,8 @@ class CreateJobsTable extends Migration
             $table->string('time')->nullable(); //Full time or part time
             $table->string('address')->nullable(); //Address of the job
             $table->string('salary')->nullable();
-            $table->string('deadline')->nullable(); //Application deadline
+            $table->string('deadline')->nullable(); //Application deadline in string
+            $table->date('truedeadline')->nullable(); //Application deadline in Datetime
             $table->string('education')->nullable();
             $table->string('experience')->nullable();
             $table->text('skills')->nullable();
