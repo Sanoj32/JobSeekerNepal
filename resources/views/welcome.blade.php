@@ -60,12 +60,11 @@
                     <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:darkblue;">{{$count}}</span> active jobs that matched your search for <span style="font-weight: bold "> {{$searchText}}</span></p>
                     <?php $sn = 1; ?>
                     @foreach($jobs as $job)
+                    @if($job->isExpired == false)
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="job-content">
-                                <h5 style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"><span> <?= $sn; ?>) <span class="pl-1"> {{ $job->name }} </span> @if($job->isExpired == true)
-                                        <button class="btn btn-danger" title="This job is expired">Expired</button>
-                                        @endif </span> </h5>
+                                <h5 style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"><span> <?= $sn; ?>) <span class="pl-1"> {{ $job->name }} </span> </span> </h5>
 
                                 <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
                                     @if(!empty($job->address))
@@ -106,6 +105,7 @@
                             <a href="{{$job->url}}" class="btn btn-success mb-5 mt-0" target="_blank">Apply now</a>
                         </div>
                     </div>
+                    @endif
                     @endforeach
                     @endif
 

@@ -13,11 +13,7 @@
 
     use App\Jobs;
 
-    $jobs = Jobs::where(
-        'url',
-        'Not like',
-        '%merojob%'
-    )->get();
+    $jobs = Jobs::all();
     foreach ($jobs as $job) {
         echo $job->url . '<br>';
     }
