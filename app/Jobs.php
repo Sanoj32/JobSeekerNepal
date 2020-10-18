@@ -11,4 +11,8 @@ class Jobs extends Model
     {
         return $this->hasMany(comments::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 }

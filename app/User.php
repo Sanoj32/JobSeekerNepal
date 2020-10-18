@@ -40,4 +40,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(comments::class);
     }
+    public function jobs()
+    {
+        return $this->hasMany(jobs::class);
+    }
 }
