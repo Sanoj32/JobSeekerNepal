@@ -36,6 +36,7 @@ class CreateJobsTable extends Migration
             $table->text('desc3')->nullable();
             $table->text('desc4')->nullable();
             $table->text('url')->nullable();
+            $table->string('websitename')->nullable();
             $table->integer('relevancy'); // The relevancy of the search results
             $table->boolean('isExpired'); //true means the job is  expired , false means it is not expired
             $table->timestamps();

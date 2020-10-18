@@ -11,6 +11,11 @@ class JobsController extends Controller
 {
     public function store()
     {
+
+
+
+
+
         $websites = array('\linkedin.json', '\jobsnepal.json', '\merocareer.json', '\kumarijobs.json', '\merojobs.json');
         foreach ($websites as $website) {
             $jsondata = file_get_contents(public_path("jsondata") . $website);
@@ -50,15 +55,18 @@ class JobsController extends Controller
                     $jobs['desc3'] = $data['desc3'] ?? "";
                     $jobs['desc4'] = $data['desc4'] ?? "";
                     $jobs['url'] = $data['Page_URL'] ?? "";
+                    $jobs['websitename'] = "";
                     $jobs['isExpired'] = false;
                     $jobs['relevancy'] = 10;
                     $jobs->save();
                 }
             } // saved one data
         } //end of whole data collection from different websites 
+        $websitenames = array('linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijobs.com', 'merojobs.com');
         $jobs = Jobs::all(); //catagroize legitimate dates and calculate exact date
         $datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
         foreach ($jobs as $job) {
+
             $deadline = $job->deadline;
             $deadline = strtotime($deadline);
             $deadline = date('Y-m-d', $deadline); //formats the date into Y-m-d format
@@ -72,6 +80,7 @@ class JobsController extends Controller
                 $job->save();
             }
         }
+        //code to calculate the real date from string from merojob site
         $jobs = Jobs::where('url', 'like', '%merojob%')->get();
         foreach ($jobs as $job) {
             $deadline = $job->deadline;
@@ -82,6 +91,21 @@ class JobsController extends Controller
             $job->truedeadline = $realdate;
             $job->save();
         }
+        //end real date calculation code
+
+        //code to assign websitename
+        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
+        foreach ($websitenames as $sitename) {
+            $jobs = Jobs::where('url', 'like', '%' . $sitename . '%')->get();
+            foreach ($jobs as $job) {
+                echo $sitename . "<br>";
+                $job->websitename = $sitename;
+                $job->save();
+                echo $job->websitename . "<br>";
+            }
+        }
+        //end code to assign websitename
+
         return redirect('/');
     }
     public function search()
