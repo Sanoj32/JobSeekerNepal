@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-3 my-3">
                             <div class="input-group position-relative">
-                                <input type="text" class="form-control" placeholder="Enter Your Keywords" id="searchText" name="searchText" required>
+                                <input type="text" class="form-control" placeholder="Enter a single Keyword" id="searchText" name="searchText" required>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3 my-3">
@@ -96,6 +96,7 @@
                                     <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-timer mr-2"></i> {{$job->truedeadline ?? $job->deadline}}
                                     </li>
+
                                     @endif
                                     <?php $sn += 1; ?>
                                 </ul>
@@ -103,6 +104,7 @@
                         </div>
                         <div class="job-right my-4 flex-shrink-0">
                             <a href="{{$job->url}}" class="btn btn-success mb-5 mt-0" target="_blank">Apply now</a>
+                            <div class="font-italic">{{$job->websitename}}</div>
                         </div>
                     </div>
                     @endif
