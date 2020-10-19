@@ -5,17 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use App\Jobs;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class JobsController extends Controller
 {
     public function store()
     {
-
-
-
-
-
         $websites = array('\linkedin.json', '\jobsnepal.json', '\merocareer.json', '\kumarijobs.json', '\merojobs.json');
         foreach ($websites as $website) {
             $jsondata = file_get_contents(public_path("jsondata") . $website);
@@ -23,9 +17,6 @@ class JobsController extends Controller
             if (empty($jsondata)) {
                 echo "Variable 'data' is empty.<br>";
             }
-            // echo '<pre>';
-            // print_r($data);
-            // echo '</pre>';
             foreach ($jsondata as $data) {
                 $storedjobs = Jobs::all();
                 $c = 0; // if c=0 It means the url is a unique url from that site and filters duplicate jobs from same site
@@ -33,7 +24,7 @@ class JobsController extends Controller
                     if ($data['Page_URL'] == $storedjob['url']) {
                         $c = 1;
                     }
-                }
+                } //code to insert data in the database
                 if ($c == 0) {
                     $jobs = new Jobs();
                     $jobs['name'] = $data['name'] ?? "";
@@ -60,13 +51,12 @@ class JobsController extends Controller
                     $jobs['relevancy'] = 10;
                     $jobs->save();
                 }
-            } // saved one data
+            } // end code to insert data
         } //end of whole data collection from different websites 
         $websitenames = array('linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijobs.com', 'merojobs.com');
-        $jobs = Jobs::all(); //catagroize legitimate dates and calculate exact date
+        $jobs = Jobs::where('url', 'not like', '%merojob%'); //catagroize legitimate dates and calculate exact date
         $datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
         foreach ($jobs as $job) {
-
             $deadline = $job->deadline;
             $deadline = strtotime($deadline);
             $deadline = date('Y-m-d', $deadline); //formats the date into Y-m-d format
@@ -89,6 +79,9 @@ class JobsController extends Controller
             $actualdate = strtotime($date);
             $realdate = date('Y-m-d', $actualdate);
             $job->truedeadline = $realdate;
+            if ($realdate < $datenow) {
+                $job->isExpired = true;
+            }
             $job->save();
         }
         //end real date calculation code
@@ -98,10 +91,8 @@ class JobsController extends Controller
         foreach ($websitenames as $sitename) {
             $jobs = Jobs::where('url', 'like', '%' . $sitename . '%')->get();
             foreach ($jobs as $job) {
-                echo $sitename . "<br>";
                 $job->websitename = $sitename;
                 $job->save();
-                echo $job->websitename . "<br>";
             }
         }
         //end code to assign websitename
