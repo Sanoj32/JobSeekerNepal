@@ -11,20 +11,17 @@
 <body>
     <?php
 
+    use Illuminate\Support\Collection;
     use App\Jobs;
-    //code to assign websitename
-    $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
+    use Illuminate\Support\Facades\DB;
 
-    $jobs = Jobs::all();
-    foreach ($websitenames as $sitename) {
-        $jobs = Jobs::where('url', 'like', '%' . $sitename . '%')->get();
-        foreach ($jobs as $job) {
-            echo $sitename . "<br>";
-            $job->websitename = $sitename;
-            echo $job->websitename . "<br>";
-        }
+    $address = "";
+    $jobs = Jobs::where('address', 'like', '%kathmandu%')->get();
+    foreach ($jobs as $job) {
+        echo $job->name . "<br>";
     }
-    //end code to assign websitename
+
+
 
     ?>
 
