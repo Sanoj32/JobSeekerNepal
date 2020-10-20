@@ -15,11 +15,7 @@
     use App\Jobs;
     use Illuminate\Support\Facades\DB;
 
-    $address = "";
-    $jobs = Jobs::where('address', 'like', '%kathmandu%')->get();
-    foreach ($jobs as $job) {
-        echo $job->name . "<br>";
-    }
+    $test = "Javascript"
 
 
 
