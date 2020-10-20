@@ -17,30 +17,20 @@
         <div class="col-lg-10 mx-auto">
             <div class="career-search mb-60">
 
-                <form action="/search" class="career-form mb-60">
+                <form action="/search" method="GET" class="career-form mb-60">
                     <div class="row">
-                        <div class="col-md-6 col-lg-3 my-3">
+                        <div class="col-md-6 col-lg-6 my-3">
                             <div class="input-group position-relative">
-                                <input type="text" class="form-control" placeholder="Enter Your Keywords" id="searchText" name="searchText" required>
+                                <input type="text" class="form-control" @if(isset($searchText)) value="{{$searchText}}" @endif placeholder="Enter a single Keyword" id="searchText" name="searchText">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3 my-3">
                             <div class="select-container">
-                                <select class="custom-select">
-                                    <option selected="">Location</option>
-                                    <option value="1">Jaipur</option>
-                                    <option value="2">Pune</option>
-                                    <option value="3">Bangalore</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 my-3">
-                            <div class="select-container">
-                                <select class="custom-select">
-                                    <option selected="">Select Job Type</option>
-                                    <option value="1">Ui designer</option>
-                                    <option value="2">JS developer</option>
-                                    <option value="3">Web developer</option>
+                                <select class="custom-select" name="location">
+                                    <option selected="" value="">Select a location</option>
+                                    <option value="kathmandu">Kathmandu</option>
+                                    <option value="lalitpur">Lalitpur</option>
+                                    <option value="other">Other</option>
                                 </select>
                             </div>
                         </div>
@@ -54,10 +44,26 @@
 
                 <div class="filter-result">
                     <br>
-                    <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isexpired', '=', 'false')->count(); ?></span> total active job openings</p>
+                    @if( !isset($searchText) && !isset($address))
+                    <p class="mb-30 ff-montserrat"> Type a keyword the search bar to find the job you are searching for. Selecting a location is optional </p>
+                    @endif
+                    @if(!empty($searchText))
+                    <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isexpired', '=', 'false')->count(); ?></span> total active job openings
 
+                    </p>
+
+                    @endif
                     @if(!empty($jobs))
-                    <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:darkblue;">{{$count}}</span> active jobs that matched your search for <span style="font-weight: bold "> {{$searchText}}</span></p>
+                    <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:darkblue;">{{$count}}</span> active jobs that matched your search
+                        @if(!empty($searchText))
+                        for <span style="font-weight: bold "> {{$searchText}}</span>
+                        @endif
+                        @if(!empty($address))
+                        in {{$address}}
+                        @endif
+                    </p>
+
+
                     <?php $sn = 1; ?>
                     @foreach($jobs as $job)
                     @if($job->isExpired == false)
@@ -96,6 +102,7 @@
                                     <li class="mr-md-4 pt-3 pr-3">
                                         <i class="zmdi zmdi-timer mr-2"></i> {{$job->truedeadline ?? $job->deadline}}
                                     </li>
+
                                     @endif
                                     <?php $sn += 1; ?>
                                 </ul>
@@ -103,6 +110,7 @@
                         </div>
                         <div class="job-right my-4 flex-shrink-0">
                             <a href="{{$job->url}}" class="btn btn-success mb-5 mt-0" target="_blank">Apply now</a>
+                            <div class="font-italic">{{$job->websitename}}</div>
                         </div>
                     </div>
                     @endif

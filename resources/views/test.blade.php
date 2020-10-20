@@ -11,12 +11,13 @@
 <body>
     <?php
 
+    use Illuminate\Support\Collection;
     use App\Jobs;
+    use Illuminate\Support\Facades\DB;
 
-    $jobs = Jobs::all();
-    foreach ($jobs as $job) {
-        echo $job->url . '<br>';
-    }
+    $test = "Javascript"
+
+
 
     ?>
 

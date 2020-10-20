@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use App\Jobs;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class JobsController extends Controller
 {
@@ -18,9 +17,6 @@ class JobsController extends Controller
             if (empty($jsondata)) {
                 echo "Variable 'data' is empty.<br>";
             }
-            // echo '<pre>';
-            // print_r($data);
-            // echo '</pre>';
             foreach ($jsondata as $data) {
                 $storedjobs = Jobs::all();
                 $c = 0; // if c=0 It means the url is a unique url from that site and filters duplicate jobs from same site
@@ -28,7 +24,7 @@ class JobsController extends Controller
                     if ($data['Page_URL'] == $storedjob['url']) {
                         $c = 1;
                     }
-                }
+                } //code to insert data in the database
                 if ($c == 0) {
                     $jobs = new Jobs();
                     $jobs['name'] = $data['name'] ?? "";
@@ -50,13 +46,14 @@ class JobsController extends Controller
                     $jobs['desc3'] = $data['desc3'] ?? "";
                     $jobs['desc4'] = $data['desc4'] ?? "";
                     $jobs['url'] = $data['Page_URL'] ?? "";
+                    $jobs['websitename'] = "";
                     $jobs['isExpired'] = false;
                     $jobs['relevancy'] = 10;
                     $jobs->save();
                 }
-            } // saved one data
+            } // end code to insert data
         } //end of whole data collection from different websites 
-        $jobs = Jobs::all(); //catagroize legitimate dates and calculate exact date
+        $jobs = Jobs::where('url', 'not like', '%merojob%'); //catagroize legitimate dates and calculate exact date
         $datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
         foreach ($jobs as $job) {
             $deadline = $job->deadline;
@@ -72,6 +69,7 @@ class JobsController extends Controller
                 $job->save();
             }
         }
+        //code to calculate the real date from string from merojob site
         $jobs = Jobs::where('url', 'like', '%merojob%')->get();
         foreach ($jobs as $job) {
             $deadline = $job->deadline;
@@ -80,29 +78,125 @@ class JobsController extends Controller
             $actualdate = strtotime($date);
             $realdate = date('Y-m-d', $actualdate);
             $job->truedeadline = $realdate;
+            if ($realdate < $datenow) {
+                $job->isExpired = true;
+            }
             $job->save();
         }
+        //end real date calculation code
+
+        //code to assign websitename
+        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
+        foreach ($websitenames as $sitename) {
+            $jobs = Jobs::where('url', 'like', '%' . $sitename . '%')->get();
+            foreach ($jobs as $job) {
+                $job->websitename = $sitename;
+                $job->save();
+            }
+        }
+        //end code to assign websitename
+
         return redirect('/');
     }
     public function search()
     {
+        $address = $_GET['location'];
         $searchText = $_GET['searchText'];
-        $jobs = Jobs::where('name', 'LIKE', '%' . $searchText . '%')
-            ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
-            ->orwhere('skills1', 'LIKE', '%' . $searchText . '%')
-            ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
-            ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
-            ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
-            ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
-            ->orwhere('desc4', 'LIKE', '%' . $searchText . '%')
-            ->get();
+        $ogsearchText = $searchText;
+        $searchText = strtolower($searchText);
+        if ($searchText == 'dot net' || $searchText ==  'dotnet') {
+            $searchText = ".net";
+        }
+        if ($searchText == 'java') {
+            $searchText = "java ";
+        }
+
+        if ($searchText == 'js') {
+            $searchText = "javascript";
+        }
+        if (Str::contains($searchText, 'node')) {
+            $searchText = 'node';
+        }
+        if (Str::contains($searchText, 'react')) {
+            $searchText = 'react';
+        }
+        if ($searchText == "" && $address == "") { //if both search text and location select are empty just redirect the user to homepage
+            return redirect('/');
+        }
+        if ($searchText == "" && $address <> "") { //if only the searchtext is empty show jobs with the selected address
+            if ($address != 'other' && $address <> "") {
+
+                $jobs = Jobs::where('address', 'like', '%' . $address . '%')
+                    ->where('isExpired', '=', 'false')
+                    ->get();
+                $count = $jobs->count();
+                return view('welcome', compact('jobs', 'count', 'address'));
+            } else {
+
+                $jobs = Jobs::where('address', 'not like', '%kathmandu%')
+                    ->where('address', 'not like', '%lalitpur%')
+                    ->where('isExpired', '=', 'false')
+                    ->get();
+                $count = $jobs->count();
+                return view('welcome', compact('jobs', 'count', 'address'));
+            }
+        }
+        if ($searchText <> "" && $address == "") { // when search text is not empty and address is  empty
+
+            $jobs = Jobs::where('isExpired', '=', 'false')
+                ->where(function ($query) use ($searchText) {
+                    $query->where('name', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('skills1', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc4', 'LIKE', '%' . $searchText . '%');
+                })
+                ->get();
+        }
+        if ($address <> "" && $address <> 'other' && $searchText <> "") {  //if the address isn't empty only get the jobs containing this address
+
+            $jobs = Jobs::where('isExpired', '=', 'false')
+                ->where('address', 'like', '%' . $address . '%')
+                ->where(function ($query) use ($searchText) {
+                    $query->where('name', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('skills1', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc4', 'LIKE', '%' . $searchText . '%');
+                })
+                ->get();
+        }
+
+        if ($searchText <> "" && $address == 'other') {
+
+            $jobs = Jobs::where('address', 'not like', '%kathmandu%')
+                ->where('address', 'not like', '%lalitpur%')
+                ->where('isExpired', '=', 'false')
+                ->where(function ($query) use ($searchText) {
+                    $query->where('name', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('skills1', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
+                        ->orwhere('desc4', 'LIKE', '%' . $searchText . '%');
+                })
+                ->get();
+        }
         foreach ($jobs as $job) {
+
             $job->relevacny = 0;
             $name = Str::lower($job->name); //the job name in lowercase
             $search = Str::lower($searchText);  //the searchText in lower case
             if (Str::contains($name, $search)) {  // check if a string contains a substring
-
-                $job->relevancy += 100;
+                $job->relevancy += 200;
             }
             $skills = Str::lower($job->skills); // skills to lower case
             if (Str::contains($skills, $searchText)) {
@@ -116,9 +210,10 @@ class JobsController extends Controller
                 $job->relevancy = 0;
             }
         }
-        $count = $jobs->where('isExpired', '=', 'false')->count();
+        $count = $jobs->count();
+        $searchText = $ogsearchText;
         $jobs = $jobs->sortByDesc('relevancy');
-        return view('welcome', compact('jobs', 'count', 'searchText'));
+        return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
     }
     public function test()
     {

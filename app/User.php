@@ -36,12 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function comments()
-    {
-        return $this->hasMany(comments::class);
-    }
     public function jobs()
     {
-        return $this->hasMany(jobs::class);
+        return $this->belongsToMany(Jobs::class);
     }
 }
