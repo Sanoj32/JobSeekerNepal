@@ -26,8 +26,8 @@
                         </div>
                         <div class="col-md-6 col-lg-3 my-3">
                             <div class="select-container">
-                                <select class="custom-select" name="location">
-                                    <option selected="" value="">Select a location</option>
+                                <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
+                                    <option selected="" default=" {{$address ?? ''}}" value="">Select a location</option>
                                     <option value="kathmandu">Kathmandu</option>
                                     <option value="lalitpur">Lalitpur</option>
                                     <option value="other">Other</option>
@@ -47,12 +47,12 @@
                     @if( !isset($searchText) && !isset($address))
                     <p class="mb-30 ff-montserrat"> Type a keyword the search bar to find the job you are searching for. Selecting a location is optional </p>
                     @endif
-                    @if(!empty($searchText))
+
                     <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isexpired', '=', 'false')->count(); ?></span> total active job openings
 
                     </p>
 
-                    @endif
+
                     @if(!empty($jobs))
                     <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:darkblue;">{{$count}}</span> active jobs that matched your search
                         @if(!empty($searchText))

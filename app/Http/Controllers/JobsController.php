@@ -53,9 +53,21 @@ class JobsController extends Controller
                 }
             } // end code to insert data
         } //end of whole data collection from different websites 
-        $jobs = Jobs::where('url', 'not like', '%merojob%'); //catagroize legitimate dates and calculate exact date
+        //code to assign websitename
+        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
+        foreach ($websitenames as $sitename) {
+            $jobs = Jobs::where('url', 'like', '%' . $sitename . '%')->get();
+            foreach ($jobs as $job) {
+                $job->websitename = $sitename;
+                $job->save();
+            }
+        }
+        //end code to assign websitename
+
+        $jobs = Jobs::where('url', 'not like', '%merojob%')->get(); //catagroize legitimate dates and calculate exact date
         $datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
         foreach ($jobs as $job) {
+            echo $job->websitename . "<hr>";
             $deadline = $job->deadline;
             $deadline = strtotime($deadline);
             $deadline = date('Y-m-d', $deadline); //formats the date into Y-m-d format
@@ -69,7 +81,7 @@ class JobsController extends Controller
                 $job->save();
             }
         }
-        //code to calculate the real date from string from merojob site
+        //code to calculate the real date from string from merojob site 
         $jobs = Jobs::where('url', 'like', '%merojob%')->get();
         foreach ($jobs as $job) {
             $deadline = $job->deadline;
@@ -85,16 +97,6 @@ class JobsController extends Controller
         }
         //end real date calculation code
 
-        //code to assign websitename
-        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
-        foreach ($websitenames as $sitename) {
-            $jobs = Jobs::where('url', 'like', '%' . $sitename . '%')->get();
-            foreach ($jobs as $job) {
-                $job->websitename = $sitename;
-                $job->save();
-            }
-        }
-        //end code to assign websitename
 
         return redirect('/');
     }

@@ -11,17 +11,24 @@
 <body>
     <?php
 
-    use Illuminate\Support\Collection;
+    use Carbon\Carbon;
     use App\Jobs;
-    use Illuminate\Support\Facades\DB;
 
-    $test = "Javascript"
-
-
+    $jobs = Jobs::where('url', 'like', '%jobsnepal%')->get();
+    foreach ($jobs as $job) {
+        echo $job->deadline, '<br>';
+        $deadline = strtotime($job->deadline);
+        $deadline = date('Y-m-d', $deadline);
+        $comparison = date('1970-01-01');
+        if (!($deadline == $comparison)) {
+            echo "valid dates <br>";
+            echo $deadline . "<br><hr>";
+        } else {
+            echo "invalid dates<br><hr>";
+        }
+    }
 
     ?>
-
-
 </body>
 
 </html>
