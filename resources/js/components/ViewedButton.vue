@@ -1,11 +1,13 @@
 <template>
-    <div>
+    <span>
+       
         <button
             class="btn btn-primary ml-4"
             @click="viewed"
             v-text="buttonText"
         ></button>
-    </div>
+        
+    </span>
 </template>
 
 <script>

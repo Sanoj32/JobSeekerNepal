@@ -230,7 +230,6 @@ class JobsController extends Controller
         }
 
         $jobs = $jobs->sortByDesc('relevancy');
-        print_r($viewed);
         return view('welcome', compact('jobs', 'count', 'searchText', 'address','viewed'));
     }
     public function test()

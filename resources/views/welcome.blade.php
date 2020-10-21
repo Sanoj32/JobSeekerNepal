@@ -71,15 +71,20 @@
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="job-content">
-                                <h5 style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"><span> <?= $sn; ?>)
+                            <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?= $sn; ?>)
                                         <span class="pl-1"> {{ $job->name }} {{$job->relevancy}}
+                                            @auth
                                             <viewed-button jobs-id="{{$job->id}}" viewedjobs="{{$viewed[$no]}}" >  </viewed-button> 
+                                            @endauth
+                                            @guest
+                                           <a href="/login"> <button class="btn btn-primary ml-4"> Mark as opened</button> </a>
+                                            @endguest
                                             <?php
                                             $no += 1;
                                             ; ?>
                                         </span>
-
-                                    </span> </h5>
+                                        </h5>
+                                    </span> 
 
                                 <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
                                     @if(!empty($job->address))
