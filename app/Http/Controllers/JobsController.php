@@ -102,7 +102,13 @@ class JobsController extends Controller
     }
     public function search()
     {
-        $address = $_GET['location'];
+        
+        if (isset($_GET['location'])) {
+            $address = $_GET['location'];
+        } else {
+            $address = "";
+        }
+
         $searchText = $_GET['searchText'];
         $ogsearchText = $searchText;
         $searchText = strtolower($searchText);
@@ -214,8 +220,18 @@ class JobsController extends Controller
         }
         $count = $jobs->count();
         $searchText = $ogsearchText;
+        $viewed =  array();
+        foreach($jobs as $job){
+            $jobstatus =  (auth()->user()) ? auth()->user()->viewedjobs->contains($job->id) : false;
+            if($jobstatus == true){
+                $job->relevancy = 0;
+            }
+           $viewed[] = $jobstatus;
+        }
+
         $jobs = $jobs->sortByDesc('relevancy');
-        return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
+        print_r($viewed);
+        return view('welcome', compact('jobs', 'count', 'searchText', 'address','viewed'));
     }
     public function test()
     {

@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
 </head>
 
