@@ -8,7 +8,7 @@ class Jobs extends Model
 {
     protected $guarded = [''];
 
-    public function user()
+    public function viewedbyusers()
     {
         return $this->belongsToMany(User::class);
     }

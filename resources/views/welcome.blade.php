@@ -26,8 +26,8 @@
                         </div>
                         <div class="col-md-6 col-lg-3 my-3">
                             <div class="select-container">
-                                <select class="custom-select" name="location">
-                                    <option selected="" value="">Select a location</option>
+                                <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
+                                    <option selected disabled value="">Select a location</option>
                                     <option value="kathmandu">Kathmandu</option>
                                     <option value="lalitpur">Lalitpur</option>
                                     <option value="other">Other</option>
@@ -47,16 +47,16 @@
                     @if( !isset($searchText) && !isset($address))
                     <p class="mb-30 ff-montserrat"> Type a keyword the search bar to find the job you are searching for. Selecting a location is optional </p>
                     @endif
-                    @if(!empty($searchText))
+
                     <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isexpired', '=', 'false')->count(); ?></span> total active job openings
 
                     </p>
 
-                    @endif
+
                     @if(!empty($jobs))
-                    <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:darkblue;">{{$count}}</span> active jobs that matched your search
+                    <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:green;">{{$count}}</span> active jobs that matched your search
                         @if(!empty($searchText))
-                        for <span style="font-weight: bold "> {{$searchText}}</span>
+                        for <span style="font:bolder"> {{$searchText}}</span>
                         @endif
                         @if(!empty($address))
                         in {{$address}}
@@ -64,13 +64,27 @@
                     </p>
 
 
-                    <?php $sn = 1; ?>
+                    <?php $sn = 1; $no = 0; ?>
+                    <!--  Count for the status array -->
                     @foreach($jobs as $job)
                     @if($job->isExpired == false)
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="job-content">
-                                <h5 style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"><span> <?= $sn; ?>) <span class="pl-1"> {{ $job->name }} </span> </span> </h5>
+                            <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?= $sn; ?>)
+                                        <span class="pl-1"> {{ $job->name }} {{$job->relevancy}}
+                                            @auth
+                                            <viewed-button jobs-id="{{$job->id}}" viewedjobs="{{$viewed[$no]}}" >  </viewed-button> 
+                                            @endauth
+                                            @guest
+                                           <a href="/login"> <button class="btn btn-primary ml-4"> Mark as opened</button> </a>
+                                            @endguest
+                                            <?php
+                                            $no += 1;
+                                            ; ?>
+                                        </span>
+                                        </h5>
+                                    </span> 
 
                                 <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
                                     @if(!empty($job->address))
