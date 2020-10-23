@@ -82,33 +82,33 @@
 
                                 <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
                                     @if(!empty($job->address))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Address">
                                         <i class="zmdi zmdi-pin mr-2 "></i> {{$job->address}}
                                     </li>
                                     @endif
                                     @if(!empty($job->level))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Level">
                                         <i class="zmdi zmdi-star mr-2 "></i> {{$job->level}}
                                     </li>
                                     @endif
                                     @if(!empty($job->salary))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Salary">
                                         <i class="zmdi zmdi-money mr-2"></i> {{$job->salary}}
                                     </li>
                                     @endif
                                     @if(!empty($job->time))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Employment type">
                                         <i class="zmdi zmdi-time mr-2"></i> {{$job->time}}
                                     </li>
                                     @endif
                                     @if(!empty($job->company))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Company name">
                                         <i class="zmdi zmdi-case-check mr-2"></i> {{$job->company}}
                                     </li>
                                     @endif
                                     @if(!empty($job->truedeadline))
-                                    <li class="mr-md-4 pt-3 pr-3">
-                                        <i class="zmdi zmdi-timer mr-2"></i> {{$job->truedeadline ?? $job->deadline}}
+                                    <li class="mr-md-4 pt-3 pr-3" title="Deadline">
+                                        <img style="width: 20px; height:20px" class="mr-2" src="\images\deadline.svg"> {{$job->truedeadline ?? $job->deadline}}
                                     </li>
                                     @endif
                                     <?php $sn += 1; ?>
