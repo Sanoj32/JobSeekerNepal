@@ -15,6 +15,9 @@
                         @endif
 
                         {{ __('You are logged in!') }}
+                        <div class="pt-3">
+                        <h3><a class="pt-4" href="/">Go to the search page</a></h3>
+                        </div>
                     </div>
                 </div>
             </div>

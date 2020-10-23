@@ -52,7 +52,6 @@
 
                     </p>
 
-
                     @if(!empty($jobs))
                     <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:green;">{{$count}}</span> active jobs that matched your search
                         @if(!empty($searchText))
@@ -62,61 +61,55 @@
                         in {{$address}}
                         @endif
                     </p>
-
-
-                    <?php $sn = 1; $no = 0; ?>
-                    <!--  Count for the status array -->
+                    <?php $sn = 1; ?>
                     @foreach($jobs as $job)
                     @if($job->isExpired == false)
+                   <?php $id = $job->id; ?>
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="job-content">
                             <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?= $sn; ?>)
-                                        <span class="pl-1"> {{ $job->name }} {{$job->relevancy}}
+                                        <span class="pl-1"> {{ $job->name }} 
                                             @auth
-                                            <viewed-button jobs-id="{{$job->id}}" viewedjobs="{{$viewed[$no]}}" >  </viewed-button> 
+                                            <viewed-button  jobs-id="{{$job->id}}" viewedjobs="{{$job->isViewed}}" >  </viewed-button> 
                                             @endauth
                                             @guest
                                            <a href="/login"> <button class="btn btn-primary ml-4"> Mark as opened</button> </a>
                                             @endguest
-                                            <?php
-                                            $no += 1;
-                                            ; ?>
                                         </span>
                                         </h5>
-                                    </span> 
+                                    </span>
 
                                 <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
                                     @if(!empty($job->address))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Address">
                                         <i class="zmdi zmdi-pin mr-2 "></i> {{$job->address}}
                                     </li>
                                     @endif
                                     @if(!empty($job->level))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Level">
                                         <i class="zmdi zmdi-star mr-2 "></i> {{$job->level}}
                                     </li>
                                     @endif
                                     @if(!empty($job->salary))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Salary">
                                         <i class="zmdi zmdi-money mr-2"></i> {{$job->salary}}
                                     </li>
                                     @endif
                                     @if(!empty($job->time))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Employment type">
                                         <i class="zmdi zmdi-time mr-2"></i> {{$job->time}}
                                     </li>
                                     @endif
                                     @if(!empty($job->company))
-                                    <li class="mr-md-4 pt-3 pr-3">
+                                    <li class="mr-md-4 pt-3 pr-3" title="Company name">
                                         <i class="zmdi zmdi-case-check mr-2"></i> {{$job->company}}
                                     </li>
                                     @endif
                                     @if(!empty($job->truedeadline))
-                                    <li class="mr-md-4 pt-3 pr-3">
-                                        <i class="zmdi zmdi-timer mr-2"></i> {{$job->truedeadline ?? $job->deadline}}
+                                    <li class="mr-md-4 pt-3 pr-3" title="Deadline">
+                                        <img style="width: 20px; height:20px" class="mr-2" src="\images\deadline.svg"> {{$job->truedeadline ?? $job->deadline}}
                                     </li>
-
                                     @endif
                                     <?php $sn += 1; ?>
                                 </ul>

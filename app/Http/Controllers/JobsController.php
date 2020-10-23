@@ -48,6 +48,7 @@ class JobsController extends Controller
                     $jobs['url']         = $data['Page_URL'] ?? "";
                     $jobs['websitename'] = "";
                     $jobs['isExpired']   = false;
+                    $jobs['isViewed']    = false;
                     $jobs['relevancy']   = 10;
                     $jobs->save();
                 }
@@ -221,20 +222,27 @@ class JobsController extends Controller
             if ($job->isExpired == true) {
                 $job->relevancy = 0;
             }
+            $jobstatus = (auth()->user()) ? auth()->user()->viewedjobs->contains($job->id) : false;
+            if ($jobstatus == true) {
+                $job->relevancy = 0;
+                $job->isViewed  = true;
+            } else {
+                $job->isViewed = false;
+            };
         }
         $count      = $jobs->count();
         $searchText = $ogsearchText;
-        $viewed     = array();
         foreach ($jobs as $job) {
             $jobstatus = (auth()->user()) ? auth()->user()->viewedjobs->contains($job->id) : false;
             if ($jobstatus == true) {
                 $job->relevancy = 0;
-            }
-            $viewed[] = $jobstatus;
+                $job->isViewed  = true;
+            } else {
+                $job->isViewed = false;
+            };
         }
-
         $jobs = $jobs->sortByDesc('relevancy');
-        return view('welcome', compact('jobs', 'count', 'searchText', 'address', 'viewed'));
+        return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
     }
     public function test()
     {
