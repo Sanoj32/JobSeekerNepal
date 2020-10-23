@@ -48,7 +48,7 @@
                     <p class="mb-30 ff-montserrat"> Type a keyword the search bar to find the job you are searching for. Selecting a location is optional </p>
                     @endif
 
-                    <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isexpired', '=', 'false')->count(); ?></span> total active job openings
+                    <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings
 
                     </p>
 
