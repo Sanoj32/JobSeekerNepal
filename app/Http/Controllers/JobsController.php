@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
 use App\Jobs;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class JobsController extends Controller
 {
@@ -48,11 +48,12 @@ class JobsController extends Controller
                     $jobs['url'] = $data['Page_URL'] ?? "";
                     $jobs['websitename'] = "";
                     $jobs['isExpired'] = false;
+                    $jobs['isViewed'] = false;
                     $jobs['relevancy'] = 10;
                     $jobs->save();
                 }
             } // end code to insert data
-        } //end of whole data collection from different websites 
+        } //end of whole data collection from different websites
         //code to assign websitename
         $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
         foreach ($websitenames as $sitename) {
@@ -81,7 +82,7 @@ class JobsController extends Controller
                 $job->save();
             }
         }
-        //code to calculate the real date from string from merojob site 
+        //code to calculate the real date from string from merojob site
         $jobs = Jobs::where('url', 'like', '%merojob%')->get();
         foreach ($jobs as $job) {
             $deadline = $job->deadline;
@@ -97,12 +98,11 @@ class JobsController extends Controller
         }
         //end real date calculation code
 
-
         return redirect('/');
     }
     public function search()
     {
-        
+
         if (isset($_GET['location'])) {
             $address = $_GET['location'];
         } else {
@@ -112,7 +112,7 @@ class JobsController extends Controller
         $searchText = $_GET['searchText'];
         $ogsearchText = $searchText;
         $searchText = strtolower($searchText);
-        if ($searchText == 'dot net' || $searchText ==  'dotnet') {
+        if ($searchText == 'dot net' || $searchText == 'dotnet') {
             $searchText = ".net";
         }
         if ($searchText == 'java') {
@@ -131,8 +131,8 @@ class JobsController extends Controller
         if ($searchText == "" && $address == "") { //if both search text and location select are empty just redirect the user to homepage
             return redirect('/');
         }
-        if ($searchText == "" && $address <> "") { //if only the searchtext is empty show jobs with the selected address
-            if ($address != 'other' && $address <> "") {
+        if ($searchText == "" && $address != "") { //if only the searchtext is empty show jobs with the selected address
+            if ($address != 'other' && $address != "") {
 
                 $jobs = Jobs::where('address', 'like', '%' . $address . '%')
                     ->where('isExpired', '=', 'false')
@@ -149,7 +149,7 @@ class JobsController extends Controller
                 return view('welcome', compact('jobs', 'count', 'address'));
             }
         }
-        if ($searchText <> "" && $address == "") { // when search text is not empty and address is  empty
+        if ($searchText != "" && $address == "") { // when search text is not empty and address is  empty
 
             $jobs = Jobs::where('isExpired', '=', 'false')
                 ->where(function ($query) use ($searchText) {
@@ -164,7 +164,7 @@ class JobsController extends Controller
                 })
                 ->get();
         }
-        if ($address <> "" && $address <> 'other' && $searchText <> "") {  //if the address isn't empty only get the jobs containing this address
+        if ($address != "" && $address != 'other' && $searchText != "") { //if the address isn't empty only get the jobs containing this address
 
             $jobs = Jobs::where('isExpired', '=', 'false')
                 ->where('address', 'like', '%' . $address . '%')
@@ -181,7 +181,7 @@ class JobsController extends Controller
                 ->get();
         }
 
-        if ($searchText <> "" && $address == 'other') {
+        if ($searchText != "" && $address == 'other') {
 
             $jobs = Jobs::where('address', 'not like', '%kathmandu%')
                 ->where('address', 'not like', '%lalitpur%')
@@ -202,8 +202,8 @@ class JobsController extends Controller
 
             $job->relevacny = 0;
             $name = Str::lower($job->name); //the job name in lowercase
-            $search = Str::lower($searchText);  //the searchText in lower case
-            if (Str::contains($name, $search)) {  // check if a string contains a substring
+            $search = Str::lower($searchText); //the searchText in lower case
+            if (Str::contains($name, $search)) { // check if a string contains a substring
                 $job->relevancy += 200;
             }
             $skills = Str::lower($job->skills); // skills to lower case
@@ -217,20 +217,28 @@ class JobsController extends Controller
             if ($job->isExpired == true) {
                 $job->relevancy = 0;
             }
+            $jobstatus = (auth()->user()) ? auth()->user()->viewedjobs->contains($job->id) : false;
+            if ($jobstatus == true) {
+                $job->relevancy = 0;
+                $job->isViewed = true;
+            } else {
+                $job->isViewed = false;
+            };
         }
         $count = $jobs->count();
         $searchText = $ogsearchText;
-        $viewed =  array();
-        foreach($jobs as $job){
-            $jobstatus =  (auth()->user()) ? auth()->user()->viewedjobs->contains($job->id) : false;
-            if($jobstatus == true){
-                $job->relevancy = 0;
-            }
-           $viewed[] = $jobstatus;
-        }
 
+        foreach ($jobs as $job) {
+            $jobstatus = (auth()->user()) ? auth()->user()->viewedjobs->contains($job->id) : false;
+            if ($jobstatus == true) {
+                $job->relevancy = 0;
+                $job->isViewed = true;
+            } else {
+                $job->isViewed = false;
+            };
+        }
         $jobs = $jobs->sortByDesc('relevancy');
-        return view('welcome', compact('jobs', 'count', 'searchText', 'address','viewed'));
+        return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
     }
     public function test()
     {

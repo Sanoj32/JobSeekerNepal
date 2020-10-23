@@ -1,0 +1,12 @@
+To do
+mark more than 2 months ago jobs as expired on linked in
+company name not coming from merojob
+read about laravel eloquent collections
+Add a watch a tag feature
+Marked as viewed feature
+Code comments backed
+Copy paste instagram profile UI
+expand to medical
+Fix the fillable properties in jobs Object/Model
+make a pie chart of the most popular language
+make a "notify me 2 days before this job expires"
