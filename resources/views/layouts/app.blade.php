@@ -43,7 +43,7 @@ use Illuminate\Support\Facades\DB;
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        Refrences
+                       <a href="/references"> Refrences </a>
                         <a href="/test">Testing</a>
                     </ul>
 

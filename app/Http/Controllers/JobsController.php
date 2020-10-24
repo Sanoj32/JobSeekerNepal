@@ -57,7 +57,7 @@ class JobsController extends Controller
         //code to assign websitename
         $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
         foreach ($websitenames as $sitename) {
-            $jobs = Jobs::where('url', 'like', '%' . $sitename . '%')->get();
+            $jobs = Jobs::where('url', 'ILIKE', '%' . $sitename . '%')->get();
             foreach ($jobs as $job) {
                 $job->websitename = $sitename;
                 $job->save();
@@ -65,7 +65,7 @@ class JobsController extends Controller
         }
         //end code to assign websitename
 
-        $jobs    = Jobs::where('url', 'not like', '%merojob%')->get(); //catagroize legitimate dates and calculate exact date
+        $jobs    = Jobs::where('url', 'not ILIKE', '%merojob%')->get(); //catagroize legitimate dates and calculate exact date
         $datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
         foreach ($jobs as $job) {
             echo $job->websitename . "<hr>";
@@ -83,7 +83,7 @@ class JobsController extends Controller
             }
         }
         //code to calculate the real date from string from merojob site
-        $jobs = Jobs::where('url', 'like', '%merojob%')->get();
+        $jobs = Jobs::where('url', 'ILIKE', '%merojob%')->get();
         foreach ($jobs as $job) {
             $deadline          = $job->deadline;
             $arr               = explode('(', $deadline);
@@ -136,15 +136,15 @@ class JobsController extends Controller
             //if only the searchtext is empty show jobs with the selected address
             if ($address != 'other') {
 
-                $jobs = Jobs::where('address', 'like', '%' . $address . '%')
+                $jobs = Jobs::where('address', 'ILIKE', '%' . $address . '%')
                     ->where('isExpired', '=', 'false')
                     ->get();
                 $count = $jobs->count();
                 return view('welcome', compact('jobs', 'count', 'address'));
             } else {
 
-                $jobs = Jobs::where('address', 'not like', '%kathmandu%')
-                    ->where('address', 'not like', '%lalitpur%')
+                $jobs = Jobs::where('address', 'not ILIKE', '%kathmandu%')
+                    ->where('address', 'not ILIKE', '%lalitpur%')
                     ->where('isExpired', '=', 'false')
                     ->get();
                 $count = $jobs->count();
@@ -156,14 +156,14 @@ class JobsController extends Controller
 
             $jobs = Jobs::where('isExpired', '=', 'false')
                 ->where(function ($query) use ($searchText) {
-                    $query->where('name', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('skills1', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc4', 'LIKE', '%' . $searchText . '%');
+                    $query->where('name', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc4', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
         }
@@ -171,34 +171,34 @@ class JobsController extends Controller
             //if the address isn't empty only get the jobs containing this address
 
             $jobs = Jobs::where('isExpired', '=', 'false')
-                ->where('address', 'like', '%' . $address . '%')
+                ->where('address', 'ILIKE', '%' . $address . '%')
                 ->where(function ($query) use ($searchText) {
-                    $query->where('name', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('skills1', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc4', 'LIKE', '%' . $searchText . '%');
+                    $query->where('name', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc4', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
         }
 
         if ($searchText != "" && $address == 'other') {
 
-            $jobs = Jobs::where('address', 'not like', '%kathmandu%')
-                ->where('address', 'not like', '%lalitpur%')
+            $jobs = Jobs::where('address', 'not ILIKE', '%kathmandu%')
+                ->where('address', 'not ILIKE', '%lalitpur%')
                 ->where('isExpired', '=', 'false')
                 ->where(function ($query) use ($searchText) {
-                    $query->where('name', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('skills', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('skills1', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc1', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc2', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc3', 'LIKE', '%' . $searchText . '%')
-                        ->orwhere('desc4', 'LIKE', '%' . $searchText . '%');
+                    $query->where('name', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desc4', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
         }
@@ -247,5 +247,9 @@ class JobsController extends Controller
     public function test()
     {
         return view('test');
+    }
+    public function references()
+    {
+        return view('references');
     }
 }
