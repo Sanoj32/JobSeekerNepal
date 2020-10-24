@@ -134,7 +134,7 @@ class JobsController extends Controller
         }
         if ($searchText == "" && $address != "") {
             //if only the searchtext is empty show jobs with the selected address
-            if ($address != 'other' && $address != "") {
+            if ($address != 'other') {
 
                 $jobs = Jobs::where('address', 'like', '%' . $address . '%')
                     ->where('isExpired', '=', 'false')
