@@ -151,23 +151,8 @@ class JobsController extends Controller
                 return view('welcome', compact('jobs', 'count', 'address'));
             }
         }
-        if ($searchText != "" && $address == "") {
-            // when search text is not empty and address is  empty
 
-            $jobs = Jobs::where('isExpired', '=', 'false')
-                ->where(function ($query) use ($searchText) {
-                    $query->where('name', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc4', 'ILIKE', '%' . $searchText . '%');
-                })
-                ->get();
-        }
-        if ($address != "" && $address != 'other' && $searchText != "") {
+        if ($address != 'other' && $searchText != "") {
             //if the address isn't empty only get the jobs containing this address
 
             $jobs = Jobs::where('isExpired', '=', 'false')
