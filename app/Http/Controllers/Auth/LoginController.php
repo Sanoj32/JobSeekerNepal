@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-
-
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -22,7 +20,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -56,12 +54,12 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
         $user = User::firstOrCreate([
-            'name' => $user->getName(),
-            'email' => $user->getEmail(),
+            'name'        => $user->getName(),
+            'email'       => $user->getEmail(),
             'provider_id' => $user->getId(),
         ]);
         Auth::login($user, true);
-        return redirect('/');
+        return redirect('/home');
         // $user->token;
     }
 }
