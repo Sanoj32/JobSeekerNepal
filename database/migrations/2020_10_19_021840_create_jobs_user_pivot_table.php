@@ -18,6 +18,9 @@ class CreateJobsUserPivotTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('jobs_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('jobs_id')->references('id')->on('jobs');
         });
     }
 

@@ -74,7 +74,7 @@
                                             <viewed-button  jobs-id="{{$job->id}}" viewedjobs="{{$job->isViewed}}" >  </viewed-button> 
                                             @endauth
                                             @guest
-                                           <a href="/login"> <button class="btn btn-primary ml-4"> Mark as opened</button> </a>
+                                           <a href="/login"> <button class="btn btn-light ml-4"> Mark as opened</button> </a>
                                             @endguest
                                         </span>
                                         </h5>
@@ -108,7 +108,7 @@
                                     @endif
                                     @if(!empty($job->truedeadline))
                                     <li class="mr-md-4 pt-3 pr-3" title="Deadline">
-                                        <img style="width: 20px; height:20px" class="mr-2" src="\images\deadline.svg"> {{$job->truedeadline ?? $job->deadline}}
+                                        <img style="width: 20px; height:20px" class="mr-2 mb-2" src="\images\deadline.svg"> {{$job->truedeadline ?? $job->deadline}}
                                     </li>
                                     @endif
                                     <?php $sn += 1; ?>
