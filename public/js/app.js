@@ -1920,6 +1920,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["jobsId", "viewedjobs"],
   mounted: function mounted() {
@@ -1927,13 +1929,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      status: this.viewedjobs
+      status: this.viewedjobs,
+      statusr: !this.viewedjobs
     };
   },
   methods: {
     viewed: function viewed() {
+      var _this = this;
+
       axios.post("/viewed/" + this.jobsId).then(function (response) {
-        console.log(response.data);
+        _this.status = !_this.status;
+        _this.statusr = !_this.status;
       });
     }
   },
@@ -37530,7 +37536,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("span", [
     _c("button", {
-      staticClass: "btn btn-primary ml-4",
+      class: {
+        "btn btn-primary ml-4": _vm.status,
+        "btn btn-light ml-4": _vm.statusr
+      },
       domProps: { textContent: _vm._s(_vm.buttonText) },
       on: { click: _vm.viewed }
     })

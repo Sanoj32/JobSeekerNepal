@@ -1,62 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
+use App\Jobs;
+use Carbon\Carbon;
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+$jsondata = file_get_contents('merojob.json');
+$jsondata = json_decode($jsondata, true);
+if (empty($jsondata)) {
+    echo "Variable 'data' is empty.<br>";
+}
+foreach ($jsondata as $data) {
+    $storedjobs = Jobs::all();
+    $c          = 0; // if c=0 It means the url is a unique url from that site and filters duplicate jobs from same site
+    foreach ($storedjobs as $storedjob) {
+        if ($data['Page_URL'] == $storedjob['url']) {
+            $c = 1;
+        }
+    } //code to insert data in the database
+    if ($c == 0) {
+        $jobs                = new Jobs();
+        $jobs['name']        = $data['name'] ?? "";
+        $jobs['company']     = $data['company'] ?? "";
+        $jobs['logo']        = $data['logo'] ?? ""; // company logo
+        $jobs['time']        = $data['time'] ?? ""; //full time or part time
+        $jobs['level']       = $data['level'] ?? ""; // Senior or junoir
+        $jobs['vacancy']     = $data['vacancy'] ?? "";
+        $jobs['address']     = $data['address'] ?? "";
+        $jobs['salary']      = $data['salary'] ?? "";
+        $jobs['deadline']    = $data['deadline'] ?? "";
+        $jobs['education']   = $data['education'] ?? "";
+        $jobs['experience']  = $data['experience'] ?? "";
+        $jobs['skills']      = $data['skills'] ?? "";
+        $jobs['skills']      = $data['skills'] ?? "";
+        $jobs['desc']        = $data['desc'] ?? "";
+        $jobs['desc1']       = $data['desc1'] ?? "";
+        $jobs['desc2']       = $data['desc2'] ?? "";
+        $jobs['desc3']       = $data['desc3'] ?? "";
+        $jobs['desc4']       = $data['desc4'] ?? "";
+        $jobs['url']         = $data['Page_URL'] ?? "";
+        $jobs['websitename'] = "";
+        $jobs['isExpired']   = false;
+        $jobs['isViewed']    = false;
+        $jobs['relevancy']   = 10;
+        $jobs->save();
+    }
+} // end code to insert data
+//end of whole data collection from different websites
+//code to assign websitename
+$websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
+foreach ($websitenames as $sitename) {
+    $jobs = Jobs::where('url', 'ILIKE', '%' . $sitename . '%')->get();
+    foreach ($jobs as $job) {
+        $job->websitename = $sitename;
+        $job->save();
+    }
+}
+//end code to assign websitename
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+$jobs    = Jobs::where('url', 'not ILIKE', '%merojob%')->get(); //catagroize legitimate dates and calculate exact date
+$datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
+foreach ($jobs as $job) {
+    echo $job->websitename . "<hr>";
+    $deadline   = $job->deadline;
+    $deadline   = strtotime($deadline);
+    $deadline   = date('Y-m-d', $deadline); //formats the date into Y-m-d format
+    $comparison = date('1970-01-01');
+    if (!($deadline == $comparison)) {
+        $job->truedeadline = $deadline; //deadline is true deadline of the job
+        $datenow->format('Y-m-d');
+        if ($deadline < $datenow) {
+            $job->isExpired = true;
+        }
+        $job->save();
+    }
+}
+//code to calculate the real date from string from merojob site
+$jobs = Jobs::where('url', 'ILIKE', '%merojob%')->get();
+foreach ($jobs as $job) {
+    $deadline          = $job->deadline;
+    $arr               = explode('(', $deadline);
+    $date              = $arr[0];
+    $actualdate        = strtotime($date);
+    $realdate          = date('Y-m-d', $actualdate);
+    $job->truedeadline = $realdate;
+    if ($realdate < $datenow) {
+        $job->isExpired = true;
+    }
+    $job->save();
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-</head>
-
-<body>
-
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <div class="container">
-        <br />
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8">
-                <form class="card card-sm">
-                    <div class="card-body row no-gutters align-items-center">
-                        <div class="col-auto">
-                            <i class="fas fa-search h4 text-body"></i>
-                        </div>
-                        <!--end of col-->
-                        <div class="col">
-                            <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords">
-                        </div>
-                        <!--end of col-->
-                        <div class="col-md-6 col-lg-3 my-3">
-                            <div class="select-container">
-                                <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
-                                    <option selected="" default=" {{$address ?? ''}}" value="">Select a location</option>
-                                    <option value="kathmandu">Kathmandu</option>
-                                    <option value="lalitpur">Lalitpur</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-lg btn-success" type="submit">Search</button>
-                        </div>
-                        <!--end of col-->
-                    </div>
-                </form>
-            </div>
-            <!--end of col-->
-        </div>
-    </div>
-</body>
-
-</html>
+}

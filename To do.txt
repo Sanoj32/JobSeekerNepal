@@ -1,0 +1,31 @@
+To do
+mark more than 2 months ago jobs as expired on linked in
+company name not coming from merojob
+read about laravel eloquent collections
+Add a watch a tag feature
+Marked as viewed feature
+Code comments backed
+Copy paste instagram profile UI
+expand to medical
+Fix the fillable properties in jobs Object/Model
+make a pie chart of the most popular language
+make a "notify me 2 days before this job expires"
+
+
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=minorproject
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=minorproject
+DB_USERNAME=postgres
+DB_PASSWORD=12postgres34
+

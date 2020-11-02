@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ViewedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,13 +19,14 @@ Route::get('/', function () {
 Route::get('/update', 'JobsController@store');
 Route::get('/search', 'JobsController@search');
 Route::get('/test', 'JobsController@test');
+Route::get('/references', 'JobsController@references');
 Auth::routes();
 Route::post('/viewed/{jobs}', 'ViewedController@store')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
-
+// Route::get('/feedback', 'JobsController@feedback');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+// Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+// Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');

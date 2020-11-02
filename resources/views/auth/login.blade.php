@@ -56,9 +56,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-                                <a href="login/facebook" class="btn btn-primary">
+                                <!-- <a href="login/facebook" class="btn btn-primary">
                                     Login with Facebook
-                                </a>
+                                </a> -->
 
                                 @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -67,7 +67,11 @@
                                 @endif
                             </div>
                         </div>
-                    </form>
+                        <div class="align-content-centre">
+                        <p class=" pt-4 font-weight-light font-italic" style="text-align: center; opacity:0.7" > (If you are facing a loading time of more than 10 seconds please refresh the page) </p>
+                        </div>
+                        </form>
+
                 </div>
             </div>
         </div>

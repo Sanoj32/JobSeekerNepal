@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-
-
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -22,7 +19,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -42,26 +39,26 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function redirectToProvider()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
+    // public function redirectToProvider()
+    // {
+    //     return Socialite::driver('facebook')->redirect();
+    // }
 
     /**
      * Obtain the user information from Facebook.
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
-    {
-        $user = Socialite::driver('facebook')->user();
-        $user = User::firstOrCreate([
-            'name' => $user->getName(),
-            'email' => $user->getEmail(),
-            'provider_id' => $user->getId(),
-        ]);
-        Auth::login($user, true);
-        return redirect('/');
-        // $user->token;
-    }
+    // public function handleProviderCallback()
+    // {
+    //     $user = Socialite::driver('facebook')->user();
+    //     $user = User::firstOrCreate([
+    //         'name'        => $user->getName(),
+    //         'email'       => $user->getEmail(),
+    //         'provider_id' => $user->getId(),
+    //     ]);
+    //     Auth::login($user, true);
+    //     return redirect('/home');
+    //     // $user->token;
+    // }
 }

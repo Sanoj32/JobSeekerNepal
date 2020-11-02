@@ -16,7 +16,8 @@
         "laravel/socialite": "^5.0",
         "laravel/telescope": "^3.5.1",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "2.4"
+        "laravel/ui": "2.4",
+        "moontoast/math": "1.1.2 as 1.999.999"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

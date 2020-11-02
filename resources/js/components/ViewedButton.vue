@@ -1,12 +1,14 @@
 <template>
     <span>
-       
+
         <button
-            class="btn btn-primary ml-4"
+            :class="{'btn btn-primary ml-4' : status,
+            'btn btn-light ml-4' : statusr
+            }"
             @click="viewed"
             v-text="buttonText"
         ></button>
-        
+
     </span>
 </template>
 
@@ -18,14 +20,16 @@ export default {
     },
     data: function() {
         return {
-            status: this.viewedjobs
+            status: this.viewedjobs,
+            statusr: !this.viewedjobs
         };
     },
 
     methods: {
         viewed() {
             axios.post("/viewed/" + this.jobsId).then(response => {
-                console.log(response.data);
+                this.status = !this.status;
+                this.statusr = !this.status;
             });
         }
     },
