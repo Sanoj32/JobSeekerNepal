@@ -115,10 +115,10 @@ use Illuminate\Support\Facades\DB;
                             <p><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></p>
                             <p><a href="https://lec.edu.np/">Our LEC College</p>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <p><a href="">Email </a></p>
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
