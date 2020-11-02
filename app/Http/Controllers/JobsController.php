@@ -45,7 +45,7 @@ class JobsController extends Controller
                     // $jobs['desc2']       = $data['desc2'] ?? "";
                     // $jobs['desc3']       = $data['desc3'] ?? "";
                     // $jobs['desc4']       = $data['desc4'] ?? "";
-                    $jobs['desct']       = $data['desc5'] ?? ";";
+                    $jobs['desct']       = $data['desct'] ?? "";
                     $jobs['url']         = $data['Page_URL'] ?? "";
                     $jobs['websitename'] = "";
                     $jobs['isExpired']   = false;
@@ -154,7 +154,7 @@ class JobsController extends Controller
         }
 
         if ($address != 'other' && $searchText != "") {
-            //if the address isn't empty only get the jobs containing this address
+            //if the address isn't empty only get the jobs containing this address and searchtext isn't empty
 
             $jobs = Jobs::where('isExpired', '=', 'false')
                 ->where('address', 'ILIKE', '%' . $address . '%')
@@ -162,11 +162,11 @@ class JobsController extends Controller
                     $query->where('name', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc4', 'ILIKE', '%' . $searchText . '%');
+                    // ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
         }
@@ -180,11 +180,11 @@ class JobsController extends Controller
                     $query->where('name', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc4', 'ILIKE', '%' . $searchText . '%');
+                    // ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
         }
