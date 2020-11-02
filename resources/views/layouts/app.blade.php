@@ -102,7 +102,7 @@ use Illuminate\Support\Facades\DB;
                     <p>
                        This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/">Lalitpur Engineering College.</a> All job posts here belog to their respective websites.
                     </p>
-                    <p>© Company Inc.</p>
+
                 </div>
                 <div class="col-md-4 footer-links wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
                     <div class="row">
@@ -112,15 +112,12 @@ use Illuminate\Support\Facades\DB;
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <p><a class="scroll-link" href="#top-content">Home</a></p>
-                            <p><a href="#">Features</a></p>
-                            <p><a href="#">How it works</a></p>
-                            <p><a href="#">Our clients</a></p>
+                            <p><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></p>
+                            <p><a href="https://lec.edu.np/">Our LEC College</p>
                         </div>
                         <div class="col-md-6">
-                            <p><a href="#">Plans &amp; pricing</a></p>
-                            <p><a href="#">Affiliates</a></p>
-                            <p><a href="#">Terms</a></p>
+                            <p><a href="">Email </a></p>
+
                         </div>
                     </div>
                 </div>
