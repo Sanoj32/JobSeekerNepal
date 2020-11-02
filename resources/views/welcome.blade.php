@@ -45,7 +45,7 @@
                 <div class="filter-result">
                     <br>
                     @if( !isset($searchText) && !isset($address))
-                    <p class="mb-3"> Type a keyword the search bar to find the job you are searching for. Selecting a location is optional </p>
+                    <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional </p>
                     @endif
 
                     <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings
