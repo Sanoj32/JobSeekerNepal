@@ -10,7 +10,7 @@ class JobsController extends Controller
 {
     public function store()
     {
-        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijobs.json', '/merojob.json');
+        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json');
         foreach ($websites as $website) {
             $jsondata = file_get_contents(public_path("jsondata") . $website);
             $jsondata = json_decode($jsondata, true);
