@@ -8,7 +8,7 @@
         <div class="col-lg-10 mx-auto mb-4">
             <div class="section-title text-center ">
                 <h3 class="top-c-sep">Grow your career with us </h3>
-                <p>IT and communication job from over 7 sites in a single website.</p>
+                <p>IT and communication jobs from Nepal's most popular websites</p>
             </div>
         </div>
     </div>
@@ -45,33 +45,34 @@
                 <div class="filter-result">
                     <br>
                     @if( !isset($searchText) && !isset($address))
-                    <p class="mb-30 ff-montserrat"> Type a keyword the search bar to find the job you are searching for. Selecting a location is optional </p>
+                    <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional </p>
                     @endif
 
-                    <p class="mb-30 ff-montserrat"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings
+                    <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings
 
                     </p>
 
                     @if(!empty($jobs))
-                    <p style="font-size: large;" class="mb-30 ff-montserrat"> There are <span style="font-weight: bold; color:green;">{{$count}}</span> active jobs that matched your search
+                    <p style="font-size: large;"> There are <span style="font-weight: bold; color:green;">{{$count}}</span> active jobs that matched your search
                         @if(!empty($searchText))
                         for <span style="font:bolder"> {{$searchText}}</span>
-                        @endif
                         @if(!empty($address))
                         in {{$address}}
                         @endif
+                         <p>( Jobs with your searched language or skill as a secondary requirement are also included. ) </p>
+                        @endif
                     </p>
-                    <?php $sn = 1; ?>
+                    <?php $sn = 1;?>
                     @foreach($jobs as $job)
                     @if($job->isExpired == false)
-                   <?php $id = $job->id; ?>
+                   <?php $id = $job->id;?>
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="job-content">
-                            <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?= $sn; ?>)
-                                        <span class="pl-1"> {{ $job->name }} 
+                            <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?=$sn;?>)
+                                        <span class="pl-1"> {{ $job->name }}
                                             @auth
-                                            <viewed-button  jobs-id="{{$job->id}}" viewedjobs="{{$job->isViewed}}" >  </viewed-button> 
+                                            <viewed-button  jobs-id="{{$job->id}}" viewedjobs="{{$job->isViewed}}" >  </viewed-button>
                                             @endauth
                                             @guest
                                            <a href="/login"> <button class="btn btn-light ml-4"> Mark as opened</button> </a>
@@ -111,7 +112,7 @@
                                         <img style="width: 20px; height:20px" class="mr-2 mb-2" src="\images\deadline.svg"> {{$job->truedeadline ?? $job->deadline}}
                                     </li>
                                     @endif
-                                    <?php $sn += 1; ?>
+                                    <?php $sn += 1;?>
                                 </ul>
                             </div>
                         </div>

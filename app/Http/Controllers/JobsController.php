@@ -26,25 +26,26 @@ class JobsController extends Controller
                     }
                 } //code to insert data in the database
                 if ($c == 0) {
-                    $jobs                = new Jobs();
-                    $jobs['name']        = $data['name'] ?? "";
-                    $jobs['company']     = $data['company'] ?? "";
-                    $jobs['logo']        = $data['logo'] ?? ""; // company logo
-                    $jobs['time']        = $data['time'] ?? ""; //full time or part time
-                    $jobs['level']       = $data['level'] ?? ""; // Senior or junoir
-                    $jobs['vacancy']     = $data['vacancy'] ?? "";
-                    $jobs['address']     = $data['address'] ?? "";
-                    $jobs['salary']      = $data['salary'] ?? "";
-                    $jobs['deadline']    = $data['deadline'] ?? "";
-                    $jobs['education']   = $data['education'] ?? "";
-                    $jobs['experience']  = $data['experience'] ?? "";
-                    $jobs['skills']      = $data['skills'] ?? "";
-                    $jobs['skills']      = $data['skills'] ?? "";
-                    $jobs['desc']        = $data['desc'] ?? "";
-                    $jobs['desc1']       = $data['desc1'] ?? "";
-                    $jobs['desc2']       = $data['desc2'] ?? "";
-                    $jobs['desc3']       = $data['desc3'] ?? "";
-                    $jobs['desc4']       = $data['desc4'] ?? "";
+                    $jobs               = new Jobs();
+                    $jobs['name']       = $data['name'] ?? "";
+                    $jobs['company']    = $data['company'] ?? "";
+                    $jobs['logo']       = $data['logo'] ?? ""; // company logo
+                    $jobs['time']       = $data['time'] ?? ""; //full time or part time
+                    $jobs['level']      = $data['level'] ?? ""; // Senior or junoir
+                    $jobs['vacancy']    = $data['vacancy'] ?? "";
+                    $jobs['address']    = $data['address'] ?? "";
+                    $jobs['salary']     = $data['salary'] ?? "";
+                    $jobs['deadline']   = $data['deadline'] ?? "";
+                    $jobs['education']  = $data['education'] ?? "";
+                    $jobs['experience'] = $data['experience'] ?? "";
+                    $jobs['skills']     = $data['skills'] ?? "";
+                    $jobs['skills']     = $data['skills'] ?? "";
+                    // $jobs['desc']        = $data['desc'] ?? "";
+                    // $jobs['desc1']       = $data['desc1'] ?? "";
+                    // $jobs['desc2']       = $data['desc2'] ?? "";
+                    // $jobs['desc3']       = $data['desc3'] ?? "";
+                    // $jobs['desc4']       = $data['desc4'] ?? "";
+                    $jobs['desct']       = $data['desct'] ?? "";
                     $jobs['url']         = $data['Page_URL'] ?? "";
                     $jobs['websitename'] = "";
                     $jobs['isExpired']   = false;
@@ -55,7 +56,7 @@ class JobsController extends Controller
             } // end code to insert data
         } //end of whole data collection from different websites
         //code to assign websitename
-        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'merocareer.com', 'kumarijob.com', 'merojob.com');
+        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'globaljob.com', 'kumarijob.com', 'merojob.com');
         foreach ($websitenames as $sitename) {
             $jobs = Jobs::where('url', 'ILIKE', '%' . $sitename . '%')->get();
             foreach ($jobs as $job) {
@@ -153,7 +154,7 @@ class JobsController extends Controller
         }
 
         if ($address != 'other' && $searchText != "") {
-            //if the address isn't empty only get the jobs containing this address
+            //if the address isn't empty only get the jobs containing this address and searchtext isn't empty
 
             $jobs = Jobs::where('isExpired', '=', 'false')
                 ->where('address', 'ILIKE', '%' . $address . '%')
@@ -161,11 +162,11 @@ class JobsController extends Controller
                     $query->where('name', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc4', 'ILIKE', '%' . $searchText . '%');
+                    // ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
         }
@@ -179,11 +180,11 @@ class JobsController extends Controller
                     $query->where('name', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desc4', 'ILIKE', '%' . $searchText . '%');
+                    // ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
+                    // ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
+                        ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
         }

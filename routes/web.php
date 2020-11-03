@@ -23,6 +23,7 @@ Route::get('/references', 'JobsController@references');
 Auth::routes();
 Route::post('/viewed/{jobs}', 'ViewedController@store')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/faqs', 'SiteController@faqs');
 // Route::get('/feedback', 'JobsController@feedback');
 Auth::routes();
 

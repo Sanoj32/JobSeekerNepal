@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\DB;
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
+
+
 </head>
 
 <body>
@@ -44,7 +46,7 @@ use Illuminate\Support\Facades\DB;
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"> <a class="nav-link" href="/references"> Refrences </a> </li>
-                            <li class="nav-item">    <a class="nav-link" href="/test">Testing</a></li>
+                            <!-- <li class="nav-item">    <a class="nav-link" href="/test">Testing</a></li> -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -79,9 +81,10 @@ use Illuminate\Support\Facades\DB;
 
 
                         @endguest
-                        <li class="nav-item">
+
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="/update">{{ __('Update Database') }}</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -113,18 +116,23 @@ use Illuminate\Support\Facades\DB;
                     <div class="row">
                         <div class="col-md-6">
                             <p><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></p>
-                            <p><a href="https://lec.edu.np/">Our LEC College</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><a href="">Email </a></p>
+                            <p><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts Github </a></p>
+                            <p><a href="https://lec.edu.np/">Our LEC College </a></p>
+                            <p><a href="/faqs">Frequestly Asked Questions (FAQs) </a></p>
+
+
 
                         </div>
+                        <!-- <div class="col-md-6">
+                            <p><a href="">Email </a></p>
+
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer-bottom">
+    <!-- <div class="footer-bottom">
         <div class="container">
             <div class="row">
                 <div class="col footer-social">
@@ -136,7 +144,7 @@ use Illuminate\Support\Facades\DB;
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </footer>
 
 </html>
