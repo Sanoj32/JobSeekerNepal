@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\DB;
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
+
+
 </head>
 
 <body>
@@ -79,9 +81,10 @@ use Illuminate\Support\Facades\DB;
 
 
                         @endguest
-                        <li class="nav-item">
+
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="/update">{{ __('Update Database') }}</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -113,7 +116,10 @@ use Illuminate\Support\Facades\DB;
                     <div class="row">
                         <div class="col-md-6">
                             <p><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></p>
-                            <p><a href="https://lec.edu.np/">Our LEC College</p>
+                            <p><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts Github </a></p>
+                            <p><a href="https://lec.edu.np/">Our LEC College </a></p>
+
+
                         </div>
                         <!-- <div class="col-md-6">
                             <p><a href="">Email </a></p>
@@ -124,7 +130,7 @@ use Illuminate\Support\Facades\DB;
             </div>
         </div>
     </div>
-    <div class="footer-bottom">
+    <!-- <div class="footer-bottom">
         <div class="container">
             <div class="row">
                 <div class="col footer-social">
@@ -136,7 +142,7 @@ use Illuminate\Support\Facades\DB;
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </footer>
 
 </html>
