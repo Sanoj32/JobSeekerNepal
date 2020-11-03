@@ -118,6 +118,8 @@ use Illuminate\Support\Facades\DB;
                             <p><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></p>
                             <p><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts Github </a></p>
                             <p><a href="https://lec.edu.np/">Our LEC College </a></p>
+                            <p><a href="/faqs">Frequestly Asked Questions (FAQs) </a></p>
+
 
 
                         </div>
