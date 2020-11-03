@@ -117,16 +117,11 @@ use Illuminate\Support\Facades\DB;
                         <div class="col-md-6">
                             <p><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></p>
                             <p><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts Github </a></p>
+                        </div>
+                        <div class="col-md-6">
                             <p><a href="https://lec.edu.np/">Our LEC College </a></p>
                             <p><a href="/faqs">Frequestly Asked Questions (FAQs) </a></p>
-
-
-
                         </div>
-                        <!-- <div class="col-md-6">
-                            <p><a href="">Email </a></p>
-
-                        </div> -->
                     </div>
                 </div>
             </div>
