@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\DB;
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}" ><i class="fa fa-facebook-official" style="color:blue;"></i>{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
@@ -95,42 +95,56 @@ use Illuminate\Support\Facades\DB;
         </main>
     </div>
 </body>
+<hr>
+<footer>
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 footer-about wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                    <h3>About us</h3>
+                    <p>
+                       This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/">Lalitpur Engineering College.</a> All job posts here belog to their respective websites.
+                    </p>
 
- <!-- Site footer -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 col-md-6">
-            <h3>About Us</h3>
-            <p class="text-justify">This website was  team of students at <a target="_blank" href="https://lec.edu.np/"><u>Lalitpur Engineering College.</u></a> All job posts here belog to their respective websites..</p>
-          </div>
-          
-          <div class="col-xs-6 col-md-3 footer-links wow fadeInUp animated">
-            
-            <ul class="footer-links">
-                       <h3> Quick Links</h3>
-              <li><a href="https://github.com/Sanoj32/Minor-Project.git" class="fa fa fa-github fa-3x"></a></li>
-                            <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts Github </a></li>
-                            <li><a href="https://lec.edu.np/">Our LEC College </a></li>
-                            <li><a href="/faqs">Frequestly Asked Questions (FAQs) </a></li>
-            </ul>
-          </div>
+                </div>
+                <div class="col-md-4 footer-links wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Links</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></p>
+                            <p><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts Github </a></p>
+                            <p><a href="https://lec.edu.np/">Our LEC College </a></p>
+                            <p><a href="/faqs">Frequestly Asked Questions (FAQs) </a></p>
+
+
+
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <p><a href="">Email </a></p>
+
+                        </div> -->
+                    </div>
+                </div>
+            </div>
         </div>
-        <hr>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved 
-       <div class="col-md-4 col-sm-6 col-xs-12">
-            <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
-            </ul>
-          </div>
+    </div>
+    <!-- <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
         </div>
-      </div>
+    </div> -->
 </footer>
+
 </html>
