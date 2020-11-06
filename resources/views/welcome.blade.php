@@ -27,7 +27,7 @@
                         <div class="col-md-6 col-lg-3 my-3">
                             <div class="select-container">
                                 <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
-                                    <option selected disabled value="">Select a location</option>
+                                    <option selected disabled value=""><h3>Select a location<h3></option>
                                     <option value="kathmandu">Kathmandu</option>
                                     <option value="lalitpur">Lalitpur</option>
                                     <option value="other">Other</option>
