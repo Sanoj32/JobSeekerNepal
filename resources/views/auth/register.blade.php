@@ -68,6 +68,9 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="text-center pt-3"  >
+                        <p>If you are new here please consider reading the <a href="/faqs">Frequestly Asked Questions.</a><p>
+                        </div>
                     </form>
                 </div>
             </div>

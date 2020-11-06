@@ -27,7 +27,7 @@
                         <div class="col-md-6 col-lg-3 my-3">
                             <div class="select-container">
                                 <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
-                                    <option selected disabled value="">Select a location</option>
+                                    <option selected disabled value=""><h3>Select a location<h3></option>
                                     <option value="kathmandu">Kathmandu</option>
                                     <option value="lalitpur">Lalitpur</option>
                                     <option value="other">Other</option>
@@ -109,7 +109,7 @@
                                     @endif
                                     @if(!empty($job->truedeadline))
                                     <li class="mr-md-4 pt-3 pr-3" title="Deadline">
-                                        <img style="width: 20px; height:20px" class="mr-2 mb-2" src="\images\deadline.svg"> {{$job->truedeadline ?? $job->deadline}}
+                                        <img style="width: 20px; height:20px" class="mr-2 mb-2" src="\images\deadline.svg">  {{$job->truedeadline ?? $job->deadline}}
                                     </li>
                                     @endif
                                     <?php $sn += 1;?>

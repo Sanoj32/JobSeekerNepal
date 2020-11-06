@@ -1,0 +1,260 @@
+[33mcommit d9c60dfece3ff628aefe6dceb00f132cb46ad95e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: 7e02364 d339f93
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Thu Nov 5 09:14:08 2020 +0545
+
+    Merge branch 'master' of https://github.com/Sanoj32/Minor-Project
+
+[33mcommit d339f9326efa995d72dc74ab20c09817de1e4da9[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Sandzzzz <sunsetsin1.sy@gmail.com>
+Date:   Thu Nov 5 02:20:51 2020 +0545
+
+    footer added
+
+[33mcommit ea213bb6974787f493c00adeafb3ec41d0ad8907[m
+Merge: 8b87208 a59c999
+Author: Sandzzzz <sunsetsin1.sy@gmail.com>
+Date:   Wed Nov 4 00:00:16 2020 +0545
+
+    Merge branch 'master' of https://github.com/Sanoj32/Minor-Project
+
+[33mcommit 7e02364a2757c645c22809549467794e86115c98[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Tue Nov 3 13:14:40 2020 +0545
+
+    minor improvements
+
+[33mcommit 1dff8a0427e4a7569327b6a5a2939d10675c44a7[m[33m ([m[1;31mheroku/master[m[33m)[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Tue Nov 3 10:44:20 2020 +0545
+
+    minor changes
+
+[33mcommit c71688e9a1222bf2ac87d54ca836c179ff4ed347[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Tue Nov 3 10:12:34 2020 +0545
+
+    linkedin address fixed
+
+[33mcommit a59c99973ef48872f93cb7fb43bb2b457d036263[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Tue Nov 3 09:53:42 2020 +0545
+
+    FAQs added
+
+[33mcommit 2d563e48a13b2fc656f653ad86babca4ca49b7fb[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Tue Nov 3 09:51:50 2020 +0545
+
+    FAQs page added
+
+[33mcommit 9e8294f2af444480646d8e9c06202b129980fb73[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 21:54:25 2020 +0545
+
+    added register button on login page
+
+[33mcommit 2e11178a1c9f1442ab6f9e5c7362f611f734a572[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 20:48:29 2020 +0545
+
+    minor change
+
+[33mcommit c8291ee7fd6e4ea38344429dc8083722bb9121df[m[33m ([m[1;33mtag: v1.0[m[33m)[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 20:45:37 2020 +0545
+
+    All bugs fixed. Version 1.0
+
+[33mcommit f29c4e7757ae85651105cfc828b8697935beb9d9[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 20:16:37 2020 +0545
+
+    All bugs fixed. Version 1.0
+
+[33mcommit 12be29db9f843360d042ba857b26bb9857c18b4e[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 20:13:30 2020 +0545
+
+    All bugs fixed. Version 1.0
+
+[33mcommit d9c69af8fefcc22a45f6e98a40220e5445baf381[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 18:48:30 2020 +0545
+
+    Total description added
+
+[33mcommit 8b87208a95618ef164ffddba5fa50de3e28b585a[m
+Merge: 5049121 b89c124
+Author: Sandzzzz <sunsetsin1.sy@gmail.com>
+Date:   Mon Nov 2 16:51:38 2020 +0545
+
+    Merge branch 'master' of https://github.com/Sanoj32/Minor-Project
+
+[33mcommit b89c124aff56e532b5ac20bbd6b6dfc5f8d15ab3[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 13:55:33 2020 +0545
+
+    codacy deleted
+
+[33mcommit e602ea06abb539ec32fdedb7b710b06ad9df41f4[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 13:35:27 2020 +0545
+
+    infinite login loading fixed
+
+[33mcommit 3b0e3bb4aba1a80be64603785d3897263e2bd37d[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 11:13:18 2020 +0545
+
+    minor change
+
+[33mcommit 5657ba01213ceb211aa880bebf6c1788e0da9497[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Mon Nov 2 11:09:59 2020 +0545
+
+    Python data added
+
+[33mcommit 7859eaf27a26dbe4514728f7b0d66e9589004954[m
+Merge: c89cd9a 4340389
+Author: Sanoj Raj Shrestha <sanoj.shrestha.13@gmail.com>
+Date:   Wed Oct 28 14:26:05 2020 +0545
+
+    Merge pull request #23 from Sanoj32/Python
+    
+    Python Scraping added
+
+[33mcommit 43403896b2f0789bf42d3b2139ce868f45f0faf3[m[33m ([m[1;31morigin/profile[m[33m, [m[1;31morigin/Python[m[33m, [m[1;32mPython[m[33m)[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Wed Oct 28 14:22:23 2020 +0545
+
+    Python Scraping added
+
+[33mcommit c89cd9a5662fcc42149cd10a205224876b67df74[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Sat Oct 24 14:50:22 2020 +0545
+
+    testing page reset
+
+[33mcommit 5b2e16f539fdb91d3b6a46de2b025d99031f98a6[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Sat Oct 24 14:48:54 2020 +0545
+
+    Search code optimized
+
+[33mcommit 6c10e835dd0ba61b0d28459f1ddd8efd50a4bac5[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Sat Oct 24 14:08:22 2020 +0545
+
+    Query Modified according to PostgreSQL
+
+[33mcommit 89c519632cf6b5a14ddd63f4ff51c7e14e190f24[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Sat Oct 24 09:28:22 2020 +0545
+
+    minor change
+
+[33mcommit 99929d8d0befa96af54f9caa475a2086e90c8c09[m
+Merge: 93d576f d34d7bb
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 17:29:10 2020 +0545
+
+    Merge branch 'master' of https://github.com/Sanoj32/Minor-Project into master
+
+[33mcommit 93d576f54ca0fe78425ec06d4a488094cc2b0956[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 17:05:09 2020 +0545
+
+    file error fix attempt
+
+[33mcommit 67cdf980d36fd46b7e8c06c0c80d881c99ae5fb1[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 16:58:16 2020 +0545
+
+    isexpired error fixed
+
+[33mcommit 396771c91f07d8af4073d38207dcc3eaf22253ab[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 16:38:06 2020 +0545
+
+    heroku fix
+
+[33mcommit 9bf4b4882621da0d46fd904ca23a1bc2f31bd331[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 16:20:01 2020 +0545
+
+    Procfile added
+
+[33mcommit d34d7bb9cf631857718b79dae9f394663aeccf21[m
+Merge: ce0c357 21d155f
+Author: Sanoj Raj Shrestha <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 16:11:08 2020 +0545
+
+    Merge pull request #22 from Sanoj32/VueJSButton
+    
+    Heroku deploy started
+
+[33mcommit 21d155f6e417b39b43c33c95bffa119b799f7a48[m[33m ([m[1;31morigin/VueJSButton[m[33m, [m[1;32mVueJSButton[m[33m)[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 16:10:04 2020 +0545
+
+    Heroku deploy started
+
+[33mcommit ce0c357ff351981eaf093e70607966d43dc9034a[m
+Merge: c720837 ad46f0d
+Author: Sanoj Raj Shrestha <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 14:33:59 2020 +0545
+
+    Merge pull request #21 from Sanoj32/VueJSButton
+    
+    Added "Mark as opened" button with VueJS
+
+[33mcommit ad46f0dc851063ed76095fb5f3ae5ebf9b0af8c7[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Fri Oct 23 14:32:14 2020 +0545
+
+    Added "Mark as opened" button with VueJS
+
+[33mcommit 504912199e319a8d95f216bcb8903c2dbb30113a[m
+Merge: 2602b22 c720837
+Author: Sandzzzz <sunsetsin1.sy@gmail.com>
+Date:   Thu Oct 22 17:16:37 2020 +0545
+
+    Merge branch 'master' of https://github.com/Sanoj32/Minor-Project
+
+[33mcommit c72083753b742c14c08f23c47c1023e71dd2400f[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Wed Oct 21 19:37:34 2020 +0545
+
+    login redirect fixed
+
+[33mcommit 7d05f56177f98330fb1664131f37b6b93b8a2063[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Wed Oct 21 19:35:49 2020 +0545
+
+    Minor UI fixes
+
+[33mcommit 8c68954db40411d8321cadf9d5737451072352de[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Wed Oct 21 17:54:44 2020 +0545
+
+    Mark as opened feature added
+
+[33mcommit 2602b228484cc23103047701f175584312ffc876[m
+Merge: 3b71587 6e60771
+Author: Sandzzzz <sunsetsin1.sy@gmail.com>
+Date:   Tue Oct 20 17:28:39 2020 +0545
+
+    Merge branch 'master' of https://github.com/Sanoj32/Minor-Project
+
+[33mcommit a5f1eb5ddce512828b17af5772a36603d11a83d4[m
+Author: sanoj23 <sanoj.shrestha.13@gmail.com>
+Date:   Tue Oct 20 15:31:16 2020 +0545
+
+    date processing fixed
+
+[33mcommit 6e60771d35ebd8ff7b048f0d480304a8e0b2b6a9[m
+Author: Sanoj Raj Shrestha <sanoj.shrestha.13@gmail.com>
+Date:   Tue Oct 20 10:07:46 2020 +0545
+
+    Create codacy-analysis.yml
