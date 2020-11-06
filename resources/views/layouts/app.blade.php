@@ -83,9 +83,9 @@ use Illuminate\Support\Facades\DB;
 
                         @endguest
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/update">{{ __('Update Database') }}</a>
-                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="/update">Update Database</a>
+                        </li> -->
                     </ul>
                 </div>
             </div>

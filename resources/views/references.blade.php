@@ -11,6 +11,8 @@
         <li><a href="https://linkedin.com">linkedin.com </a></li>
         <li><a href="https://kumarijobs.com"> Kumarijobs.com </a></li>
         <li><a href="https://www.globaljob.com.np/"> Globaljobs.com </a></li>
+        <li><a href="https://www.merorojgari.com/"> Merorojgari.com </a></li>
+
 
     </ul>
     </div>
