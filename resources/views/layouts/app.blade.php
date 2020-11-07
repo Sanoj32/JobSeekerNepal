@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>IT Job Seeker</title>
-    <link rel="icon" href="images/jobs.png">
+    <link rel="icon" href="images/career.svg">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
     <!-- <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
@@ -36,9 +37,16 @@ use Illuminate\Support\Facades\DB;
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+            <!-- Image and text -->
+<nav class="navbar">
+  <a class="navbar-brand" href="#">
+    <img src="images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="non">
+    IT JOBS
+  </a>
+</nav>
+                <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     Home
-                </a>
+                </a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -98,52 +106,148 @@ use Illuminate\Support\Facades\DB;
 </body>
 
 <footer>
-<hr>
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 footer-about wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                    <h3>About us</h3>
-                    <p>
-                       This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/">Lalitpur Engineering College.</a> All job posts here belog to their respective websites.
-                    </p>
-                </div>
-                <div class="col-md-4 footer-links wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                    <div class="row">
-                        <div class="col">
-                            <h3>Links</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></p>
-                            <p><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts Github </a></p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><a href="https://lec.edu.np/">Our LEC College </a></p>
-                            <p><a href="/faqs">Frequestly Asked Questions (FAQs) </a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<hr class="downside">
+    <div class="site-footer">
+    <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-sm-12 col-md-6">
+            <h6>About Us</h6>
+            <p class="text-justify"> This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/"><u>    Lalitpur Engineering College.</u></a> All job posts here belog to their respective websites..</p>
+          </div>
+
+          <!-- <div class="col-xs-6 col-md-3">
+            <h6>Created</h6>
+            <ul class="footer-links">
+              <li><a href="http://scanfcode.com/category/c-language/">Laravel</a></li>
+              <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+              <li><a href="http://scanfcode.com/category/back-end-development/">Vue.js</a></li>
+              <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+            </ul>
+          </div> -->
+
+          <div class="col-xs-6 col-md-3 ">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="https://github.com/Sanoj32/Minor-Project.git">github</a></li>
+              <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">python</a></li>
+              <li><a href="https://lec.edu.np/">Our LEC College </a></li>
+              
+              <li><a href="/faqs">FAQs</a></li>
+            </ul>
+          </div>
+        </div>  
+      </div>
         </div>
-    </div>
-    <!-- <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col footer-social">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                </div>
-            </div>
-        </div>
-    </div> -->
+      </div>
 </footer>
 
 </html>
 <style>
+  html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin: 0 0 100px; /* bottom = footer height */
+}
+
+  .site-footer, .downside{
+
+line-height: 15px;
+    bottom: 0;
+    height: 100px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    font-size: 12px;
+    color:black;
+  }
+#app{
+font-size:medium ;
+}
+
+
+.site-footer hr.small
+{
+  margin:20px 0px;
+}
+
+.site-footer h6
+{
+  color:black;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:0px;
+  letter-spacing:2px;
+}
+
+.site-footer a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none;
+}
+.footer-links li
+{
+  display:block;
+}
+.footer-links a
+{
+  color:black;
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+.site-footer .social-icons
+{
+  text-align:center;
+}
+.site-footer .social-icons a
+{
+  width:40px;
+  height:40px;
+  line-height:0px;
+  margin-left:6px;
+  margin-right:0;
+  border-radius:100%;
+  color: black;
+}
+
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:10px;
+    
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0px;
+
+  }
+  .site-footer ,.site-footer
+  {
+    text-align:center;
+        
+  }
+
+}
+
+
+
+
 
 </style>
