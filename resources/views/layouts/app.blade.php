@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>IT Job Seeker</title>
-    <link rel="icon" href="images/jobs.png">
+    <link rel="icon" href="images/career.svg">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
     <!-- <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
@@ -36,9 +37,16 @@ use Illuminate\Support\Facades\DB;
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+            <!-- Image and text -->
+<nav class="navbar">
+  <a class="navbar-brand" href="#">
+    <img src="images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="non">
+    IT JOBS
+  </a>
+</nav>
+                <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     Home
-                </a>
+                </a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
