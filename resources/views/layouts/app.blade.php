@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\DB;
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
     <!-- <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
@@ -39,9 +39,9 @@ use Illuminate\Support\Facades\DB;
             <div class="container">
             <!-- Image and text -->
 <nav class="navbar">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="/">
     <img src="images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="non">
-    IT JOBS
+    <span class="pl-2">Home</span>
   </a>
 </nav>
                 <!-- <a class="navbar-brand" href="{{ url('/') }}">
@@ -131,11 +131,12 @@ use Illuminate\Support\Facades\DB;
               <li><a href="https://github.com/Sanoj32/Minor-Project.git">github</a></li>
               <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">python</a></li>
               <li><a href="https://lec.edu.np/">Our LEC College </a></li>
-              
+
               <li><a href="/faqs">FAQs</a></li>
             </ul>
           </div>
-        </div>  
+
+        </div>
       </div>
         </div>
       </div>
@@ -228,7 +229,7 @@ font-size:medium ;
   .site-footer [class^=col-]
   {
     margin-bottom:10px;
-    
+
   }
 }
 @media (max-width:767px)
@@ -241,7 +242,7 @@ font-size:medium ;
   .site-footer ,.site-footer
   {
     text-align:center;
-        
+
   }
 
 }
