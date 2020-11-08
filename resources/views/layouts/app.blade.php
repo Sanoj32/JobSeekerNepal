@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\DB;
 <nav class="navbar">
   <a class="navbar-brand" href="#">
     <img src="images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="non">
-    IT JOBS
+   <span class="pl-3">Home</span>
   </a>
 </nav>
                 <!-- <a class="navbar-brand" href="{{ url('/') }}">
@@ -132,7 +132,7 @@ use Illuminate\Support\Facades\DB;
               <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">python</a></li>
               <li><a href="https://lec.edu.np/">Our LEC College </a></li>
               
-              <li><a href="/faqs">FAQs</a></li>
+              <li><a href="/faqs"> Frequently Asked Questions(FAQs)</a></li>
             </ul>
           </div>
         </div>  
@@ -153,13 +153,13 @@ body {
 
   .site-footer, .downside{
 
-line-height: 15px;
+  line-height: inherit;
     bottom: 0;
     height: 100px;
     left: 0;
     position: absolute;
     width: 100%;
-    font-size: 12px;
+    font-size: 1rem;
     color:black;
   }
 #app{
