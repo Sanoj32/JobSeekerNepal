@@ -109,12 +109,16 @@
                                     @endif
                                     @if(!empty($job->truedeadline))
 
-                                    <li class="mr-md-4 pt-3 pr-3" title="Deadline">
-                                        <img style="width: 20px; height:20px" class="mr-2 mb-2" src="\images\deadline.svg">
+                                    <li class="mr-md-4 pt-3 pr-3">
+
                                         @if($job->websitename == "merorojgari.com" || $job->websitename =="np.linkedin.com")
-                                            Estimated Deadline:
+                                        <i class="zmdi zmdi-calendar-check mr-2 mb-2"></i> <span class="pr-2"> Posted Date: </span>{{$job->deadline}}
+
+                                        @else
+                                        <img style="width: 20px; height:20px" class="mr-2 mb-2" src="\images\deadline.svg">
+                                        Deadline: {{$job->truedeadline ?? $job->deadline}}
                                         @endif
-                                         {{$job->truedeadline ?? $job->deadline}}
+
                                     </li>
                                     @endif
                                     <?php $sn += 1;?>

@@ -112,6 +112,18 @@ class JobsController extends Controller
             $job->save();
         }
 
+        //Adding one month to the posted date of merorojgari
+        $jobs = Jobs::where('url', 'ILIKE', '%merorojgari%')->get();
+        foreach ($jobs as $job) {
+            $job->isExpired    = false;
+            $deadline          = $job->deadline;
+            $truedeadline      = date('Y-m-d', strtotime("+1 month", strtotime($deadline)));
+            $job->truedeadline = $truedeadline;
+            if ($job->truedeadline < $datenow) {
+                $job->isExpired = true;
+            }
+            $job->save();
+        }
         return redirect('/');
     }
     public function search()
@@ -235,9 +247,4 @@ class JobsController extends Controller
         $jobs = $jobs->sortByDesc('relevancy');
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
     }
-
-    // public function feedback()
-    // {
-    //     return view('feedback');
-    // }
 }
