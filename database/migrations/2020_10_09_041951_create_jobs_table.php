@@ -29,12 +29,6 @@ class CreateJobsTable extends Migration
             $table->string('experience')->nullable();
             $table->text('skills')->nullable();
             $table->text('skills1')->nullable();
-            // $table->text('desc')->nullable(); //description of the job
-            // $table->text('desc1')->nullable();
-            // $table->text('desc2')->nullable();
-            // $table->text('desc3')->nullable();
-            // $table->text('desc4')->nullable();
-            // $table->text('desc5')->nullable();
             $table->text('desct')->nullable();
             $table->text('url')->nullable();
             $table->string('websitename')->nullable();

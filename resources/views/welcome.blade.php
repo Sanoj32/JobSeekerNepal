@@ -44,13 +44,23 @@
 
                 <div class="filter-result">
                     <br>
-                    @if( !isset($searchText) && !isset($address))
+                    <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings</p>
+
+                  <?php if (!isset($searchText) && !isset($address)) {?>
                     <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional </p>
-                    @endif
+                    <h2 class="text-center">Most Popular</h2>
+                    <div class="row">
+                            <div class="col-md-6 text-center">
 
-                    <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings
+                                Languages
+                            </div>
+                            <div class="col-md-6 text-center">
+                    here
+                            </div>
 
-                    </p>
+                    </div>
+                  <?php }?>
+
 
                     @if(!empty($jobs))
                     <p style="font-size: large;"> There are <span style="font-weight: bold; color:green;">{{$count}}</span> active jobs that matched your search
@@ -92,7 +102,7 @@
                                         <i class="zmdi zmdi-star mr-2 "></i> {{$job->level}}
                                     </li>
                                     @endif
-                                    @if(!empty($job->salary))
+                                    @if(!empty($job->salary) && $job->salary != "Negotiable" && $job->salary != "As Per The Company's Policy")
                                     <li class="mr-md-4 pt-3 pr-3" title="Salary">
                                         <i class="zmdi zmdi-money mr-2"></i> {{$job->salary}}
                                     </li>

@@ -91,9 +91,9 @@ use Illuminate\Support\Facades\DB;
 
                         @endguest
 
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="/update">Update Database</a>
-                        </li> -->
+                        </li>
                     </ul>
                 </div>
             </div>
