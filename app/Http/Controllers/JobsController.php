@@ -26,25 +26,20 @@ class JobsController extends Controller
                     }
                 } //code to insert data in the database
                 if ($c == 0) {
-                    $jobs               = new Jobs();
-                    $jobs['name']       = $data['name'] ?? "";
-                    $jobs['company']    = $data['company'] ?? "";
-                    $jobs['logo']       = $data['logo'] ?? ""; // company logo
-                    $jobs['time']       = $data['time'] ?? ""; //full time or part time
-                    $jobs['level']      = $data['level'] ?? ""; // Senior or junoir
-                    $jobs['vacancy']    = $data['vacancy'] ?? "";
-                    $jobs['address']    = $data['address'] ?? "";
-                    $jobs['salary']     = $data['salary'] ?? "";
-                    $jobs['deadline']   = $data['deadline'] ?? "";
-                    $jobs['education']  = $data['education'] ?? "";
-                    $jobs['experience'] = $data['experience'] ?? "";
-                    $jobs['skills']     = $data['skills'] ?? "";
-                    $jobs['skills']     = $data['skills'] ?? "";
-                    // $jobs['desc']        = $data['desc'] ?? "";
-                    // $jobs['desc1']       = $data['desc1'] ?? "";
-                    // $jobs['desc2']       = $data['desc2'] ?? "";
-                    // $jobs['desc3']       = $data['desc3'] ?? "";
-                    // $jobs['desc4']       = $data['desc4'] ?? "";
+                    $jobs                = new Jobs();
+                    $jobs['name']        = $data['name'] ?? "";
+                    $jobs['company']     = $data['company'] ?? "";
+                    $jobs['logo']        = $data['logo'] ?? ""; // company logo
+                    $jobs['time']        = $data['time'] ?? ""; //full time or part time
+                    $jobs['level']       = $data['level'] ?? ""; // Senior or junoir
+                    $jobs['vacancy']     = $data['vacancy'] ?? "";
+                    $jobs['address']     = $data['address'] ?? "";
+                    $jobs['salary']      = $data['salary'] ?? "";
+                    $jobs['deadline']    = $data['deadline'] ?? "";
+                    $jobs['education']   = $data['education'] ?? "";
+                    $jobs['experience']  = $data['experience'] ?? "";
+                    $jobs['skills']      = $data['skills'] ?? "";
+                    $jobs['skills1']     = $data['skills1'] ?? "";
                     $jobs['desct']       = $data['desct'] ?? "";
                     $jobs['url']         = $data['Page_URL'] ?? "";
                     $jobs['websitename'] = "";
@@ -124,6 +119,7 @@ class JobsController extends Controller
             }
             $job->save();
         }
+
         return redirect('/');
     }
     public function search()
@@ -157,6 +153,12 @@ class JobsController extends Controller
         if ($searchText == "" && $address == "") {
             //if both search text and location select are empty just redirect the user to homepage
             return redirect('/');
+        }
+        if ($searchText == "go") {
+            $searchText = " go ";
+        }
+        if ($searchText == "express" || $searchText == "express js" || $searchText == "expressjs" || $searchText == "express.js") {
+            $searchText = " express ";
         }
         if ($searchText == "" && $address != "") {
             //if only the searchtext is empty show jobs with the selected address
