@@ -69,6 +69,18 @@ use Illuminate\Support\Facades\DB;
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
+                        <li>
+<div class="donate">
+<form action="https://www.paypal.com/donate" method="post" target="_top">
+                              <input type="hidden" name="cmd" value="_donations" />
+                              <input type="hidden" name="business" value="prabcrist@gmail.com" />
+                              <input type="hidden" name="item_name" value="Server cost and keeping site live" />
+                              <input type="hidden" name="currency_code" value="USD" />
+                              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                              <img alt=""  src="https://www.paypal.com/en_NP/i/scr/pixel.gif" width="1" height="1" />
+</form>
+</li>
+</div>
                         @endif
                         @else
                         <li class="nav-item dropdown">
@@ -131,8 +143,7 @@ use Illuminate\Support\Facades\DB;
               <li><a href="https://github.com/Sanoj32/Minor-Project.git">github</a></li>
               <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">python</a></li>
               <li><a href="https://lec.edu.np/">Our LEC College </a></li>
-
-              <li><a href="/faqs">FAQs</a></li>
+              <li><a href="/faqs"> Frequently Asked Questions(FAQs)</a></li>
             </ul>
           </div>
 
@@ -154,19 +165,25 @@ body {
 
   .site-footer, .downside{
 
-line-height: 15px;
+  line-height: inherit;
     bottom: 0;
     height: 100px;
     left: 0;
     position: absolute;
     width: 100%;
-    font-size: 12px;
-    color:black;
+    font-size: 1rem;
+    color: grey;
   }
 #app{
 font-size:medium ;
 }
 
+.donate{
+padding: inherit;
+position: relative;
+margin: 8px auto;
+font-size-adjust: inherit;
+}
 
 .site-footer hr.small
 {
@@ -175,7 +192,7 @@ font-size:medium ;
 
 .site-footer h6
 {
-  color:black;
+  color: grey;
   font-size:16px;
   text-transform:uppercase;
   margin-top:0px;
@@ -198,7 +215,7 @@ font-size:medium ;
 }
 .footer-links a
 {
-  color:black;
+  color: grey;
 }
 .footer-links a:active,.footer-links a:focus,.footer-links a:hover
 {
