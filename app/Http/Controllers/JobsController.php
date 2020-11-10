@@ -10,7 +10,7 @@ class JobsController extends Controller
 {
     public function store()
     {
-        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json');
+        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json', '/merorojgari.json');
         foreach ($websites as $website) {
             $jsondata = file_get_contents(public_path("jsondata") . $website);
             $jsondata = json_decode($jsondata, true);
@@ -56,7 +56,7 @@ class JobsController extends Controller
             } // end code to insert data
         } //end of whole data collection from different websites
         //code to assign websitename
-        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'globaljob.com', 'kumarijob.com', 'merojob.com');
+        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'globaljob.com', 'kumarijob.com', 'merojob.com', 'merorojgari.com');
         foreach ($websitenames as $sitename) {
             $jobs = Jobs::where('url', 'ILIKE', '%' . $sitename . '%')->get();
             foreach ($jobs as $job) {
@@ -66,17 +66,18 @@ class JobsController extends Controller
         }
         //end code to assign websitename
 
-        $jobs    = Jobs::where('url', 'not ILIKE', '%merojob%')->get(); //catagroize legitimate dates and calculate exact date
+        $jobs = Jobs::where('url', 'NOT ILIKE', '%merojob%')
+            ->where('url', 'NOT ILIKE', '%linkedin%')
+            ->get(); //catagroize legitimate dates and calculate exact date
         $datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
+        $datenow->format('Y-m-d');
         foreach ($jobs as $job) {
-            echo $job->websitename . "<hr>";
             $deadline   = $job->deadline;
             $deadline   = strtotime($deadline);
             $deadline   = date('Y-m-d', $deadline); //formats the date into Y-m-d format
             $comparison = date('1970-01-01');
             if (!($deadline == $comparison)) {
                 $job->truedeadline = $deadline; //deadline is true deadline of the job
-                $datenow->format('Y-m-d');
                 if ($deadline < $datenow) {
                     $job->isExpired = true;
                 }
@@ -97,8 +98,32 @@ class JobsController extends Controller
             }
             $job->save();
         }
-        //end real date calculation code
 
+        $jobs = Jobs::where('url', 'ILIKE', '%linkedin%')->get();
+        foreach ($jobs as $job) {
+            $job->isExpired    = false;
+            $deadline          = $job->deadline;
+            $deadline          = date('Y-m-d', strtotime($deadline));
+            $truedeadline      = date('Y-m-d', strtotime("+1 month", strtotime($deadline)));
+            $job->truedeadline = $truedeadline;
+            if ($job->truedeadline < $datenow) {
+                $job->isExpired = true;
+            }
+            $job->save();
+        }
+
+        //Adding one month to the posted date of merorojgari
+        $jobs = Jobs::where('url', 'ILIKE', '%merorojgari%')->get();
+        foreach ($jobs as $job) {
+            $job->isExpired    = false;
+            $deadline          = $job->deadline;
+            $truedeadline      = date('Y-m-d', strtotime("+1 month", strtotime($deadline)));
+            $job->truedeadline = $truedeadline;
+            if ($job->truedeadline < $datenow) {
+                $job->isExpired = true;
+            }
+            $job->save();
+        }
         return redirect('/');
     }
     public function search()
@@ -162,10 +187,6 @@ class JobsController extends Controller
                     $query->where('name', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                    // ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
-                    // ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
-                    // ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
-                    // ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
@@ -180,10 +201,6 @@ class JobsController extends Controller
                     $query->where('name', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                    // ->orwhere('desc', 'ILIKE', '%' . $searchText . '%')
-                    // ->orwhere('desc1', 'ILIKE', '%' . $searchText . '%')
-                    // ->orwhere('desc2', 'ILIKE', '%' . $searchText . '%')
-                    // ->orwhere('desc3', 'ILIKE', '%' . $searchText . '%')
                         ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
                 })
                 ->get();
@@ -230,16 +247,4 @@ class JobsController extends Controller
         $jobs = $jobs->sortByDesc('relevancy');
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
     }
-    public function test()
-    {
-        return view('test');
-    }
-    public function references()
-    {
-        return view('references');
-    }
-    // public function feedback()
-    // {
-    //     return view('feedback');
-    // }
 }

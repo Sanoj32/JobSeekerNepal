@@ -18,16 +18,13 @@ Route::get('/', function () {
 });
 Route::get('/update', 'JobsController@store');
 Route::get('/search', 'JobsController@search');
-Route::get('/test', 'JobsController@test');
-Route::get('/references', 'JobsController@references');
+Route::get('/test', 'SiteController@test');
+Route::get('/references', 'SiteController@references');
 Auth::routes();
 Route::post('/viewed/{jobs}', 'ViewedController@store')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/faqs', 'SiteController@faqs');
 // Route::get('/feedback', 'JobsController@feedback');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 // Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 // Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');

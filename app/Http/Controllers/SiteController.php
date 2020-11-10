@@ -8,4 +8,13 @@ class SiteController extends Controller
     {
         return view('faqs');
     }
+    public function test()
+    {
+        return view('test');
+    }
+    public function references()
+    {
+        return view('references');
+    }
+
 }
