@@ -37,10 +37,7 @@ function changeSearchText($searchText)
 
 function searchJobs($searchText, $address)
 {
-    if ($searchText == "" && $address == "") {
-        //if both search text and location select are empty just redirect the user to homepage
-        return redirect('/');
-    }
+
     if ($searchText == "" && $address != "") {
         //if only the searchtext is empty show jobs with the selected address
         if ($address != 'other') {
@@ -48,16 +45,13 @@ function searchJobs($searchText, $address)
             $jobs = Jobs::where('address', 'ILIKE', '%' . $address . '%')
                 ->where('isExpired', '=', 'false')
                 ->get();
-            $count = $jobs->count();
-            return view('welcome', compact('jobs', 'count', 'address'));
+
         } else {
 
             $jobs = Jobs::where('address', 'not ILIKE', '%kathmandu%')
                 ->where('address', 'not ILIKE', '%lalitpur%')
                 ->where('isExpired', '=', 'false')
                 ->get();
-            $count = $jobs->count();
-            return view('welcome', compact('jobs', 'count', 'address'));
         }
     }
 

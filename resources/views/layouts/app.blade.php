@@ -125,7 +125,7 @@ use Illuminate\Support\Facades\DB;
         <div class="row justify-content-between">
           <div class="col-sm-12 col-md-6">
             <h6>About Us</h6>
-            <p class="text-justify"> This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/"><u>    Lalitpur Engineering College.</u></a> All job posts here belog to their respective websites..</p>
+            <p class="text-justify"> This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/">Lalitpur Engineering College.</a> All job posts here belog to their respective websites..</p>
           </div>
 
           <!-- <div class="col-xs-6 col-md-3">

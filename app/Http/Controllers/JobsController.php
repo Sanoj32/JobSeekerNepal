@@ -134,14 +134,21 @@ class JobsController extends Controller
     }
     public function search()
     {
-
+        if (isset($_GET['searchText'])) {
+            $searchText = $_GET['searchText'];
+        } else {
+            $searchText = "";
+        }
         if (isset($_GET['location'])) {
             $address = $_GET['location'];
         } else {
             $address = "";
         }
+        if ($searchText == "" && $address == "") {
+            //if both search text and location select are empty just redirect the user to homepage
+            return redirect('/');
+        }
 
-        $searchText   = $_GET['searchText'];
         $ogsearchText = $searchText;
 
         $searchText = changeSearchText($searchText); // Custom function autoloaded from composer.json in app/helpers.php
@@ -161,7 +168,8 @@ class JobsController extends Controller
                 $job->isViewed = false;
             };
         }
-        $jobs = $jobs->sortByDesc('relevancy');
+        $jobs  = $jobs->sortByDesc('relevancy');
+        $count = $jobs->count();
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
     }
 
