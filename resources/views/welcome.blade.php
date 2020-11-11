@@ -102,7 +102,7 @@
                                         <i class="zmdi zmdi-star mr-2 "></i> {{$job->level}}
                                     </li>
                                     @endif
-                                    @if(!empty($job->salary) && $job->salary != "Negotiable" && $job->salary != "As Per The Company's Policy")
+                                    @if(!empty($job->salary) && $job->salary != "Negotiable" && $job->salary != "As Per The Company's Policy" && $job->salary != "Negotiablemonth" && $job->salary != " Negotiable/Month")
                                     <li class="mr-md-4 pt-3 pr-3" title="Salary">
                                         <i class="zmdi zmdi-money mr-2"></i> {{$job->salary}}
                                     </li>

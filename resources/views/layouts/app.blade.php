@@ -70,17 +70,18 @@ use Illuminate\Support\Facades\DB;
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         <li>
-<div class="donate">
-<form action="https://www.paypal.com/donate" method="post" target="_top">
+                          <div class="donate">
+                            <form action="https://www.paypal.com/donate" method="post" target="_top">
                               <input type="hidden" name="cmd" value="_donations" />
                               <input type="hidden" name="business" value="prabcrist@gmail.com" />
                               <input type="hidden" name="item_name" value="Server cost and keeping site live" />
                               <input type="hidden" name="currency_code" value="USD" />
                               <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
                               <img alt=""  src="https://www.paypal.com/en_NP/i/scr/pixel.gif" width="1" height="1" />
-</form>
-</li>
-</div>
+                            </form>
+                          </div>
+                        </li>
+
                         @endif
                         @else
                         <li class="nav-item dropdown">
