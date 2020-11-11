@@ -48,17 +48,9 @@
 
                   <?php if (!isset($searchText) && !isset($address)) {?>
                     <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional </p>
-                    <h2 class="text-center">Most Popular</h2>
-                    <div class="row">
-                            <div class="col-md-6 text-center">
 
-                                Languages
-                            </div>
-                            <div class="col-md-6 text-center">
-                    here
-                            </div>
+                  <!-- PUT YOUR CODE HERE !!!!!!!! PRAVAT -->
 
-                    </div>
                   <?php }?>
 
 
