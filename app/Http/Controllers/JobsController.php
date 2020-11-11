@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Jobs;
+use App\Query;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 
 class JobsController extends Controller
 {
@@ -26,25 +26,20 @@ class JobsController extends Controller
                     }
                 } //code to insert data in the database
                 if ($c == 0) {
-                    $jobs               = new Jobs();
-                    $jobs['name']       = $data['name'] ?? "";
-                    $jobs['company']    = $data['company'] ?? "";
-                    $jobs['logo']       = $data['logo'] ?? ""; // company logo
-                    $jobs['time']       = $data['time'] ?? ""; //full time or part time
-                    $jobs['level']      = $data['level'] ?? ""; // Senior or junoir
-                    $jobs['vacancy']    = $data['vacancy'] ?? "";
-                    $jobs['address']    = $data['address'] ?? "";
-                    $jobs['salary']     = $data['salary'] ?? "";
-                    $jobs['deadline']   = $data['deadline'] ?? "";
-                    $jobs['education']  = $data['education'] ?? "";
-                    $jobs['experience'] = $data['experience'] ?? "";
-                    $jobs['skills']     = $data['skills'] ?? "";
-                    $jobs['skills']     = $data['skills'] ?? "";
-                    // $jobs['desc']        = $data['desc'] ?? "";
-                    // $jobs['desc1']       = $data['desc1'] ?? "";
-                    // $jobs['desc2']       = $data['desc2'] ?? "";
-                    // $jobs['desc3']       = $data['desc3'] ?? "";
-                    // $jobs['desc4']       = $data['desc4'] ?? "";
+                    $jobs                = new Jobs();
+                    $jobs['name']        = $data['name'] ?? "";
+                    $jobs['company']     = $data['company'] ?? "";
+                    $jobs['logo']        = $data['logo'] ?? ""; // company logo
+                    $jobs['time']        = $data['time'] ?? ""; //full time or part time
+                    $jobs['level']       = $data['level'] ?? ""; // Senior or junoir
+                    $jobs['vacancy']     = $data['vacancy'] ?? "";
+                    $jobs['address']     = $data['address'] ?? "";
+                    $jobs['salary']      = $data['salary'] ?? "";
+                    $jobs['deadline']    = $data['deadline'] ?? "";
+                    $jobs['education']   = $data['education'] ?? "";
+                    $jobs['experience']  = $data['experience'] ?? "";
+                    $jobs['skills']      = $data['skills'] ?? "";
+                    $jobs['skills1']     = $data['skills1'] ?? "";
                     $jobs['desct']       = $data['desct'] ?? "";
                     $jobs['url']         = $data['Page_URL'] ?? "";
                     $jobs['websitename'] = "";
@@ -124,6 +119,17 @@ class JobsController extends Controller
             }
             $job->save();
         }
+
+        $queries = Query::all();
+        foreach ($queries as $query) {
+            $searchText   = $query->name;
+            $searchText   = changeSearchText($searchText);
+            $jobs         = searchJobs($searchText, "");
+            $query->count = $jobs->count();
+            echo $query->count . "<br>";
+
+        }
+
         return redirect('/');
     }
     public function search()
@@ -137,102 +143,13 @@ class JobsController extends Controller
 
         $searchText   = $_GET['searchText'];
         $ogsearchText = $searchText;
-        $searchText   = strtolower($searchText);
-        if ($searchText == 'dot net' || $searchText == 'dotnet') {
-            $searchText = ".net";
-        }
-        if ($searchText == 'java') {
-            $searchText = "java ";
-        }
 
-        if ($searchText == 'js') {
-            $searchText = "javascript";
-        }
-        if (Str::contains($searchText, 'node')) {
-            $searchText = 'node';
-        }
-        if (Str::contains($searchText, 'react')) {
-            $searchText = 'react';
-        }
-        if ($searchText == "" && $address == "") {
-            //if both search text and location select are empty just redirect the user to homepage
-            return redirect('/');
-        }
-        if ($searchText == "" && $address != "") {
-            //if only the searchtext is empty show jobs with the selected address
-            if ($address != 'other') {
+        $searchText = changeSearchText($searchText); // Custom function autoloaded from composer.json in app/helpers.php
 
-                $jobs = Jobs::where('address', 'ILIKE', '%' . $address . '%')
-                    ->where('isExpired', '=', 'false')
-                    ->get();
-                $count = $jobs->count();
-                return view('welcome', compact('jobs', 'count', 'address'));
-            } else {
+        $jobs = searchJobs($searchText, $address); // Custom function to get the jobs according to the query provided by the user.
 
-                $jobs = Jobs::where('address', 'not ILIKE', '%kathmandu%')
-                    ->where('address', 'not ILIKE', '%lalitpur%')
-                    ->where('isExpired', '=', 'false')
-                    ->get();
-                $count = $jobs->count();
-                return view('welcome', compact('jobs', 'count', 'address'));
-            }
-        }
+        $jobs = setRelevancy($jobs, $searchText); //custom function to set the relevancy of the search results.
 
-        if ($address != 'other' && $searchText != "") {
-            //if the address isn't empty only get the jobs containing this address and searchtext isn't empty
-
-            $jobs = Jobs::where('isExpired', '=', 'false')
-                ->where('address', 'ILIKE', '%' . $address . '%')
-                ->where(function ($query) use ($searchText) {
-                    $query->where('name', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
-                })
-                ->get();
-        }
-
-        if ($searchText != "" && $address == 'other') {
-
-            $jobs = Jobs::where('address', 'not ILIKE', '%kathmandu%')
-                ->where('address', 'not ILIKE', '%lalitpur%')
-                ->where('isExpired', '=', 'false')
-                ->where(function ($query) use ($searchText) {
-                    $query->where('name', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                        ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
-                })
-                ->get();
-        }
-        foreach ($jobs as $job) {
-
-            $job->relevacny = 0;
-            $name           = Str::lower($job->name); //the job name in lowercase
-            $search         = Str::lower($searchText); //the searchText in lower case
-            if (Str::contains($name, $search)) {
-                // check if a string contains a substring
-                $job->relevancy += 200;
-            }
-            $skills = Str::lower($job->skills); // skills to lower case
-            if (Str::contains($skills, $searchText)) {
-                $job->relevancy += 40;
-            }
-            $skills1 = Str::lower($job->skills1); // skills to lower case
-            if (Str::contains($skills1, $searchText)) {
-                $job->relevancy += 40;
-            }
-            if ($job->isExpired == true) {
-                $job->relevancy = 0;
-            }
-            $jobstatus = (auth()->user()) ? auth()->user()->viewedjobs->contains($job->id) : false;
-            if ($jobstatus == true) {
-                $job->relevancy = 0;
-                $job->isViewed  = true;
-            } else {
-                $job->isViewed = false;
-            };
-        }
         $count      = $jobs->count();
         $searchText = $ogsearchText;
         foreach ($jobs as $job) {
@@ -247,4 +164,5 @@ class JobsController extends Controller
         $jobs = $jobs->sortByDesc('relevancy');
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
     }
+
 }
