@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -119,6 +119,7 @@ use Illuminate\Support\Facades\DB;
 </body>
 
 <footer>
+<button class="scrollToTopBtn">🔺</button>
 <hr class="downside">
     <div class="site-footer">
     <div class="container">
@@ -153,7 +154,6 @@ use Illuminate\Support\Facades\DB;
         </div>
       </div>
 </footer>
-
 </html>
 <style>
   html {
@@ -239,9 +239,29 @@ font-size-adjust: inherit;
   margin-left:6px;
   margin-right:0;
   border-radius:100%;
-  color: black;
 }
-
+.scrollToTopBtn {
+  background-color: black;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 48px;
+  width: 48px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  opacity: 0;
+  border-style: none;
+  transform: translateY(100px);
+  transition: all .5s ease;
+}   
+.showBtn {
+  opacity: 1;
+  transform: translateY(0)
+}
 @media (max-width:991px)
 {
   .site-footer [class^=col-]
@@ -264,9 +284,24 @@ font-size-adjust: inherit;
   }
 
 }
-
-
-
-
-
 </style>
+<script>
+var scrollToTopBtn = document.querySelector(".scrollToTopBtn")
+var rootElement = document.documentElement
+function handleScroll() {
+  var scrollTotal = rootElement.scrollHeight - rootElement.clientHeight
+  if ((rootElement.scrollTop / scrollTotal ) > 0.05) {
+    scrollToTopBtn.classList.add("showBtn")
+  } else {
+    scrollToTopBtn.classList.remove("showBtn")
+  }
+}
+function scrollToTop() {
+  rootElement.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  })
+}
+scrollToTopBtn.addEventListener("click", scrollToTop)
+document.addEventListener("scroll", handleScroll)
+</script>
