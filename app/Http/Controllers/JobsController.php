@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs;
 use App\Query;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class JobsController extends Controller
 {
@@ -120,13 +121,35 @@ class JobsController extends Controller
             $job->save();
         }
 
-        $queries = Query::all();
+        $jsondata = file_get_contents(public_path("jsondata") . "\queries.json");
+        $jsondata = json_decode($jsondata, true);
+
+        foreach ($jsondata as $data) {
+
+            $storedqueries = Query::all();
+            echo ($data['name']);
+            $c = 0;
+            foreach ($storedqueries as $storedquery) {
+                strtolower($storedquery['name']);
+                echo strtolower($data['name']);
+                if ($data['name'] == $storedquery['name']) {
+                    $c = 1;
+                }
+            }
+            if ($c == 0) {
+                $query         = new Query();
+                $query['name'] = $data['name'];
+                $query['type'] = $data['type'];
+                $query->save();
+            }
+        }
+        $queries = Query::all(); // Code to count the number if jobs each query has.
         foreach ($queries as $query) {
             $searchText   = $query->name;
             $searchText   = changeSearchText($searchText);
             $jobs         = searchJobs($searchText, "");
             $query->count = $jobs->count();
-            echo $query->count . "<br>";
+            $query->save();
 
         }
 
@@ -134,14 +157,21 @@ class JobsController extends Controller
     }
     public function search()
     {
-
+        if (isset($_GET['searchText'])) {
+            $searchText = $_GET['searchText'];
+        } else {
+            $searchText = "";
+        }
         if (isset($_GET['location'])) {
             $address = $_GET['location'];
         } else {
             $address = "";
         }
+        if ($searchText == "" && $address == "") {
+            //if both search text and location select are empty just redirect the user to homepage
+            return redirect('/');
+        }
 
-        $searchText   = $_GET['searchText'];
         $ogsearchText = $searchText;
 
         $searchText = changeSearchText($searchText); // Custom function autoloaded from composer.json in app/helpers.php
@@ -161,8 +191,17 @@ class JobsController extends Controller
                 $job->isViewed = false;
             };
         }
-        $jobs = $jobs->sortByDesc('relevancy');
+        $jobs  = $jobs->sortByDesc('relevancy');
+        $count = $jobs->count();
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
+
+    }
+
+    public function liveSearch(Request $request)
+    {
+        ;
+        $queries = Query::where('name', 'ILIKE', '%' . $request->get('searchText') . '%')->get();
+        return json_encode($queries);
     }
 
 }

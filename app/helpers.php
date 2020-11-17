@@ -32,15 +32,31 @@ function changeSearchText($searchText)
     if ($searchText == "angularjs" || $searchText == "angular.js" || $searchText == "angular js") {
         $searchText = "angular";
     }
+    if ($searchText == "c") {
+        $searchText = " c ";
+    }
+    if ($searchText == "postgresql") {
+        $searchText = "postgres";
+    }
+    if (Str::contains($searchText, 'oracle')) {
+        $searchText = "oracle";
+    }
+    if (Str::contains($searchText, 'mongo')) {
+        $searchText = "mongo";
+    }
+    if (Str::contains($searchText, 'maria')) {
+        $searchText = "maria";
+    }
+    if (Str::contains($searchText, 'sql server')) {
+        $searchText = "microsoft sql";
+    }
     return $searchText;
+
 }
 
 function searchJobs($searchText, $address)
 {
-    if ($searchText == "" && $address == "") {
-        //if both search text and location select are empty just redirect the user to homepage
-        return redirect('/');
-    }
+
     if ($searchText == "" && $address != "") {
         //if only the searchtext is empty show jobs with the selected address
         if ($address != 'other') {
@@ -48,16 +64,13 @@ function searchJobs($searchText, $address)
             $jobs = Jobs::where('address', 'ILIKE', '%' . $address . '%')
                 ->where('isExpired', '=', 'false')
                 ->get();
-            $count = $jobs->count();
-            return view('welcome', compact('jobs', 'count', 'address'));
+
         } else {
 
             $jobs = Jobs::where('address', 'not ILIKE', '%kathmandu%')
                 ->where('address', 'not ILIKE', '%lalitpur%')
                 ->where('isExpired', '=', 'false')
                 ->get();
-            $count = $jobs->count();
-            return view('welcome', compact('jobs', 'count', 'address'));
         }
     }
 

@@ -1,0 +1,106 @@
+[
+    {
+        "name": "Php",
+        "type": "Progaramming Language"
+    },
+    {
+        "name": "javascript",
+        "type": "Progaramming Language"
+    },
+    {
+        "name": "Python",
+        "type": "Progaramming Language"
+    },
+    {
+        "name": "C#",
+        "type": "Progaramming Language"
+    },
+    {
+        "name": "Java",
+        "type": "Progaramming Language"
+    },
+    {
+        "name": "Ruby",
+        "type": "Progaramming Language"
+    },
+    {
+        "name": "C",
+        "type": "Progaramming Language"
+    },
+    {
+        "name": "Objective-C",
+        "type": "Progaramming Language"
+    },
+    {
+        "name": "Laravel",
+        "type": "Framework"
+    },
+    {
+        "name": "React",
+        "type": "Frontend Javascript Library"
+    },
+    {
+        "name": "Vue.js",
+        "type": "Frontend Framework"
+    },
+    {
+        "name": "Angular",
+        "type": "Frontend Framework"
+    },
+    {
+        "name": "Node.js",
+        "type": "JS runtime environment"
+    },
+    {
+        "name": "Next.js",
+        "type": "Framework"
+    },
+    {
+        "name": "Django",
+        "type": "Framework"
+    },
+    {
+        "name": "Flask",
+        "type": "Framework"
+    },
+    {
+        "name": ".NET",
+        "type": "Framework"
+    },
+    {
+        "name": "ASP.NET",
+        "type": "Framework"
+    },
+    {
+        "name": "Spring",
+        "type": "Framework"
+    },
+    {
+        "name": "Ruby on Rails",
+        "type": "Framework"
+    },
+    {
+        "name": "MySQL",
+        "type": "Database"
+    },
+    {
+        "name": "PostgreSQL",
+        "type": "Database"
+    },
+    {
+        "name": "Oracle Database",
+        "type": "Database"
+    },
+    {
+        "name": "Microsoft SQL Server",
+        "type": "Database"
+    },
+    {
+        "name": "MongoDB",
+        "type": "Database"
+    },
+    {
+        "name": "MariaDB",
+        "type": "Database"
+    }
+]
