@@ -125,7 +125,8 @@ use Illuminate\Support\Facades\DB;
 </body>
 
 <footer>
-<button class="scrollToTopBtn">🔺</button>
+<!-- <button class="scrollToTopBtn">🔺</button> -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">🔺</button>
 <hr class="downside">
     <div class="site-footer">
     <div class="container">
@@ -246,7 +247,27 @@ font-size-adjust: inherit;
   margin-right:0;
   border-radius:100%;
 }
-.scrollToTopBtn {
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: black; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 50%; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+  transition: all .5s ease;
+}
+
+#myBtn:hover {
+  background-color: black; /* Add a dark-grey background on hover */
+}
+/* .scrollToTopBtn {
   background-color: black;
   border: none;
   border-radius: 50%;
@@ -267,7 +288,7 @@ font-size-adjust: inherit;
 .showBtn {
   opacity: 1;
   transform: translateY(0)
-}
+} */
 @media (max-width:991px)
 {
   .site-footer [class^=col-]
@@ -293,22 +314,23 @@ font-size-adjust: inherit;
 
 </style>
 <script>
-var scrollToTopBtn = document.querySelector(".scrollToTopBtn")
-var rootElement = document.documentElement
-function handleScroll() {
-  var scrollTotal = rootElement.scrollHeight - rootElement.clientHeight
-  if ((rootElement.scrollTop / scrollTotal ) > 0.05) {
-    scrollToTopBtn.classList.add("showBtn")
+//Get the button:
+mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
   } else {
-    scrollToTopBtn.classList.remove("showBtn")
+    mybutton.style.display = "none";
   }
 }
-function scrollToTop() {
-  rootElement.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  })
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
-scrollToTopBtn.addEventListener("click", scrollToTop)
-document.addEventListener("scroll", handleScroll)
 </script>
