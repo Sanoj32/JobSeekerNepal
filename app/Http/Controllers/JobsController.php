@@ -121,7 +121,7 @@ class JobsController extends Controller
             $job->save();
         }
 
-        $jsondata = file_get_contents(public_path("jsondata") . "\queries.json");
+        $jsondata = file_get_contents(public_path("jsondata") . "/queries.json");
         $jsondata = json_decode($jsondata, true);
 
         foreach ($jsondata as $data) {
