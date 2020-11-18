@@ -30,6 +30,7 @@ export default {
             axios.post("/viewed/" + this.jobsId).then(response => {
                 this.status = !this.status;
                 this.statusr = !this.status;
+                console.log(this.statusr)
             });
         }
     },
