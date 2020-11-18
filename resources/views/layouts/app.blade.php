@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\DB;
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>IT Job Seeker</title>
-    <link rel="icon" href="images/career.svg">
+    <link rel="icon" href="/images/career.svg">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\DB;
     <!-- <link href="{{ asset('bootstrap/css/bootstrap.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/piechart.css') }}" rel="stylesheet">
 
 
 </head>
@@ -38,15 +39,12 @@ use Illuminate\Support\Facades\DB;
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
             <!-- Image and text -->
-<nav class="navbar">
-  <a class="navbar-brand" href="/">
-    <img src="images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="non">
-    <span class="pl-2">Home</span>
-  </a>
-</nav>
-                <!-- <a class="navbar-brand" href="{{ url('/') }}">
-                    Home
-                </a> -->
+              <nav class="navbar">
+                <a class="navbar-brand" href="/">
+                  <img src="/images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                  <span class="pl-2">Home</span>
+                </a>
+              </nav>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -90,6 +88,14 @@ use Illuminate\Support\Facades\DB;
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                <?php $UserId = Auth::user()->id?>
+                                <form action="/savedjobs/<?=$UserId?>" method="POST">
+                                @csrf
+                                <button class="dropdown-item" type="submit">
+                                My Saved Jobs
+                                </button>
+                                </form>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -126,7 +132,7 @@ use Illuminate\Support\Facades\DB;
         <div class="row justify-content-between">
           <div class="col-sm-12 col-md-6">
             <h6>About Us</h6>
-            <p class="text-justify"> This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/"><u>    Lalitpur Engineering College.</u></a> All job posts here belog to their respective websites..</p>
+            <p class="text-justify"> This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/">    Lalitpur Engineering College.</a> All job posts here belog to their respective websites..</p>
           </div>
 
           <!-- <div class="col-xs-6 col-md-3">
@@ -142,8 +148,8 @@ use Illuminate\Support\Facades\DB;
           <div class="col-xs-6 col-md-3 ">
             <h6>Quick Links</h6>
             <ul class="footer-links">
-              <li><a href="https://github.com/Sanoj32/Minor-Project.git">github</a></li>
-              <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">python</a></li>
+              <li><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></li>
+              <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts</a></li>
               <li><a href="https://lec.edu.np/">Our LEC College </a></li>
               <li><a href="/faqs"> Frequently Asked Questions(FAQs)</a></li>
             </ul>
@@ -257,7 +263,7 @@ font-size-adjust: inherit;
   border-style: none;
   transform: translateY(100px);
   transition: all .5s ease;
-}   
+}
 .showBtn {
   opacity: 1;
   transform: translateY(0)
@@ -284,6 +290,7 @@ font-size-adjust: inherit;
   }
 
 }
+
 </style>
 <script>
 var scrollToTopBtn = document.querySelector(".scrollToTopBtn")

@@ -22,6 +22,8 @@ Route::get('/test', 'SiteController@test');
 Route::get('/references', 'SiteController@references');
 Auth::routes();
 Route::post('/viewed/{jobs}', 'ViewedController@store')->middleware('auth');
+Route::post('/saved/{jobs}', 'SavedController@store')->middleware('auth');
+Route::post('/savedjobs/{userId}', 'SavedController@index')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/faqs', 'SiteController@faqs');
 // Route::get('/feedback', 'JobsController@feedback');

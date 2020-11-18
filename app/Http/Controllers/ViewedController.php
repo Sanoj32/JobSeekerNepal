@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-
-
 use App\Jobs;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ViewedController extends Controller
 {
-    public function store(Jobs $jobs){
-          return  auth()->user()->viewedjobs()->toggle($jobs);
+    public function store(Jobs $jobs)
+    {
+        return auth()->user()->viewedjobs()->toggle($jobs);
     }
 }

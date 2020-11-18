@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Jobs;
 use App\Query;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class JobsController extends Controller
 {
@@ -46,6 +45,7 @@ class JobsController extends Controller
                     $jobs['websitename'] = "";
                     $jobs['isExpired']   = false;
                     $jobs['isViewed']    = false;
+                    $jobs['isSaved']     = false;
                     $jobs['relevancy']   = 10;
                     $jobs->save();
                 }
@@ -191,17 +191,25 @@ class JobsController extends Controller
                 $job->isViewed = false;
             };
         }
+        foreach ($jobs as $job) {
+            $jobstatus = (auth()->user()) ? auth()->user()->savedjobs->contains($job->id) : false;
+            if ($jobstatus == true) {
+                $job->isSaved = true;
+            } else {
+                $job->isSaved = false;
+            };
+        }
         $jobs  = $jobs->sortByDesc('relevancy');
         $count = $jobs->count();
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
 
     }
 
-    public function liveSearch(Request $request)
-    {
-        ;
-        $queries = Query::where('name', 'ILIKE', '%' . $request->get('searchText') . '%')->get();
-        return json_encode($queries);
-    }
+    // public function liveSearch(Request $request)
+    // {
+    //     ;
+    //     $queries = Query::where('name', 'ILIKE', '%' . $request->get('searchText') . '%')->get();
+    //     return json_encode($queries);
+    // }
 
 }

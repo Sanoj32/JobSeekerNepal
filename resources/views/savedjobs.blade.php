@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
 
 <div class="container">
     <div class="row">
         <div class="col-lg-10 mx-auto mb-4">
             <div class="section-title text-center ">
-                <h3 class="top-c-sep">Grow your career with us </h3>
-                <p>IT and communication jobs from Nepal's most popular websites</p>
+                <h3 class="top-c-sep">My saved Jobs </h3>
             </div>
         </div>
     </div>
@@ -17,52 +15,13 @@
         <div class="col-lg-10 mx-auto">
             <div class="career-search mb-60">
 
-                <form action="/search" method="GET" class="career-form mb-60">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 my-3">
-                            <div class="input-group position-relative">
-                                <input type="text" class="form-control" @if(isset($searchText)) value="{{$searchText}}" @endif placeholder="Enter a single Keyword" id="searchText" name="searchText">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 my-3">
-                            <div class="select-container">
-                                <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
-                                    <option selected disabled value=""><h3>Select a location<h3></option>
-                                    <option value="kathmandu">Kathmandu</option>
-                                    <option value="lalitpur">Lalitpur</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 my-3">
-                            <button type="submit" class="btn btn-lg btn-block btn-light btn-custom" id="contact-submit">
-                                Search
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
                 <div class="filter-result">
                     <br>
-                    <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings</p>
-
-                  <?php if (!isset($searchText) && !isset($address)) {?>
-                    <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional </p>
-
-
-                  <?php }?>
 
 
                     @if(!empty($jobs))
                     @if($count != 0)
-                    <p style="font-size: large;"> There are <span style="font-weight: bold; color:green;">{{$count}}</span> active jobs that matched your search
-                        @if(!empty($searchText))
-                        for <span style="font:bolder"> {{$searchText}}</span>
-                        @if(!empty($address))
-                        in {{$address}}
-                        @endif
-                         <p>( Jobs with your searched language or skill as a secondary requirement are also included. ) </p>
-                        @endif
+                    <p style="font-size: large;"> You have <span style="font-weight: bold; color:green;">{{$count}}</span> saved jobs.
                     </p>
                     <?php $sn = 1;?>
                     @foreach($jobs as $job)
@@ -79,7 +38,6 @@
                                             @endauth
                                             @guest
                                            <a href="/login"> <button class="btn btn-light ml-4"> Mark as opened</button> </a>
-                                           <a href="/login"> <button class="btn btn-light ml-3">Save</button> </a>
                                             @endguest
                                         </span>
                                         </h5>
@@ -139,8 +97,8 @@
                     @else
                     <div class="align-content-center">
 
-                            <img class="center" src="/images/emptyresult.png">
-                            <h3 ><p class="text-center fontweight pt-2">No results found</p></h1>
+                    <img class="center" src="/images/empty.png">
+                    <h3 ><p class="text-center fontweight">Nothing to see here- Yet</p></h1>
                     </div>
                     @endif
                     @endif
@@ -148,27 +106,6 @@
                 </div>
             </div>
 
-            <!-- START Pagination -->
-            <!-- <nav aria-label="Page navigation">
-                <ul class="pagination pagination-reset justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                            <i class="zmdi zmdi-long-arrow-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item d-none d-md-inline-block"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item d-none d-md-inline-block"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#">8</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            <i class="zmdi zmdi-long-arrow-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav> -->
-            <!-- END Pagination -->
         </div>
     </div>
 
@@ -179,7 +116,7 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 50%;
 }
 p.fontweight{
   font-weight: 100;

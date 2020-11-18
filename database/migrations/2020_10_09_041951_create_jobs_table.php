@@ -35,6 +35,7 @@ class CreateJobsTable extends Migration
             $table->integer('relevancy'); // The relevancy of the search results
             $table->boolean('isExpired'); //true means the job is  expired , false means it is not expired
             $table->boolean('isViewed');
+            $table->boolean('isSaved');
             $table->timestamps();
         });
     }
