@@ -50,7 +50,7 @@
             </div>
             <div id="collapseTen" class="panel-collapse collapse">
                 <div class="panel-body">
-                    Registration allows you to use features like the <button class="btn btn-light">Mark as opened</button> button. It is optional but encouraged.
+                    Registration allows you to use features like the <button class="btn btn-light">Mark as opened</button> button and the benifit of saving jobs. It is optional but encouraged.
                 </div>
             </div>
         </div>
