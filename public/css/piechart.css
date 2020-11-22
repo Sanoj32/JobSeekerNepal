@@ -1,23 +1,36 @@
 .flex {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
-    flex: 1 1 auto
+    flex: 1 1 auto;
 }
 
 @media (max-width:991.98px) {
     .padding {
-        padding: 1.5rem
+        padding: 1.5rem;
     }
 }
 
-@media (max-width:767.98px) {
+@media (max-width:767px) {
     .padding {
-        padding: 1rem
+          padding: 1rem ;  
     }
+
+}
+@media (max-width:400px) {
+    .padding {
+          padding: 1rem ;  
+    }
+    .card{  
+        height: 19rem;  
+         top: -30px;
+    }
+    /* .lez{
+        margin-top: -95px;
+    } */
 }
 
 .padding {
-    padding: 5rem
+    padding: 3rem;
 }
 
 .card {
@@ -25,7 +38,8 @@
     border-width: 0;
     border-radius: .25rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
-    margin-bottom: 1.5rem
+    margin-bottom: 1rem;
+    /* top: -40px; */
 }
 
 .card {
@@ -37,7 +51,10 @@
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(19, 24, 44, .125);
-    border-radius: .25rem
+    border-radius: .25rem;
+}
+.lez{
+    margin-top: -93px;
 }
 
 .card-header {
@@ -48,12 +65,14 @@
 }
 
 .card-header:first-child {
-    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
 }
 
 card-footer,
 .card-header {
     background-color: transparent;
     border-color: rgba(160, 175, 185, .15);
-    background-clip: padding-box
+    background-clip: padding-box;
 }
+
+  
