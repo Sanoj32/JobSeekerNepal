@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var ctx = $("#chart-line");
     var myLineChart = new Chart(ctx, {
-        type: 'pie',
+        type:'doughnut',
         data: {
             labels: ["Spring", "Summer", "Fall", "Winter"],
             datasets: [{

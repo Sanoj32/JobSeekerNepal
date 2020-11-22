@@ -86,7 +86,7 @@
             </div>
             <div id="collapsethirteen" class="panel-collapse collapse">
                 <div class="panel-body">
-                 Jobs are updated daily at 10:00 am.
+                 Jobs are updated daily at 7:00 am.
                 </div>
             </div>
         </div>

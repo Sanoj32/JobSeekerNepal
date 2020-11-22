@@ -278,28 +278,7 @@ font-size-adjust: inherit;
 #myBtn:hover {
   background-color: black; /* Add a dark-grey background on hover */
 }
-/* .scrollToTopBtn {
-  background-color: black;
-  border: none;
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 48px;
-  width: 48px;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 100;
-  opacity: 0;
-  border-style: none;
-  transform: translateY(100px);
-  transition: all .5s ease;
-}
-.showBtn {
-  opacity: 1;
-  transform: translateY(0)
-} */
+
 @media (max-width:991px)
 {
   .site-footer [class^=col-]
