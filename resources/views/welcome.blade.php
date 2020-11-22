@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
 
 
-
 <div class="container">
     <div class="row">
         <div class="col-lg-10 mx-auto mb-4">
@@ -47,7 +46,7 @@
                 <div class="filter-result">
                     <br>
                     <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings</p>
-
+                    The language count is {{$languageNames ?? ''}}
                   <?php if (!isset($searchText) && !isset($address)) {?>
                     <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional </p>
 
@@ -208,7 +207,6 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
 }
 p.fontweight{
   font-weight: 100;
@@ -219,6 +217,3 @@ p.fontweight{
 
 
 
-<script>
-
-</script>

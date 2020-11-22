@@ -127,11 +127,9 @@ class JobsController extends Controller
         foreach ($jsondata as $data) {
 
             $storedqueries = Query::all();
-            echo ($data['name']);
-            $c = 0;
+            $c             = 0;
             foreach ($storedqueries as $storedquery) {
                 strtolower($storedquery['name']);
-                echo strtolower($data['name']);
                 if ($data['name'] == $storedquery['name']) {
                     $c = 1;
                 }
@@ -201,6 +199,7 @@ class JobsController extends Controller
         }
         $jobs  = $jobs->sortByDesc('relevancy');
         $count = $jobs->count();
+
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
 
     }
