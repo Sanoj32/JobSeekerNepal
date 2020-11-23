@@ -9,11 +9,12 @@ use App\Jobs;
 use App\Query;
 
 // code to assign dynamic value to the programming languages pie chart
-$languages          = Query::where('type', 'ilike', '%Progaramming Language%')->get();
-$popularLanguages   = $languages->sortByDesc('count')->take(5);
-$unpopularLanguages = $languages->sortBy('count')->take(3);
-$languageNames      = [];
-$languageCounts     = [];
+$languages                = Query::where('type', 'ilike', '%Progaramming Language%')->get();
+$popularLanguagesUnsorted = $languages->sortByDesc('count')->take(5);
+$popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
+$unpopularLanguages       = $languages->sortBy('count')->take(3);
+$languageNames            = [];
+$languageCounts           = [];
 foreach ($popularLanguages as $popularLanguage) {
     array_push($languageNames, $popularLanguage->name);
     array_push($languageCounts, $popularLanguage->count);
@@ -33,10 +34,11 @@ $frameworks = Query::where('type', 'ilike', '%framework%')
     ->orwhere('type', 'ilike', '%library%')
     ->get();
 
-$frameworkNames      = [];
-$frameworkCounts     = [];
-$popularFrameworks   = $frameworks->sortByDesc('count')->take(5);
-$unpopularFrameworks = $frameworks->sortBy('count')->take(7);
+$frameworkNames            = [];
+$frameworkCounts           = [];
+$popularFrameworksUnSorted = $frameworks->sortByDesc('count')->take(5);
+$popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
+$unpopularFrameworks       = $frameworks->sortBy('count')->take(7);
 foreach ($popularFrameworks as $popularFramework) {
     array_push($frameworkNames, $popularFramework->name);
     array_push($frameworkCounts, $popularFramework->count);
@@ -49,51 +51,19 @@ foreach ($unpopularFrameworks as $unpopularFramework) {
 array_push($frameworkNames, 'Others');
 array_push($frameworkCounts, $unpopularFrameworkCounts);
 //end code
-
-$database = Query::where('type', 'ilike', '%database%')->get();
-
-$databaseNames   = [];
-$databaseCounts  = [];
-$popularDatabase = $database->sortByDesc('count');
-foreach ($popularDatabase as $popularDatabase) {
-    array_push($databaseNames, $popularDatabase->name);
-    array_push($databaseCounts, $popularDatabase->count);
-}
-
 //code to assign dynamic values to database pichart
 
-//code to assign dynamic value to the jobsites pie chart
-
-$jobSites = Jobs::all()->pluck('sitenames');
-
-$frameworkNames      = [];
-$frameworkCounts     = [];
-$popularFrameworks   = $frameworks->sortByDesc('count')->take(5);
-$unpopularFrameworks = $frameworks->sortBy('count')->take(7);
-foreach ($popularFrameworks as $popularFramework) {
-    array_push($frameworkNames, $popularFramework->name);
-    array_push($frameworkCounts, $popularFramework->count);
-}
-
-$unpopularFrameworkCounts = 0;
-foreach ($unpopularFrameworks as $unpopularFramework) {
-    $unpopularFrameworkCounts += $unpopularFramework->count;
-}
-array_push($frameworkNames, 'Others');
-array_push($frameworkCounts, $unpopularFrameworkCounts);
-//end code
-//code to find out most popular databases
 $database = Query::where('type', 'ilike', '%database%')->get();
 
 $databaseNames   = [];
 $databaseCounts  = [];
-$popularDatabase = $database->sortByDesc('count');
+$popularDatabase = $database->sortBy('name');
 foreach ($popularDatabase as $popularDatabase) {
     array_push($databaseNames, $popularDatabase->name);
     array_push($databaseCounts, $popularDatabase->count);
 }
-//end code
-//code to find out most popular sites
+
+//code to assign dynamic value to the jobsites pie chart
 $jobsCount     = Jobs::all();
 $websiteNames  = ['np.linkedin.com', 'merojob.com', 'jobsnepal.com', 'globaljob.com', 'merorojgari.com', 'kathmandujobs.com', 'kumarijob.com'];
 $websiteCounts = [];
@@ -310,7 +280,7 @@ foreach ($websiteNames as $websiteName) {
 
                                         <div class="col-md-6">
                                             <div class="card">
-                                                <div class="card-header te">Websites</div>
+                                                <div class="card-header text-centre">Websites</div>
                                                 <div class="card-body" style="height: 400px">
                                                     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                                         <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
