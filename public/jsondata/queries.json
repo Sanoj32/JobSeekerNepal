@@ -88,11 +88,11 @@
         "type": "Database"
     },
     {
-        "name": "Oracle Database",
+        "name": "Oracle DB",
         "type": "Database"
     },
     {
-        "name": "Microsoft SQL Server",
+        "name": "SQL Server",
         "type": "Database"
     },
     {
@@ -102,5 +102,29 @@
     {
         "name": "MariaDB",
         "type": "Database"
+    },
+    {
+        "name": "linkedin",
+        "type": "Website"
+    },
+    {
+        "name": "merojob",
+        "type": "Website"
+    },
+    {
+        "name": "kumarijob",
+        "type": "Website"
+    },
+    {
+        "name": "globaljob",
+        "type": "Website"
+    },
+    {
+        "name": "jobsnepal",
+        "type": "Website"
+    },
+    {
+        "name": "merorojgari",
+        "type": "Website"
     }
 ]

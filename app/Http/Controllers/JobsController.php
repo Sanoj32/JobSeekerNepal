@@ -10,7 +10,7 @@ class JobsController extends Controller
 {
     public function store()
     {
-        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json', '/merorojgari.json');
+        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json', '/merorojgari.json', '/kathmandujob.json');
         foreach ($websites as $website) {
             $jsondata = file_get_contents(public_path("jsondata") . $website);
             $jsondata = json_decode($jsondata, true);
@@ -52,7 +52,7 @@ class JobsController extends Controller
             } // end code to insert data
         } //end of whole data collection from different websites
         //code to assign websitename
-        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'globaljob.com', 'kumarijob.com', 'merojob.com', 'merorojgari.com');
+        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'globaljob.com', 'kumarijob.com', 'merojob.com', 'merorojgari.com', 'kathmandujobs.com');
         foreach ($websitenames as $sitename) {
             $jobs = Jobs::where('url', 'ILIKE', '%' . $sitename . '%')->get();
             foreach ($jobs as $job) {

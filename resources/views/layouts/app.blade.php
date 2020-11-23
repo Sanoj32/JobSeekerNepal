@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\DB;
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/scrollup.js') }}" defer></script>
-    <script src="{{ asset('js/piechart.js') }}" defer></script>
 
 
 
@@ -35,12 +34,10 @@ use Illuminate\Support\Facades\DB;
     <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/piechart.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/piechart.js') }}" defer></script>
 
-<!-- links for the pie chart -->
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+
+
 
 
 </head>
