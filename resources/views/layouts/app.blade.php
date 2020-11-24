@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>IT Job Seeker</title>
-    <link rel="icon" href="/images/career.svg">
+    <link rel="icon" href="/images/favicon.png">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -49,8 +49,8 @@ use Illuminate\Support\Facades\DB;
             <!-- Image and text -->
               <nav class="navbar">
                 <a class="navbar-brand" href="/">
-                  <img src="/images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                  <span class="pl-2">Home</span>
+                  <img class="pb-1" src="/images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                  <img class="pl-2" wirdth="30" height="30" src="/images/jobseeker.png">
                 </a>
               </nav>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
