@@ -51,9 +51,9 @@ use Illuminate\Support\Facades\DB;
             <div class="container">
             <!-- Image and text -->
               <nav class="navbar">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand py-0" href="/">
                   <img src="/images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                  <span class="pl-2">Home</span>
+                  <span class="pl-2"  >Home</span>
                 </a>
               </nav>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -62,32 +62,33 @@ use Illuminate\Support\Facades\DB;
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <!-- <ul class="navbar-nav mr-auto">
                         <li class="nav-item"> <a class="nav-link" href="/references"> Refrences </a> </li>
                             <!-- <li class="nav-item">    <a class="nav-link" href="/test">Testing</a></li> -->
-                    </ul>
+                    <!-- </ul> -->
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto px-5">
                         <!-- Authentication Links -->
+                        <li class="nav-item py-0"> <a class="nav-link" href="/references"> Refrences </a> </li>
                         @guest
-                        <li class="nav-item">
+                        <li class="nav-item py-0">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
-                        <li class="nav-item">
+                        <li class="nav-item py-0">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         <li>
-                          <div class="donate">
-                            <form action="https://www.paypal.com/donate" method="post" target="_top">
-                              <input type="hidden" name="cmd" value="_donations" />
-                              <input type="hidden" name="business" value="prabcrist@gmail.com" />
-                              <input type="hidden" name="item_name" value="Server cost and keeping site live" />
-                              <input type="hidden" name="currency_code" value="USD" />
-                              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-                              <img alt=""  src="https://www.paypal.com/en_NP/i/scr/pixel.gif" width="1" height="1" />
-                            </form>
+                          <div class="donate py-0" >
+                                      <form action="https://www.paypal.com/donate" method="post" target="_top">
+                                      <input type="hidden" name="cmd" value="_donations" />
+                                      <input type="hidden" name="business" value="prabcrist@gmail.com" />
+                                      <input type="hidden" name="item_name" value="Server cost and keeping site live" />
+                                      <input type="hidden" name="currency_code" value="USD" />
+                                      <input type="image" src="https://www.svgrepo.com/show/104997/donate.svg"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                                      <img alt=""  src="https://www.paypal.com/en_NP/i/scr/pixel.gif"/>
+                                      </form>
                           </div>
                         </li>
 
@@ -122,7 +123,7 @@ use Illuminate\Support\Facades\DB;
                         @endguest
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/update">Update Database</a>
+                            <a class="nav-link ml-5" href="/update">     update</a>
                         </li>
                     </ul>
                 </div>
@@ -194,15 +195,25 @@ body {
     color: grey;
   }
 #app{
-font-size:medium ;
+font-size:medium;
 }
 
-.donate{
-padding: inherit;
-position: relative;
-margin: 8px auto;
-font-size-adjust: inherit;
+.nav-item{
+  font-size: large;
 }
+
+.nav-item:hover{
+  text-decoration: underline;
+}
+ 
+.donate{
+position: absolute;
+margin: auto;
+height: 80px;
+width:60px;
+padding:auto 8px;
+} 
+
 
 .site-footer hr.small
 {
