@@ -36,9 +36,9 @@ $frameworks = Query::where('type', 'ilike', '%framework%')
 
 $frameworkNames            = [];
 $frameworkCounts           = [];
-$popularFrameworksUnSorted = $frameworks->sortByDesc('count')->take(5);
+$popularFrameworksUnSorted = $frameworks->sortByDesc('count')->take(6);
 $popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
-$unpopularFrameworks       = $frameworks->sortBy('count')->take(7);
+$unpopularFrameworks       = $frameworks->sortBy('count')->take(6);
 foreach ($popularFrameworks as $popularFramework) {
     array_push($frameworkNames, $popularFramework->name);
     array_push($frameworkCounts, $popularFramework->count);
@@ -240,7 +240,7 @@ foreach ($websiteNames as $websiteName) {
 
                                         <div class="col-lg-6">
                                             <div class="card">
-                                                <div class="card-header text-center">Framework/libray</div>
+                                                <div class="card-header text-center">Framework/Libray/Runtime</div>
                                                 <div class="card-body" style="height: 400px">
                                                     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                                         <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
@@ -280,7 +280,7 @@ foreach ($websiteNames as $websiteName) {
 
                                         <div class="col-md-6">
                                             <div class="card">
-                                                <div class="card-header text-centre">Websites</div>
+                                            <div class="card-header text-center">Job sites</div>
                                                 <div class="card-body" style="height: 400px">
                                                     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                                         <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">

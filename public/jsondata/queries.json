@@ -68,10 +68,6 @@
         "type": "Framework"
     },
     {
-        "name": "ASP.NET",
-        "type": "Framework"
-    },
-    {
         "name": "Spring",
         "type": "Framework"
     },
