@@ -19,7 +19,14 @@ $(document).ready(function() {
                  display: false,
                  text: 'Programming language'
              },
-             legend:{
+         scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        legend:{
                  display:false
              }
          },

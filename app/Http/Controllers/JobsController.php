@@ -52,7 +52,7 @@ class JobsController extends Controller
             } // end code to insert data
         } //end of whole data collection from different websites
         //code to assign websitename
-        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'globaljob.com', 'kumarijob.com', 'merojob.com', 'merorojgari.com', 'kathmandujobs.com');
+        $websitenames = array('np.linkedin.com', 'jobsnepal.com', 'globaljob.com', 'kumarijob.com', 'merojob.com', 'merorojgari.com', 'kathmandujobs.com', 'kantipurjob.com');
         foreach ($websitenames as $sitename) {
             $jobs = Jobs::where('url', 'ILIKE', '%' . $sitename . '%')->get();
             foreach ($jobs as $job) {
@@ -100,7 +100,7 @@ class JobsController extends Controller
             $job->isExpired    = false;
             $deadline          = $job->deadline;
             $deadline          = date('Y-m-d', strtotime($deadline));
-            $truedeadline      = date('Y-m-d', strtotime("+1 month", strtotime($deadline)));
+            $truedeadline      = date('Y-m-d', strtotime("+2 month", strtotime($deadline)));
             $job->truedeadline = $truedeadline;
             if ($job->truedeadline < $datenow) {
                 $job->isExpired = true;
@@ -141,14 +141,27 @@ class JobsController extends Controller
                 $query->save();
             }
         }
-        $queries = Query::all(); // Code to count the number if jobs each query has.
+        $queries = Query::where('type', '!=', 'website')->get(); // Code to count the number if jobs each query has.
         foreach ($queries as $query) {
-            $searchText   = $query->name;
-            $searchText   = changeSearchText($searchText);
-            $jobs         = searchJobs($searchText, "");
-            $query->count = $jobs->count();
+            $searchText = $query->name;
+            $searchText = changeSearchText($searchText);
+            $jobs       = Jobs::where('name', 'ILIKE', '%' . $searchText . '%')
+                ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
+                ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
+                ->orwhere('desct', 'ILIKE', '%' . $searchText . '%')
+                ->get();
+            $query->total_count   = $jobs->count();
+            $query->active_count  = $jobs->where('isExpired', false)->count();
+            $query->expired_count = $jobs->where('isExpired', true)->count();
             $query->save();
 
+        }
+        $queries = Query::where('type', 'website')->get(); // Code to count the number of jobs each sites have.
+        foreach ($queries as $query) {
+            $query->active_count  = Jobs::where('url', 'ilike', '%' . $query->name . '%')->where('isExpired', false)->count();
+            $query->expired_count = Jobs::where('url', 'ilike', '%' . $query->name . '%')->where('isExpired', true)->count();
+            $query->total_count   = Jobs::where('url', 'ilike', '%' . $query->name . '%')->count();
+            $query->save();
         }
 
         return redirect('/');

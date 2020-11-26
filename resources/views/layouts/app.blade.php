@@ -73,10 +73,10 @@ use Illuminate\Support\Facades\DB;
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
-                        <li class="nav-item py-0">
+                        <li class="nav-item py-0 pr-2">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
-                        <li>
+                        <li class="nav-item py-0 pr-2">
                           <div class="donate py-0" >
                                       <form action="https://www.paypal.com/donate" method="post" target="_top">
                                       <input type="hidden" name="cmd" value="_donations" />
@@ -116,12 +116,11 @@ use Illuminate\Support\Facades\DB;
                             </div>
                         </li>
 
-
                         @endguest
-
+<!--
                         <li class="nav-item">
                             <a class="nav-link ml-5" href="/update">     update</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -202,14 +201,14 @@ font-size:medium;
 .nav-item:hover{
   text-decoration: underline;
 }
- 
+
 .donate{
 position: absolute;
 margin: auto;
 height: 80px;
 width:60px;
 padding:auto 8px;
-} 
+}
 
 
 .site-footer hr.small

@@ -100,27 +100,39 @@
         "type": "Database"
     },
     {
-        "name": "linkedin",
-        "type": "Website"
+        "name": "np.linkedin.com",
+        "type": "website"
     },
     {
-        "name": "merojob",
-        "type": "Website"
+        "name": "merojob.com",
+        "type": "website"
     },
     {
         "name": "kumarijob",
-        "type": "Website"
+        "type": "website"
     },
     {
-        "name": "globaljob",
-        "type": "Website"
+        "name": "globaljob.com",
+        "type": "website"
     },
     {
-        "name": "jobsnepal",
-        "type": "Website"
+        "name": "jobsnepal.com",
+        "type": "website"
     },
     {
         "name": "merorojgari",
-        "type": "Website"
+        "type": "website"
+    },
+    {
+        "name": "kumarijob.com",
+        "type": "website"
+    },
+    {
+        "name": "kathmandujobs.com",
+        "type": "website"
+    },
+    {
+        "name": "kantipurjob.com",
+        "type": "website"
     }
 ]

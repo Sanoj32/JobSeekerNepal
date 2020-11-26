@@ -10,18 +10,18 @@ use App\Query;
 
 // code to assign dynamic value to the programming languages pie chart
 $languages                = Query::where('type', 'ilike', '%Progaramming Language%')->get();
-$popularLanguagesUnsorted = $languages->sortByDesc('count')->take(5);
+$popularLanguagesUnsorted = $languages->sortByDesc('active_count')->take(5);
 $popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
-$unpopularLanguages       = $languages->sortBy('count')->take(3);
+$unpopularLanguages       = $languages->sortBy('active_count')->take(3);
 $languageNames            = [];
 $languageCounts           = [];
 foreach ($popularLanguages as $popularLanguage) {
     array_push($languageNames, $popularLanguage->name);
-    array_push($languageCounts, $popularLanguage->count);
+    array_push($languageCounts, $popularLanguage->active_count);
 }
 $unpopularLanguageCounts = 0;
 foreach ($unpopularLanguages as $unpopularLanguage) {
-    $unpopularLanguageCounts += $unpopularLanguage->count;
+    $unpopularLanguageCounts += $unpopularLanguage->active_count;
 }
 array_push($languageNames, 'Others');
 array_push($languageCounts, $unpopularLanguageCounts);
@@ -36,17 +36,17 @@ $frameworks = Query::where('type', 'ilike', '%framework%')
 
 $frameworkNames            = [];
 $frameworkCounts           = [];
-$popularFrameworksUnSorted = $frameworks->sortByDesc('count')->take(6);
+$popularFrameworksUnSorted = $frameworks->sortByDesc('active_count')->take(6);
 $popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
-$unpopularFrameworks       = $frameworks->sortBy('count')->take(6);
+$unpopularFrameworks       = $frameworks->sortBy('active_count')->take(6);
 foreach ($popularFrameworks as $popularFramework) {
     array_push($frameworkNames, $popularFramework->name);
-    array_push($frameworkCounts, $popularFramework->count);
+    array_push($frameworkCounts, $popularFramework->active_count);
 }
 
 $unpopularFrameworkCounts = 0;
 foreach ($unpopularFrameworks as $unpopularFramework) {
-    $unpopularFrameworkCounts += $unpopularFramework->count;
+    $unpopularFrameworkCounts += $unpopularFramework->active_count;
 }
 array_push($frameworkNames, 'Others');
 array_push($frameworkCounts, $unpopularFrameworkCounts);
@@ -60,17 +60,35 @@ $databaseCounts  = [];
 $popularDatabase = $database->sortBy('name');
 foreach ($popularDatabase as $popularDatabase) {
     array_push($databaseNames, $popularDatabase->name);
-    array_push($databaseCounts, $popularDatabase->count);
+    array_push($databaseCounts, $popularDatabase->active_count);
 }
 
 //code to assign dynamic value to the jobsites pie chart
-$jobsCount     = Jobs::all();
-$websiteNames  = ['np.linkedin.com', 'merojob.com', 'jobsnepal.com', 'globaljob.com', 'merorojgari.com', 'kathmandujobs.com', 'kumarijob.com'];
-$websiteCounts = [];
-foreach ($websiteNames as $websiteName) {
-    $websiteCount = $jobsCount->where('websitename', $websiteName)->where('isExpired', false)->count();
-    array_push($websiteCounts, $websiteCount);
+$jobsCount              = Jobs::all();
+$websiteNames           = [];
+$websiteNamesTemp       = ['np.linkedin.com', 'merojob.com', 'jobsnepal.com', 'globaljob.com', 'merorojgari.com', 'kathmandujobs.com', 'kumarijob.com', 'kantipurjob.com'];
+$websiteCountsTemp      = [];
+$websiteCounts          = [];
+$unPopularWebsiteCounts = 0;
+foreach ($websiteNamesTemp as $websiteNameTemp) {
+    $websiteCount = $jobsCount->where('websitename', $websiteNameTemp)->where('isExpired', false)->count();
+    array_push($websiteCountsTemp, $websiteCount);
 }
+$combinedSite = array_combine($websiteNamesTemp, $websiteCountsTemp);
+arsort($combinedSite);
+$arCount = 0;
+foreach ($combinedSite as $key => $value) {
+    if ($arCount < 6) {
+        array_push($websiteNames, $key);
+        array_push($websiteCounts, $value);
+        $arCount++;
+    } else {
+        $unPopularWebsiteCounts += $value;
+    }
+}
+
+array_push($websiteNames, 'others');
+array_push($websiteCounts, $unPopularWebsiteCounts);
 
 ?>
 
