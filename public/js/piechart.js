@@ -3,7 +3,6 @@ $(document).ready(function() {
  })
 
  function renderChart(ctx) {
-    console.log(languageNames);
      var lang = new Chart(ctx, {
          type: 'bar',
          data: {
