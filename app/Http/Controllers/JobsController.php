@@ -15,7 +15,7 @@ class JobsController extends Controller
             $jsondata = file_get_contents(public_path("jsondata") . $website);
             $jsondata = json_decode($jsondata, true);
             if (empty($jsondata)) {
-                echo "Variable 'data' is empty.<br>";
+                continue;
             }
             foreach ($jsondata as $data) {
                 $storedjobs = Jobs::all();
