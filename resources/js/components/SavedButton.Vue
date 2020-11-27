@@ -14,7 +14,6 @@
 export default {
     props: ["jobsId", "savedjobs"],
     mounted() {
-        console.log("Saved button mounted.");
     },
     data: function() {
         return {

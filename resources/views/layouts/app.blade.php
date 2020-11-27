@@ -36,6 +36,10 @@ use Illuminate\Support\Facades\DB;
     <link href="{{ asset('css/piechart.css') }}" rel="stylesheet">
     <script src="{{ asset('js/piechart.js') }}" defer></script>
 
+    <!-- job icons for salary , level etc -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
+
+
 
 
 
