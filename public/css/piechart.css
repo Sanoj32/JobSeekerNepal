@@ -10,9 +10,13 @@
     }
 }
 
-@media (max-width:767px) {
+@media (max-width:895px) {
     .padding {
-          padding: 1rem ;  
+          padding: 1rem ;          
+    }
+    .card{  
+        
+        display: block;  
     }
 
 }
@@ -21,7 +25,7 @@
           padding: 1rem ;  
     }
     .card{  
-        height: 19rem;  
+        height: 20rem;  
          top: -30px;
     }
     /* .lez{
@@ -63,10 +67,10 @@
     background-color: rgba(19, 24, 44, .03);
     border-bottom: 1px solid rgba(19, 24, 44, .125)
 }
-
+ 
 .card-header:first-child {
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
-}
+} 
 
 card-footer,
 .card-header {
