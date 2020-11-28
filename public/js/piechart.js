@@ -13,6 +13,7 @@ $(document).ready(function() {
              }]
          },
          options: {
+            maintainAspectRatio: false,
              title: {
                  display: true,
                  text: 'Weather'
@@ -32,6 +33,7 @@ $(document).ready(function() {
          }]
      },
      options: {
+        maintainAspectRatio: false,
          title: {
              display: true,
              text: 'language'
@@ -50,6 +52,7 @@ $(document).ready(function() {
          }]
      },
      options: {
+        maintainAspectRatio: false,
          title: {
              display: true,
              text: 'language'
@@ -69,6 +72,7 @@ var dying = new Chart(ctx, {
         }]
     },
     options: {
+        maintainAspectRatio: false,
         title: {
             display: true,
             text: 'language'
