@@ -4,7 +4,7 @@
         "type": "Progaramming Language"
     },
     {
-        "name": "javascript",
+        "name": "Javascript",
         "type": "Progaramming Language"
     },
     {
@@ -68,10 +68,6 @@
         "type": "Framework"
     },
     {
-        "name": "ASP.NET",
-        "type": "Framework"
-    },
-    {
         "name": "Spring",
         "type": "Framework"
     },
@@ -88,11 +84,11 @@
         "type": "Database"
     },
     {
-        "name": "Oracle Database",
+        "name": "Oracle DB",
         "type": "Database"
     },
     {
-        "name": "Microsoft SQL Server",
+        "name": "SQL Server",
         "type": "Database"
     },
     {
@@ -102,5 +98,41 @@
     {
         "name": "MariaDB",
         "type": "Database"
+    },
+    {
+        "name": "np.linkedin.com",
+        "type": "website"
+    },
+    {
+        "name": "merojob.com",
+        "type": "website"
+    },
+    {
+        "name": "kumarijob",
+        "type": "website"
+    },
+    {
+        "name": "globaljob.com",
+        "type": "website"
+    },
+    {
+        "name": "jobsnepal.com",
+        "type": "website"
+    },
+    {
+        "name": "merorojgari",
+        "type": "website"
+    },
+    {
+        "name": "kumarijob.com",
+        "type": "website"
+    },
+    {
+        "name": "kathmandujobs.com",
+        "type": "website"
+    },
+    {
+        "name": "kantipurjob.com",
+        "type": "website"
     }
 ]

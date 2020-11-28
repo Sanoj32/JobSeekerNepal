@@ -16,7 +16,6 @@
 export default {
     props: ["jobsId", "viewedjobs"],
     mounted() {
-        console.log("Component mounted.");
     },
     data: function() {
         return {
@@ -30,7 +29,6 @@ export default {
             axios.post("/viewed/" + this.jobsId).then(response => {
                 this.status = !this.status;
                 this.statusr = !this.status;
-                console.log(this.statusr)
             });
         }
     },

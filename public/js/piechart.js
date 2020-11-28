@@ -1,83 +1,120 @@
 $(document).ready(function() {
     renderChart($("#chart-line"));
  })
- 
+
  function renderChart(ctx) {
      var lang = new Chart(ctx, {
-         type: 'pie',
+         type: 'bar',
          data: {
-             labels: ["Spring", "Summer", "Fall", ],
+             labels: languageNames,
              datasets: [{
-                 data: [10, 1700, 800, 200],
-                 backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
-             }]
+                 data: languageCounts,
+                 backgroundColor: [ "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)", "rgba(255, 0, 0, 0.5)", "rgba(66, 7, 7, 0.5)"]
+                }]
          },
+        //  "rgba(255, 0, 0, 0.5)",
          options: {
             maintainAspectRatio: false,
              title: {
-                 display: true,
-                 text: 'Weather'
+                 display: false,
+                 text: 'Programming language'
+             },
+         scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        legend:{
+                 display:false
              }
-         }
+         },
      });
  };
 
  var ctx = document.getElementById('chart-line2');
  var program = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'bar',
      data: {
-         labels: ["Sad", "Swt", "istic", "surprise"],
+         labels: frameworkNames,
          datasets: [{
-             data: [100, 900, 300, 80],
-             backgroundColor: ["rgba(255, 20, 0, 0.5)", "rgba(100, 255, 90, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
+             data: frameworkCounts,
+             backgroundColor: [ "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)", "rgba(255, 0, 0, 0.5)", "rgba(66, 7, 7, 0.5)","rgba(252, 240, 5, 0.5)"]
          }]
      },
      options: {
         maintainAspectRatio: false,
          title: {
-             display: true,
-             text: 'language'
-         }
+             display: false,
+             text: 'Framework/library'
+         },
+         scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        legend:{
+            display:false
+        }
      }
  });
 
  var ctx = document.getElementById('chart-line3');
  var database = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'bar',
      data: {
-         labels: ["ad", "weet", "sad", "surpplies"],
+         labels: databaseNames,
          datasets: [{
-             data: [1, 900, 300, 1200],
-             backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
-         }]
+             data: databaseCounts,
+             backgroundColor: [ "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)", "rgba(255, 0, 0, 0.5)", "rgba(66, 7, 7, 0.5)"]         }]
      },
      options: {
         maintainAspectRatio: false,
          title: {
-             display: true,
+             display: false,
              text: 'language'
-         }
+         },
+         scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        legend:{
+            display:false
+        }
      }
  });
- 
 
  var ctx = document.getElementById('chart-line4');
 var dying = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'bar',
     data: {
-        labels: ["Sad", "Sweet", "sadistic", "surprise"],
+        labels: websiteNames ,
         datasets: [{
-            data: [100, 900, 300, 1200],
-            backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
+            data: websiteCounts,
+            backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)","rgba(66, 7, 7, 0.5)","rgba(252, 240, 5, 0.5)" ]
         }]
     },
     options: {
         maintainAspectRatio: false,
         title: {
-            display: true,
+            display: false,
             text: 'language'
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        legend:{
+            display:false
         }
     }
-}); 
-      
-        
+});

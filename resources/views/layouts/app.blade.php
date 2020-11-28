@@ -14,13 +14,7 @@ use Illuminate\Support\Facades\DB;
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>IT Job Seeker</title>
-    <link rel="icon" href="/images/career.svg">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/scrollup.js') }}" defer></script>
-    <script src="{{ asset('js/piechart.js') }}" defer></script>
-
+    <link rel="icon" href="/images/favicon.png">
 
 
 
@@ -36,11 +30,20 @@ use Illuminate\Support\Facades\DB;
 
     <link href="{{ asset('css/piechart.css') }}" rel="stylesheet">
 
-<!-- links for the pie chart -->
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+    <!-- job icons for salary , level etc -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+ <!-- Scripts -->
+ <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/scrollup.js') }}" defer></script>
+
+
 
 
 </head>
@@ -52,8 +55,8 @@ use Illuminate\Support\Facades\DB;
             <!-- Image and text -->
               <nav class="navbar">
                 <a class="navbar-brand" href="/">
-                  <img src="/images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                  <span class="pl-2">Home</span>
+                  <img class="pb-1" src="/images/job-search.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                  <img class="pl-2" wirdth="30" height="30" src="/images/jobseeker.png">
                 </a>
               </nav>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -62,34 +65,24 @@ use Illuminate\Support\Facades\DB;
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <!-- <ul class="navbar-nav mr-auto">
                         <li class="nav-item"> <a class="nav-link" href="/references"> Refrences </a> </li>
-                            <!-- <li class="nav-item">    <a class="nav-link" href="/test">Testing</a></li> -->
-                    </ul>
+                            <li class="nav-item">    <a class="nav-link" href="/test">Testing</a></li> -->
+                    <!-- </ul> -->
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto px-5">
                         <!-- Authentication Links -->
+                        <li class="nav-item py-0"> <a class="nav-link" href="/references"> Refrences </a> </li>
                         @guest
-                        <li class="nav-item">
+                        <li class="nav-item py-0">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
-                        <li class="nav-item">
+                        <li class="nav-item py-0 pr-2">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
-                        <li>
-                          <div class="donate">
-                            <form action="https://www.paypal.com/donate" method="post" target="_top">
-                              <input type="hidden" name="cmd" value="_donations" />
-                              <input type="hidden" name="business" value="prabcrist@gmail.com" />
-                              <input type="hidden" name="item_name" value="Server cost and keeping site live" />
-                              <input type="hidden" name="currency_code" value="USD" />
-                              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-                              <img alt=""  src="https://www.paypal.com/en_NP/i/scr/pixel.gif" width="1" height="1" />
-                            </form>
-                          </div>
-                        </li>
+
 
                         @endif
                         @else
@@ -118,12 +111,22 @@ use Illuminate\Support\Facades\DB;
                             </div>
                         </li>
 
-
                         @endguest
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/update">Update Database</a>
+                        <li class="nav-item py-0 pl-2">
+                          <div class="donate py-0" >
+                                      <form action="https://www.paypal.com/donate" method="post" target="_top">
+                                      <input type="hidden" name="cmd" value="_donations" />
+                                      <input type="hidden" name="business" value="prabcrist@gmail.com" />
+                                      <input type="hidden" name="item_name" value="Server cost and keeping site live" />
+                                      <input type="hidden" name="currency_code" value="USD" />
+                                      <input type="image" src="https://www.svgrepo.com/show/104997/donate.svg"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                                      </form>
+                          </div>
                         </li>
+<!--
+                        <li class="nav-item">
+                            <a class="nav-link ml-5" href="/update">     update</a>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -194,15 +197,25 @@ body {
     color: grey;
   }
 #app{
-font-size:medium ;
+font-size:medium;
+}
+
+.nav-item{
+  font-size: large;
+}
+
+.nav-item:hover{
+  text-decoration: underline;
 }
 
 .donate{
-padding: inherit;
-position: relative;
-margin: 8px auto;
-font-size-adjust: inherit;
+position: absolute;
+margin: auto;
+height: 80px;
+width:60px;
+padding:auto 8px;
 }
+
 
 .site-footer hr.small
 {
@@ -278,28 +291,7 @@ font-size-adjust: inherit;
 #myBtn:hover {
   background-color: black; /* Add a dark-grey background on hover */
 }
-/* .scrollToTopBtn {
-  background-color: black;
-  border: none;
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 48px;
-  width: 48px;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 100;
-  opacity: 0;
-  border-style: none;
-  transform: translateY(100px);
-  transition: all .5s ease;
-}
-.showBtn {
-  opacity: 1;
-  transform: translateY(0)
-} */
+
 @media (max-width:991px)
 {
   .site-footer [class^=col-]

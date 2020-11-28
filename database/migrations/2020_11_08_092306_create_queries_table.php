@@ -17,7 +17,9 @@ class CreateQueriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
-            $table->integer('count')->nullable();
+            $table->integer('active_count')->nullable();
+            $table->integer('expired_count')->nullable();
+            $table->integer('total_count')->nullable();
             $table->timestamps();
         });
     }

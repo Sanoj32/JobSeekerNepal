@@ -1,52 +1,180 @@
 
-<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Table V01</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-<link href="{{ asset('css/piechart.css') }}" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
-<script>
-    $(document).ready(function() {
-        var ctx = $("#chart-line");
-        var myLineChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ["Spring", "Summer", "Fall", "Winter"],
-                datasets: [{
-                    data: [1200, 1700, 800, 200],
-                    backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Weather'
-                }
-            }
-        });
-    });
-</script>
-<div class="page-content page-container" id="page-content">
-    <div class="padding">
-        <div class="row">
-            <div class="container-fluid d-flex justify-content-center">
-                <div class="col-sm-8 col-md-6">
-                    <div class="card">
-                        <div class="card-header">Pie chart</div>
-                        <div class="card-body" style="height: 420px">
-                            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                </div>
-                                <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                </div>
-                            </div> <canvas id="chart-line" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+
+<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+
+<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+<body>
+<div class="limiter">
+<div class="container-table100">
+<div class="wrap-table100">
+<div class="table100">
+<table>
+<thead>
+<tr class="table100-head">
+<th class="column1">Date</th>
+<th class="column2">Order ID</th>
+<th class="column3">Name</th>
+<th class="column4">Price</th>
+<th class="column5">Quantity</th>
+<th class="column6">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="column1">2017-09-29 01:22</td>
+<td class="column2">200398</td>
+<td class="column3">iPhone X 64Gb Grey</td>
+<td class="column4">$999.00</td>
+<td class="column5">1</td>
+<td class="column6">$999.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-28 05:57</td>
+<td class="column2">200397</td>
+<td class="column3">Samsung S8 Black</td>
+<td class="column4">$756.00</td>
+<td class="column5">1</td>
+<td class="column6">$756.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-26 05:57</td>
+<td class="column2">200396</td>
+<td class="column3">Game Console Controller</td>
+<td class="column4">$22.00</td>
+<td class="column5">2</td>
+<td class="column6">$44.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-25 23:06</td>
+<td class="column2">200392</td>
+<td class="column3">USB 3.0 Cable</td>
+<td class="column4">$10.00</td>
+<td class="column5">3</td>
+<td class="column6">$30.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-24 05:57</td>
+<td class="column2">200391</td>
+<td class="column3">Smartwatch 4.0 LTE Wifi</td>
+<td class="column4">$199.00</td>
+<td class="column5">6</td>
+<td class="column6">$1494.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-23 05:57</td>
+<td class="column2">200390</td>
+<td class="column3">Camera C430W 4k</td>
+<td class="column4">$699.00</td>
+<td class="column5">1</td>
+<td class="column6">$699.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-22 05:57</td>
+<td class="column2">200389</td>
+<td class="column3">Macbook Pro Retina 2017</td>
+<td class="column4">$2199.00</td>
+<td class="column5">1</td>
+<td class="column6">$2199.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-21 05:57</td>
+<td class="column2">200388</td>
+<td class="column3">Game Console Controller</td>
+<td class="column4">$999.00</td>
+<td class="column5">1</td>
+<td class="column6">$999.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-19 05:57</td>
+<td class="column2">200387</td>
+<td class="column3">iPhone X 64Gb Grey</td>
+<td class="column4">$999.00</td>
+<td class="column5">1</td>
+<td class="column6">$999.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-18 05:57</td>
+<td class="column2">200386</td>
+<td class="column3">iPhone X 64Gb Grey</td>
+<td class="column4">$999.00</td>
+<td class="column5">1</td>
+<td class="column6">$999.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-22 05:57</td>
+<td class="column2">200389</td>
+<td class="column3">Macbook Pro Retina 2017</td>
+<td class="column4">$2199.00</td>
+<td class="column5">1</td>
+<td class="column6">$2199.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-21 05:57</td>
+<td class="column2">200388</td>
+<td class="column3">Game Console Controller</td>
+<td class="column4">$999.00</td>
+<td class="column5">1</td>
+<td class="column6">$999.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-19 05:57</td>
+<td class="column2">200387</td>
+<td class="column3">iPhone X 64Gb Grey</td>
+<td class="column4">$999.00</td>
+<td class="column5">1</td>
+<td class="column6">$999.00</td>
+</tr>
+<tr>
+<td class="column1">2017-09-18 05:57</td>
+<td class="column2">200386</td>
+<td class="column3">iPhone X 64Gb Grey</td>
+<td class="column4">$999.00</td>
+<td class="column5">1</td>
+<td class="column6">$999.00</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+</div>
+</div>
+
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="vendor/select2/select2.min.js"></script>
+
+<script src="js/main.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"5f73b2657c0c198c","version":"2020.11.6","si":10}'></script>
+</body>
+</html>

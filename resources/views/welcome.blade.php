@@ -1,8 +1,95 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
 
+
+<?php
+use App\Jobs;
+use App\Query;
+
+// code to assign dynamic value to the programming languages pie chart
+$languages                = Query::where('type', 'ilike', '%Progaramming Language%')->get();
+$popularLanguagesUnsorted = $languages->sortByDesc('active_count')->take(5);
+$popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
+$unpopularLanguages       = $languages->sortBy('active_count')->take(3);
+$languageNames            = [];
+$languageCounts           = [];
+foreach ($popularLanguages as $popularLanguage) {
+    array_push($languageNames, $popularLanguage->name);
+    array_push($languageCounts, $popularLanguage->active_count);
+}
+$unpopularLanguageCounts = 0;
+foreach ($unpopularLanguages as $unpopularLanguage) {
+    $unpopularLanguageCounts += $unpopularLanguage->active_count;
+}
+array_push($languageNames, 'Others');
+array_push($languageCounts, $unpopularLanguageCounts);
+
+//end code
+//code to assign dynamic value to the frameworks pie chart
+
+$frameworks = Query::where('type', 'ilike', '%framework%')
+    ->orwhere('type', 'ilike', '%runtime%')
+    ->orwhere('type', 'ilike', '%library%')
+    ->get();
+
+$frameworkNames            = [];
+$frameworkCounts           = [];
+$popularFrameworksUnSorted = $frameworks->sortByDesc('active_count')->take(6);
+$popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
+$unpopularFrameworks       = $frameworks->sortBy('active_count')->take(6);
+foreach ($popularFrameworks as $popularFramework) {
+    array_push($frameworkNames, $popularFramework->name);
+    array_push($frameworkCounts, $popularFramework->active_count);
+}
+
+$unpopularFrameworkCounts = 0;
+foreach ($unpopularFrameworks as $unpopularFramework) {
+    $unpopularFrameworkCounts += $unpopularFramework->active_count;
+}
+array_push($frameworkNames, 'Others');
+array_push($frameworkCounts, $unpopularFrameworkCounts);
+//end code
+//code to assign dynamic values to database pichart
+
+$database = Query::where('type', 'ilike', '%database%')->get();
+
+$databaseNames   = [];
+$databaseCounts  = [];
+$popularDatabase = $database->sortBy('name');
+foreach ($popularDatabase as $popularDatabase) {
+    array_push($databaseNames, $popularDatabase->name);
+    array_push($databaseCounts, $popularDatabase->active_count);
+}
+
+//code to assign dynamic value to the jobsites pie chart
+$jobsCount              = Jobs::all();
+$websiteNames           = [];
+$websiteNamesTemp       = ['np.linkedin.com', 'merojob.com', 'jobsnepal.com', 'globaljob.com', 'merorojgari.com', 'kathmandujobs.com', 'kumarijob.com', 'kantipurjob.com'];
+$websiteCountsTemp      = [];
+$websiteCounts          = [];
+$unPopularWebsiteCounts = 0;
+foreach ($websiteNamesTemp as $websiteNameTemp) {
+    $websiteCount = $jobsCount->where('websitename', $websiteNameTemp)->where('isExpired', false)->count();
+    array_push($websiteCountsTemp, $websiteCount);
+}
+$combinedSite = array_combine($websiteNamesTemp, $websiteCountsTemp);
+arsort($combinedSite);
+$arCount = 0;
+foreach ($combinedSite as $key => $value) {
+    if ($arCount < 6) {
+        array_push($websiteNames, $key);
+        array_push($websiteCounts, $value);
+        $arCount++;
+    } else {
+        $unPopularWebsiteCounts += $value;
+    }
+}
+
+array_push($websiteNames, 'others');
+array_push($websiteCounts, $unPopularWebsiteCounts);
+
+?>
 
 
 <div class="container">
@@ -47,7 +134,6 @@
                 <div class="filter-result">
                     <br>
                     <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings</p>
-
                   <?php if (!isset($searchText) && !isset($address)) {?>
                     <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional </p>
 
@@ -146,14 +232,17 @@
                     </div>
                     @endif
                     @else
+                    <script type="application/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+                    <script type="application/javascript" src="{{ asset('js/piechart.js') }}" defer></script>
 
 
+                        <img class="img-resposive center" width="170" height="120"  src="images/mostp.png">
                         <div class="page-content page-container" id="page-content">
                             <div class="padding">
                                 <div class="row">
                                         <div class="col-lg-6">
                                             <div class="card">
-                                                <div class="card-header">Pie chart</div>
+                                                <div class="card-header text-center">Programming language</div>
                                                 <div class="card-body" style="height: 400px">
                                                     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                                         <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
@@ -162,16 +251,16 @@
                                                         <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                                         </div>
-                                                    </div> 
-                                                    
+                                                    </div>
+
                                                     <canvas id="chart-line" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 400px; height: 500px;"></canvas>
                                                 </div>
                                             </div>
                                         </div>
-                                    
+
                                         <div class="col-lg-6">
                                             <div class="card">
-                                                <div class="card-header">Pie chart</div>
+                                                <div class="card-header text-center">Framework/Libray/Runtime</div>
                                                 <div class="card-body" style="height: 400px">
                                                     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                                         <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
@@ -187,13 +276,13 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="lez">   
+                    <div class="lez">
                         <div class="page-content page-container" id="page-content">
                             <div class="padding" >
                                 <div class="row">
                                         <div class="col-md-6">
                                             <div class="card">
-                                                <div class="card-header">Pie chart</div>
+                                                <div class="card-header text-center">Database</div>
                                                 <div class="card-body" style="height: 400px">
                                                     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                                         <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
@@ -202,16 +291,16 @@
                                                         <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                                         </div>
-                                                    </div> 
-                                                    
+                                                    </div>
+
                                                     <canvas id="chart-line3" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 400px; height: 500px;"></canvas>
                                                 </div>
                                             </div>
                                         </div>
-                                    
+
                                         <div class="col-md-6">
                                             <div class="card">
-                                                <div class="card-header">Pie chart</div>
+                                            <div class="card-header text-center">Job sites</div>
                                                 <div class="card-body" style="height: 400px">
                                                     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                                         <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
@@ -258,23 +347,40 @@
     </div>
 
 </div>
+
+
 @endsection
 <style>
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
 }
 p.fontweight{
   font-weight: 100;
   opacity: 0.5
 
 }
+.popular{
+
+}
 </style>
 
 
+<!-- links for the pie chart -->
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script> -->
 
-<script>
+
+<script type="text/javascript">
+var languageNames = <?=json_encode($languageNames)?>;
+var languageCounts = <?=json_encode($languageCounts)?>;
+var frameworkNames = <?=json_encode($frameworkNames)?>;
+var frameworkCounts = <?=json_encode($frameworkCounts)?>;
+var databaseNames = <?=json_encode($databaseNames)?>;
+var databaseCounts = <?=json_encode($databaseCounts)?>;
+var websiteNames = <?=json_encode($websiteNames)?>;
+var websiteCounts = <?=json_encode($websiteCounts)?>;
 
 </script>
+
+
