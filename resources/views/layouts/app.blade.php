@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\DB;
     <title>IT Job Seeker</title>
     <link rel="icon" href="/images/favicon.png">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/scrollup.js') }}" defer></script>
-
-
 
 
     <!-- Fonts -->
@@ -34,12 +29,19 @@ use Illuminate\Support\Facades\DB;
     <link href="{{ asset('css/searchbar.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/piechart.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/piechart.js') }}" defer></script>
 
     <!-- job icons for salary , level etc -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
 
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+ <!-- Scripts -->
+ <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/scrollup.js') }}" defer></script>
 
 
 
@@ -80,18 +82,7 @@ use Illuminate\Support\Facades\DB;
                         <li class="nav-item py-0 pr-2">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
-                        <li class="nav-item py-0 pr-2">
-                          <div class="donate py-0" >
-                                      <form action="https://www.paypal.com/donate" method="post" target="_top">
-                                      <input type="hidden" name="cmd" value="_donations" />
-                                      <input type="hidden" name="business" value="prabcrist@gmail.com" />
-                                      <input type="hidden" name="item_name" value="Server cost and keeping site live" />
-                                      <input type="hidden" name="currency_code" value="USD" />
-                                      <input type="image" src="https://www.svgrepo.com/show/104997/donate.svg"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-                                      <img alt=""  src="https://www.paypal.com/en_NP/i/scr/pixel.gif"/>
-                                      </form>
-                          </div>
-                        </li>
+
 
                         @endif
                         @else
@@ -121,6 +112,17 @@ use Illuminate\Support\Facades\DB;
                         </li>
 
                         @endguest
+                        <li class="nav-item py-0 pl-2">
+                          <div class="donate py-0" >
+                                      <form action="https://www.paypal.com/donate" method="post" target="_top">
+                                      <input type="hidden" name="cmd" value="_donations" />
+                                      <input type="hidden" name="business" value="prabcrist@gmail.com" />
+                                      <input type="hidden" name="item_name" value="Server cost and keeping site live" />
+                                      <input type="hidden" name="currency_code" value="USD" />
+                                      <input type="image" src="https://www.svgrepo.com/show/104997/donate.svg"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                                      </form>
+                          </div>
+                        </li>
 <!--
                         <li class="nav-item">
                             <a class="nav-link ml-5" href="/update">     update</a>

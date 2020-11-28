@@ -232,6 +232,9 @@ array_push($websiteCounts, $unPopularWebsiteCounts);
                     </div>
                     @endif
                     @else
+                    <script type="application/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+                    <script type="application/javascript" src="{{ asset('js/piechart.js') }}" defer></script>
+
 
                         <img class="img-resposive center" width="170" height="120"  src="images/mostp.png">
                         <div class="page-content page-container" id="page-content">
@@ -365,10 +368,7 @@ p.fontweight{
 
 
 <!-- links for the pie chart -->
-<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script> -->
 
 
 <script type="text/javascript">
@@ -381,8 +381,6 @@ var databaseCounts = <?=json_encode($databaseCounts)?>;
 var websiteNames = <?=json_encode($websiteNames)?>;
 var websiteCounts = <?=json_encode($websiteCounts)?>;
 
-</script>
-<script type="text/javascript" src="js/piechart.js">
 </script>
 
 

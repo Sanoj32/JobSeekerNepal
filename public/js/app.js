@@ -1922,9 +1922,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["jobsId", "savedjobs"],
-  mounted: function mounted() {
-    console.log("Saved button mounted.");
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       status: this.savedjobs,
@@ -1975,9 +1973,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["jobsId", "viewedjobs"],
-  mounted: function mounted() {
-    console.log("Component mounted.");
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       status: this.viewedjobs,
@@ -1991,7 +1987,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/viewed/" + this.jobsId).then(function (response) {
         _this.status = !_this.status;
         _this.statusr = !_this.status;
-        console.log(_this.statusr);
       });
     }
   },
