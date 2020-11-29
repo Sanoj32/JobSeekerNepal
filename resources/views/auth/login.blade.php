@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header justify-content-between">{{ __('Login') }}<span class="float-right"> New here? <a class="pl-2" href="/register"> Register</a> <span></div>
+                <div class="card-header justify-content-between">{{ __('Login') }}<span class="float-right"> <a class="pl-2" href="/register"> Create my account.</a> <span></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -67,11 +67,10 @@
                                 @endif -->
                             </div>
                         </div>
-                        <!-- <div class="align-content-centre">
-                        <p class=" pt-4 font-weight-light font-italic" style="text-align: center; opacity:0.7" > (If you are facing a loading time of more than 10 seconds please refresh the page) </p>
-                        </div> -->
+                        <div class="text-center pt-3"  >
+                        <p style="font-style:italic; opacity:0.8">(Features like Save jobs and Mark as opened require login)</p>
+                        </div>
                         </form>
-
                 </div>
             </div>
         </div>

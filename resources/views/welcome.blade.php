@@ -387,5 +387,3 @@ var websiteNames = <?=json_encode($websiteNames)?>;
 var websiteCounts = <?=json_encode($websiteCounts)?>;
 
 </script>
-
-
