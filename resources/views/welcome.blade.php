@@ -116,10 +116,14 @@ array_push($websiteCounts, $unPopularWebsiteCounts);
                         <div class="col-md-6 col-lg-3 my-3">
                             <div class="select-container">
                                 <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
-                                    <option selected disabled value=""><h3>Select a location<h3></option>
-                                    <option value="kathmandu">Kathmandu</option>
-                                    <option value="lalitpur">Lalitpur</option>
-                                    <option value="other">Other</option>
+                                <option selected  value=""><h3>Select a location<h3></option>
+
+                                <?php $options = array('kathmandu', 'lalitpur', 'other');?>
+                                    <?php foreach ($options as $option): ?>
+                                        <option value="<?php echo $option; ?>" <?php echo (isset($_GET['location']) && $_GET['location'] == $option) ? 'selected' : ''; ?>>
+                                            <?php echo $option; ?>
+                                        </option>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                         </div>
@@ -143,12 +147,13 @@ array_push($websiteCounts, $unPopularWebsiteCounts);
 
                     @if(!empty($jobs))
                     @if($count != 0)
-                    <p style="font-size: large;"> There are <span style="font-weight: bold; color:green;">{{$count}}</span> active jobs that matched your search
+                    <p style="font-size: large;"> There are <span style="font-weight: bold; color:green;">{{$count}}</span> active jobs
                         @if(!empty($searchText))
-                        for <span style="font:bolder"> {{$searchText}}</span>
+                        that matched your search for <span style="font:bolder"> {{$searchText}}</span>
+                        @endif
                         @if(!empty($address))
                         in {{$address}}
-                        @endif
+
                          <p>( Jobs with your searched language or skill as a secondary requirement are also included. ) </p>
                         @endif
                     </p>

@@ -17,7 +17,9 @@
 <div class="container">
 
 <div class="page-header">
+    <h2><a href="/">Home</a></h2>
     <h1>Website FAQ <small> Frequently Asked Questions</small></h1>
+
 </div>
 
 <!-- Bootstrap FAQ - START -->

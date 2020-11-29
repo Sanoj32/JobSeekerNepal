@@ -12,6 +12,9 @@ function changeSearchText($searchText)
     if ($searchText == 'java') {
         $searchText = "java ";
     }
+    // if ($searchText == 'intern') {
+    //     $searchText = "intern ";
+    // }
 
     if ($searchText == 'js') {
         $searchText = "javascript";
