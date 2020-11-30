@@ -41,6 +41,15 @@ use Illuminate\Support\Facades\DB;
     <script src="{{ asset('js/scrollup.js') }}" defer></script>
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-88ZJ4XKW00"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-88ZJ4XKW00');
+</script>
 
 
 </head>
@@ -109,8 +118,8 @@ use Illuminate\Support\Facades\DB;
                         </li>
 
                         @endguest
-                        <li class="nav-item py-0 pl-2">
-                          <div class="donate py-0" >
+                        <li class="nav-item pl-2">
+                          <div class="donate" >
                                       <form action="https://www.paypal.com/donate" method="post" target="_top">
                                       <input type="hidden" name="cmd" value="_donations" />
                                       <input type="hidden" name="business" value="prabcrist@gmail.com" />
@@ -120,10 +129,7 @@ use Illuminate\Support\Facades\DB;
                                       </form>
                           </div>
                         </li>
-<!--
-                        <li class="nav-item">
-                            <a class="nav-link ml-5" href="/update">     update</a>
-                        </li> -->
+
                     </ul>
                 </div>
             </div>
@@ -206,11 +212,13 @@ font-size:medium;
 }
 
 .donate{
-position: absolute;
+position: relative;
 margin: auto;
-height: 80px;
+height: 50px;
 width:60px;
 padding:auto 8px;
+float : left;
+
 }
 
 

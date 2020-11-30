@@ -153,8 +153,10 @@ array_push($websiteCounts, $unPopularWebsiteCounts);
                         @endif
                         @if(!empty($address))
                         in {{$address}}
+                        @if(!empty($searchText))
 
                          <p>( Jobs with your searched language or skill as a secondary requirement are also included. ) </p>
+                        @endif
                         @endif
                     </p>
                     <?php $sn = 1;?>
