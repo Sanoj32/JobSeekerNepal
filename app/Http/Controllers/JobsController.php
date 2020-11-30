@@ -17,9 +17,9 @@ class JobsController extends Controller
             if (empty($jsondata)) {
                 continue;
             }
+            $storedjobs = Jobs::all();
 
             foreach ($jsondata as $data) {
-                $storedjobs = Jobs::all();
 
                 $c = 0; // if c=0 It means the url is a unique url from that site and filters duplicate jobs from same site
                 foreach ($storedjobs as $storedjob) {
@@ -105,6 +105,14 @@ class JobsController extends Controller
                 if ($job->truedeadline < $datenow) {
                     $job->isExpired = true;
                 }
+                $job->save();
+            }
+        }
+
+        $jobs = Jobs::all();
+        foreach ($jobs as $job) {
+            if ($job->truedeadline < $datenow) {
+                $job->isExpired = true;
                 $job->save();
             }
         }
