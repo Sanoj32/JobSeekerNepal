@@ -50,15 +50,7 @@ use Illuminate\Support\Facades\DB;
   gtag('config', 'G-88ZJ4XKW00');
 </script>
 
-<!-- Global site tag (gtag.js) - Google Analytics for Pravat -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0W9NYQ8RN3%22%3E</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-0W9NYQ8RN3');
-</script>
 
 </head>
 
