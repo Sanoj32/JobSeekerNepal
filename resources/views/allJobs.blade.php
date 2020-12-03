@@ -3,146 +3,14 @@
 @section('content')
 
 
-<?php
-use App\Jobs;
-use App\Query;
-
-// code to assign dynamic value to the programming languages pie chart
-$languages                = Query::where('type', 'ilike', '%Progaramming Language%')->get();
-$popularLanguagesUnsorted = $languages->sortByDesc('active_count')->take(5);
-$popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
-$unpopularLanguages       = $languages->sortBy('active_count')->take(3);
-$languageNames            = [];
-$languageCounts           = [];
-foreach ($popularLanguages as $popularLanguage) {
-    array_push($languageNames, $popularLanguage->name);
-    array_push($languageCounts, $popularLanguage->active_count);
-}
-$unpopularLanguageCounts = 0;
-foreach ($unpopularLanguages as $unpopularLanguage) {
-    $unpopularLanguageCounts += $unpopularLanguage->active_count;
-}
-array_push($languageNames, 'Others');
-array_push($languageCounts, $unpopularLanguageCounts);
-
-//end code
-//code to assign dynamic value to the frameworks pie chart
-
-$frameworks = Query::where('type', 'ilike', '%framework%')
-    ->orwhere('type', 'ilike', '%runtime%')
-    ->orwhere('type', 'ilike', '%library%')
-    ->get();
-
-$frameworkNames            = [];
-$frameworkCounts           = [];
-$popularFrameworksUnSorted = $frameworks->sortByDesc('active_count')->take(6);
-$popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
-$unpopularFrameworks       = $frameworks->sortBy('active_count')->take(6);
-foreach ($popularFrameworks as $popularFramework) {
-    array_push($frameworkNames, $popularFramework->name);
-    array_push($frameworkCounts, $popularFramework->active_count);
-}
-
-$unpopularFrameworkCounts = 0;
-foreach ($unpopularFrameworks as $unpopularFramework) {
-    $unpopularFrameworkCounts += $unpopularFramework->active_count;
-}
-array_push($frameworkNames, 'Others');
-array_push($frameworkCounts, $unpopularFrameworkCounts);
-//end code
-//code to assign dynamic values to database pichart
-
-$database = Query::where('type', 'ilike', '%database%')->get();
-
-$databaseNames   = [];
-$databaseCounts  = [];
-$popularDatabase = $database->sortBy('name');
-foreach ($popularDatabase as $popularDatabase) {
-    array_push($databaseNames, $popularDatabase->name);
-    array_push($databaseCounts, $popularDatabase->active_count);
-}
-
-//code to assign dynamic value to the jobsites pie chart
-$jobsCount              = Jobs::all();
-$websiteNames           = [];
-$websiteNamesTemp       = ['np.linkedin.com', 'merojob.com', 'jobsnepal.com', 'globaljob.com', 'merorojgari.com', 'kathmandujobs.com', 'kumarijob.com', 'kantipurjob.com'];
-$websiteCountsTemp      = [];
-$websiteCounts          = [];
-$unPopularWebsiteCounts = 0;
-foreach ($websiteNamesTemp as $websiteNameTemp) {
-    $websiteCount = $jobsCount->where('websitename', $websiteNameTemp)->where('isExpired', false)->count();
-    array_push($websiteCountsTemp, $websiteCount);
-}
-$combinedSite = array_combine($websiteNamesTemp, $websiteCountsTemp);
-arsort($combinedSite);
-$arCount = 0;
-foreach ($combinedSite as $key => $value) {
-    if ($arCount < 6) {
-        array_push($websiteNames, $key);
-        array_push($websiteCounts, $value);
-        $arCount++;
-    } else {
-        $unPopularWebsiteCounts += $value;
-    }
-}
-
-array_push($websiteNames, 'others');
-array_push($websiteCounts, $unPopularWebsiteCounts)
-
-?>
-
-
 <div class="container">
-    <div class="row">
-        <div class="col-lg-10 mx-auto mb-4">
-            <div class="section-title text-center ">
-                <h3 class="top-c-sep">Grow your career with us </h3>
-                <p>IT and communication jobs from Nepal's most popular websites</p>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
-        <div class="col-lg-10 col-xs-12 mx-auto">
+        <div class="col-lg-12 mx-auto">
             <div class="career-search mb-60">
 
-                <form action="/search" method="GET" class="career-form mb-60">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 my-3">
-                            <div class="input-group position-relative">
-                                <input type="text" class="form-control" @if(isset($searchText)) value="{{$searchText}}" @endif placeholder="Enter a Keyword. eg- Laravel" id="searchText" name="searchText">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 my-3">
-                            <div class="select-container">
-                                <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
-                                <option selected  value=""><h3>Select a location<h3></option>
-
-                                <?php $options = array('kathmandu', 'lalitpur', 'other');?>
-                                    <?php foreach ($options as $option): ?>
-                                        <option value="<?php echo $option; ?>" <?php echo (isset($_GET['location']) && $_GET['location'] == $option) ? 'selected' : ''; ?>>
-                                            <?php echo $option; ?>
-                                        </option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 my-3">
-                            <button type="submit" class="btn btn-lg btn-block btn-light btn-custom" id="contact-submit">
-                                Search
-                            </button>
-                        </div>
-                    </div>
-                </form>
 
                 <div class="filter-result">
-                    <br>
-                    <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings.<a href="/all"> View all </a> </p>
-                  <?php if (!isset($searchText) && !isset($address)) {?>
-                    <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional. </p>
-
-
-                  <?php }?>
 
 
                     @if(!empty($jobs))
@@ -166,8 +34,8 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="job-content">
-                            <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?=$sn;?>)
-                                        <span class="pl-1"> {{ $job->name }}
+                            <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-4 text-center text-md-left"> 
+                                        <span class="pl-3"> {{ $job->name }}
                                             @auth
                                             <viewed-button  jobs-id="{{$job->id}}" viewedjobs="{{$job->isViewed}}" >  </viewed-button>
                                            <saved-button  jobs-id="{{$job->id}}" savedjobs="{{$job->isSaved}}" >  </saved-button>
@@ -247,7 +115,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                         <div class="page-content page-container" id="page-content">
                             <div class="padding">
                                 <div class="row">
-                                        <div class="col-lg-6 col-xs-12">
+                                        <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-header text-center">Programming language</div>
                                                 <div class="card-body" style="height: 400px">
@@ -328,36 +196,15 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
 
                 </div>
             </div>
-
-            <!-- START Pagination -->
-            <!-- <nav aria-label="Page navigation">
-                <ul class="pagination pagination-reset justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                            <i class="zmdi zmdi-long-arrow-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item d-none d-md-inline-block"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item d-none d-md-inline-block"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#">8</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            <i class="zmdi zmdi-long-arrow-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav> -->
-            <!-- END Pagination -->
+            <div class="center">
+            {{$jobs->links()}}
+            </div>
         </div>
     </div>
 
 </div>
-
-
-@endsection
-<style>
+ @endsection
+ <style>
 .center {
   display: block;
   margin-left: auto;
@@ -372,20 +219,3 @@ p.fontweight{
 
 }
 </style>
-
-
-<!-- links for the pie chart -->
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script> -->
-
-
-<script type="text/javascript">
-var languageNames = <?=json_encode($languageNames)?>;
-var languageCounts = <?=json_encode($languageCounts)?>;
-var frameworkNames = <?=json_encode($frameworkNames)?>;
-var frameworkCounts = <?=json_encode($frameworkCounts)?>;
-var databaseNames = <?=json_encode($databaseNames)?>;
-var databaseCounts = <?=json_encode($databaseCounts)?>;
-var websiteNames = <?=json_encode($websiteNames)?>;
-var websiteCounts = <?=json_encode($websiteCounts)?>;
-
-</script>
