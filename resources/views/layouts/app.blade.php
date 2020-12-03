@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\DB;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="It, programming, csit, computer engineering Jobs in Nepal" >
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>IT Job Seeker</title>
+    <title>jobSeeker Nepal</title>
     <link rel="icon" href="/images/favicon.png">
 
 
@@ -41,15 +42,15 @@ use Illuminate\Support\Facades\DB;
     <script src="{{ asset('js/scrollup.js') }}" defer></script>
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics For Sanoj -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-88ZJ4XKW00"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-88ZJ4XKW00');
 </script>
+
 
 
 </head>

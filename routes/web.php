@@ -26,6 +26,7 @@ Route::post('/saved/{jobs}', 'SavedController@store')->middleware('auth');
 Route::post('/savedjobs/{userId}', 'SavedController@index')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/faqs', 'SiteController@faqs');
+Route::get('/all', 'JobsController@index');
 // Route::get('/feedback', 'JobsController@feedback');
 Auth::routes();
 // Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');

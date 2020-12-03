@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs;
 use App\Query;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class JobsController extends Controller
 {
@@ -210,6 +211,34 @@ class JobsController extends Controller
         $count = $jobs->count();
 
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
+
+    }
+
+    public function index()
+    {
+
+        $jobs = DB::table('jobs')->orderByDesc('created_at')->where('isExpired', false)->paginate(25);
+
+        $count = Jobs::where('isExpired', false)->count();
+        foreach ($jobs as $job) {
+            $jobstatus = (auth()->user()) ? auth()->user()->viewedjobs->contains($job->id) : false;
+            if ($jobstatus == true) {
+                $job->relevancy = 0;
+                $job->isViewed  = true;
+            } else {
+                $job->isViewed = false;
+            }
+            ;
+        }
+        foreach ($jobs as $job) {
+            $jobstatus = (auth()->user()) ? auth()->user()->savedjobs->contains($job->id) : false;
+            if ($jobstatus == true) {
+                $job->isSaved = true;
+            } else {
+                $job->isSaved = false;
+            }
+        }
+        return view('allJobs', compact('jobs', 'count'));
 
     }
 
