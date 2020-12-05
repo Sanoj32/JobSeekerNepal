@@ -33,12 +33,9 @@
                             <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?=$sn;?>)
                                         <span class="pl-1"> {{ $job->name }}
                                             @auth
-                                            <viewed-button  jobs-id="{{$job->id}}" viewedjobs="{{$job->isViewed}}" >  </viewed-button>
                                            <saved-button  jobs-id="{{$job->id}}" savedjobs="{{$job->isSaved}}" >  </saved-button>
                                             @endauth
-                                            @guest
-                                           <a href="/login"> <button class="btn btn-light ml-4"> Mark as opened</button> </a>
-                                            @endguest
+
                                         </span>
                                         </h5>
                                     </span>

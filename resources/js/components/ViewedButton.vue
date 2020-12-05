@@ -5,6 +5,7 @@
             :class="{'btn btn-primary ml-4' : status,
             'btn btn-light ml-4' : statusr
             }"
+            
             @click="viewed"
             v-text="buttonText"
         ></button>
