@@ -119,7 +119,7 @@ use Illuminate\Support\Facades\DB;
                         </li>
 
                         @endguest
-                        <li class="nav-item pl-2">
+                        <!-- <li class="nav-item pl-2">
                           <div class="donate" >
                                       <form action="https://www.paypal.com/donate" method="post" target="_top">
                                       <input type="hidden" name="cmd" value="_donations" />
@@ -129,7 +129,7 @@ use Illuminate\Support\Facades\DB;
                                       <input type="image" src="https://www.svgrepo.com/show/104997/donate.svg"  name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
                                       </form>
                           </div>
-                        </li>
+                        </li> -->
 
                     </ul>
                 </div>
@@ -167,6 +167,7 @@ use Illuminate\Support\Facades\DB;
           <div class="col-xs-6 col-md-3 ">
             <h6>Quick Links</h6>
             <ul class="footer-links">
+              <li> <a href="https://www.facebook.com/JobSeeker-Nepal-107381447893672">Like us on Facebook </a> </li>
               <li><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></li>
               <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts</a></li>
               <li><a href="https://lec.edu.np/">Our LEC College </a></li>

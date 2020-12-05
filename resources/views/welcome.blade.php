@@ -103,7 +103,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
     </div>
 
     <div class="row">
-        <div class="col-lg-10 col-xs-12 mx-auto">
+        <div class="col-lg-10 mx-auto">
             <div class="career-search mb-60">
 
                 <form action="/search" method="GET" class="career-form mb-60">
@@ -229,8 +229,10 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                             <div class="font-italic">{{$job->websitename}}</div>
                         </div>
                     </div>
+                    
                     @endif
                     @endforeach
+                    Like the website? Consider bookmarking us. Control + D on windows.
                     @else
                     <div class="align-content-center">
 
@@ -247,7 +249,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                         <div class="page-content page-container" id="page-content">
                             <div class="padding">
                                 <div class="row">
-                                        <div class="col-lg-6 col-xs-12">
+                                        <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-header text-center">Programming language</div>
                                                 <div class="card-body" style="height: 400px">
