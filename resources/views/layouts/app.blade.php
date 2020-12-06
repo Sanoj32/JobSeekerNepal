@@ -168,8 +168,8 @@ use Illuminate\Support\Facades\DB;
             <h6>Quick Links</h6>
             <ul class="footer-links">
               <li> <a href="https://www.facebook.com/JobSeeker-Nepal-107381447893672">Like us on Facebook </a> </li>
-              <li><a href="https://github.com/Sanoj32/Minor-Project.git">Github</a></li>
-              <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts</a></li>
+              <!-- <li><a href="https://github.com/Sanoj32/Minor-Project.git">Star on Github</a></li> -->
+              <!-- <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts</a></li> -->
               <li><a href="https://lec.edu.np/">Our LEC College </a></li>
               <li><a href="/faqs"> Frequently Asked Questions(FAQs)</a></li>
             </ul>
