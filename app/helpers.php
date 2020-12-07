@@ -38,6 +38,9 @@ function changeSearchText($searchText)
     if ($searchText == "c") {
         $searchText = " c ";
     }
+    if ($searchText == "vue.js" || $searchText == "vuejs" || $searchText == "vue js") {
+        $searchText = "vue";
+    }
     if ($searchText == "postgresql") {
         $searchText = "postgres";
     }

@@ -6,24 +6,44 @@
 <?php
 use App\Jobs;
 use App\Query;
+$jobStatus = $_GET['jobStatus'] ?? "total";
 
 // code to assign dynamic value to the programming languages pie chart
-$languages                = Query::where('type', 'ilike', '%Progaramming Language%')->get();
-$popularLanguagesUnsorted = $languages->sortByDesc('active_count')->take(5);
-$popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
-$unpopularLanguages       = $languages->sortBy('active_count')->take(3);
-$languageNames            = [];
-$languageCounts           = [];
-foreach ($popularLanguages as $popularLanguage) {
-    array_push($languageNames, $popularLanguage->name);
-    array_push($languageCounts, $popularLanguage->active_count);
+$languages = Query::where('type', 'ilike', '%Progaramming Language%')->get();
+if ($jobStatus == "total") {
+    $popularLanguagesUnsorted = $languages->sortByDesc('total_count')->take(5);
+    $popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
+    $unpopularLanguages       = $languages->sortBy('total_count')->take(3);
+    $languageNames            = [];
+    $languageCounts           = [];
+    foreach ($popularLanguages as $popularLanguage) {
+        array_push($languageNames, $popularLanguage->name);
+        array_push($languageCounts, $popularLanguage->total_count);
+    }
+    $unpopularLanguageCounts = 0;
+    foreach ($unpopularLanguages as $unpopularLanguage) {
+        $unpopularLanguageCounts += $unpopularLanguage->total_count;
+    }
+    array_push($languageNames, 'Others');
+    array_push($languageCounts, $unpopularLanguageCounts);
+
+} else {
+    $popularLanguagesUnsorted = $languages->sortByDesc('active_count')->take(5);
+    $popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
+    $unpopularLanguages       = $languages->sortBy('active_count')->take(3);
+    $languageNames            = [];
+    $languageCounts           = [];
+    foreach ($popularLanguages as $popularLanguage) {
+        array_push($languageNames, $popularLanguage->name);
+        array_push($languageCounts, $popularLanguage->active_count);
+    }
+    $unpopularLanguageCounts = 0;
+    foreach ($unpopularLanguages as $unpopularLanguage) {
+        $unpopularLanguageCounts += $unpopularLanguage->active_count;
+    }
+    array_push($languageNames, 'Others');
+    array_push($languageCounts, $unpopularLanguageCounts);
 }
-$unpopularLanguageCounts = 0;
-foreach ($unpopularLanguages as $unpopularLanguage) {
-    $unpopularLanguageCounts += $unpopularLanguage->active_count;
-}
-array_push($languageNames, 'Others');
-array_push($languageCounts, $unpopularLanguageCounts);
 
 //end code
 //code to assign dynamic value to the frameworks pie chart
@@ -33,21 +53,40 @@ $frameworks = Query::where('type', 'ilike', '%framework%')
     ->orwhere('type', 'ilike', '%library%')
     ->get();
 
-$frameworkNames            = [];
-$frameworkCounts           = [];
-$popularFrameworksUnSorted = $frameworks->sortByDesc('active_count')->take(6);
-$popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
-$unpopularFrameworks       = $frameworks->sortBy('active_count')->take(6);
-foreach ($popularFrameworks as $popularFramework) {
-    array_push($frameworkNames, $popularFramework->name);
-    array_push($frameworkCounts, $popularFramework->active_count);
+$frameworkNames  = [];
+$frameworkCounts = [];
+if ($jobStatus == "total") {
+    $popularFrameworksUnSorted = $frameworks->sortByDesc('total_count')->take(7);
+    $popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
+    $unpopularFrameworks       = $frameworks->sortBy('total_count')->take(5);
+    foreach ($popularFrameworks as $popularFramework) {
+        array_push($frameworkNames, $popularFramework->name);
+        array_push($frameworkCounts, $popularFramework->total_count);
+    }
+
+    $unpopularFrameworkCounts = 0;
+    foreach ($unpopularFrameworks as $unpopularFramework) {
+        $unpopularFrameworkCounts += $unpopularFramework->total_count;
+    }
+    array_push($frameworkNames, 'Others');
+
+} else {
+    $popularFrameworksUnSorted = $frameworks->sortByDesc('active_count')->take(6);
+    $popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
+    $unpopularFrameworks       = $frameworks->sortBy('active_count')->take(6);
+    foreach ($popularFrameworks as $popularFramework) {
+        array_push($frameworkNames, $popularFramework->name);
+        array_push($frameworkCounts, $popularFramework->active_count);
+    }
+
+    $unpopularFrameworkCounts = 0;
+    foreach ($unpopularFrameworks as $unpopularFramework) {
+        $unpopularFrameworkCounts += $unpopularFramework->active_count;
+    }
+    array_push($frameworkNames, 'Others');
+
 }
 
-$unpopularFrameworkCounts = 0;
-foreach ($unpopularFrameworks as $unpopularFramework) {
-    $unpopularFrameworkCounts += $unpopularFramework->active_count;
-}
-array_push($frameworkNames, 'Others');
 array_push($frameworkCounts, $unpopularFrameworkCounts);
 //end code
 //code to assign dynamic values to database pichart
@@ -59,18 +98,28 @@ $databaseCounts  = [];
 $popularDatabase = $database->sortBy('name');
 foreach ($popularDatabase as $popularDatabase) {
     array_push($databaseNames, $popularDatabase->name);
-    array_push($databaseCounts, $popularDatabase->active_count);
+    if ($jobStatus == "total") {
+        array_push($databaseCounts, $popularDatabase->total_count);
+
+    } else {
+        array_push($databaseCounts, $popularDatabase->active_count);
+
+    }
 }
 
 //code to assign dynamic value to the jobsites pie chart
 $jobsCount              = Jobs::all();
 $websiteNames           = [];
-$websiteNamesTemp       = ['np.linkedin.com', 'merojob.com', 'jobsnepal.com', 'globaljob.com', 'merorojgari.com', 'kathmandujobs.com', 'kumarijob.com', 'kantipurjob.com'];
+$websiteNamesTemp       = ['np.linkedin', 'merojob', 'jobsnepal', 'globaljob', 'merorojgari', 'kathmandujobs', 'kumarijob', 'kantipurjob'];
 $websiteCountsTemp      = [];
 $websiteCounts          = [];
 $unPopularWebsiteCounts = 0;
 foreach ($websiteNamesTemp as $websiteNameTemp) {
-    $websiteCount = $jobsCount->where('websitename', $websiteNameTemp)->where('isExpired', false)->count();
+    if ($jobStatus == "total") {
+        $websiteCount = $jobsCount->where('websitename', $websiteNameTemp . ".com")->count();
+    } else {
+        $websiteCount = $jobsCount->where('websitename', $websiteNameTemp . ".com")->where('isExpired', false)->count();
+    }
     array_push($websiteCountsTemp, $websiteCount);
 }
 $combinedSite = array_combine($websiteNamesTemp, $websiteCountsTemp);
@@ -229,7 +278,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                             <div class="font-italic">{{$job->websitename}}</div>
                         </div>
                     </div>
-                    
+
                     @endif
                     @endforeach
                     Like the website? Consider bookmarking us. Control + D on windows.
@@ -246,6 +295,22 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
 
 
                         <img class="img-resposive center" width="170" height="120"  src="images/mostp.png">
+
+
+<form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+
+  <input type="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "active") {
+    echo "checked";
+}
+?> value="active">Show active
+  <input type="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "total") {
+    echo "checked";
+}
+?> value="total">Show total
+  <input type="submit" name="submit" value="Submit">
+</form>
+
+
                         <div class="page-content page-container" id="page-content">
                             <div class="padding">
                                 <div class="row">
@@ -389,5 +454,4 @@ var databaseNames = <?=json_encode($databaseNames)?>;
 var databaseCounts = <?=json_encode($databaseCounts)?>;
 var websiteNames = <?=json_encode($websiteNames)?>;
 var websiteCounts = <?=json_encode($websiteCounts)?>;
-
 </script>

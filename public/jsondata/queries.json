@@ -100,11 +100,11 @@
         "type": "Database"
     },
     {
-        "name": "np.linkedin.com",
+        "name": "linkedin",
         "type": "website"
     },
     {
-        "name": "merojob.com",
+        "name": "merojob",
         "type": "website"
     },
     {
@@ -112,11 +112,11 @@
         "type": "website"
     },
     {
-        "name": "globaljob.com",
+        "name": "globaljob",
         "type": "website"
     },
     {
-        "name": "jobsnepal.com",
+        "name": "jobsnepal",
         "type": "website"
     },
     {
@@ -124,15 +124,15 @@
         "type": "website"
     },
     {
-        "name": "kumarijob.com",
+        "name": "kumarijob",
         "type": "website"
     },
     {
-        "name": "kathmandujobs.com",
+        "name": "kathmandujobs",
         "type": "website"
     },
     {
-        "name": "kantipurjob.com",
+        "name": "kantipurjob",
         "type": "website"
     }
 ]
