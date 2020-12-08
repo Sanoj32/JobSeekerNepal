@@ -4,7 +4,7 @@ $(document).ready(function() {
 
  function renderChart(ctx) {
      var lang = new Chart(ctx, {
-         type: 'bar',
+         type: chartType,
          data: {
              labels: languageNames,
              datasets: [{
@@ -27,7 +27,7 @@ $(document).ready(function() {
             }]
         },
         legend:{
-                 display:false
+                 display: index
              }
          },
      });
@@ -35,7 +35,7 @@ $(document).ready(function() {
 
  var ctx = document.getElementById('chart-line2');
  var program = new Chart(ctx, {
-    type: 'bar',
+    type: chartType,
      data: {
          labels: frameworkNames,
          datasets: [{
@@ -57,14 +57,14 @@ $(document).ready(function() {
             }]
         },
         legend:{
-            display:false
+            display: index
         }
      }
  });
 
  var ctx = document.getElementById('chart-line3');
  var database = new Chart(ctx, {
-    type: 'bar',
+    type: chartType,
      data: {
          labels: databaseNames,
          datasets: [{
@@ -85,19 +85,19 @@ $(document).ready(function() {
             }]
         },
         legend:{
-            display:false
+            display: index
         }
      }
  });
 
  var ctx = document.getElementById('chart-line4');
 var dying = new Chart(ctx, {
-    type: 'bar',
+    type: chartType,
     data: {
         labels: websiteNames ,
         datasets: [{
             data: websiteCounts,
-            backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)","rgba(66, 7, 7, 0.5)","rgba(252, 240, 5, 0.5)" ]
+            backgroundColor: [ "rgba(100, 255, 0, 0.5)" ,"rgba(255, 0, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)","rgba(66, 7, 7, 0.5)","rgba(252, 240, 5, 0.5)" ]
         }]
     },
     options: {
@@ -114,7 +114,7 @@ var dying = new Chart(ctx, {
             }]
         },
         legend:{
-            display:false
+            display: index
         }
     }
 });

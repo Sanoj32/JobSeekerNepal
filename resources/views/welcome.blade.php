@@ -6,7 +6,12 @@
 <?php
 use App\Jobs;
 use App\Query;
+$index     = false;
 $jobStatus = $_GET['jobStatus'] ?? "total";
+$chartType = $_GET['chartType'] ?? "bar";
+if ($chartType == "pie" || $chartType == "doughnut") {
+    $index = true;
+}
 
 // code to assign dynamic value to the programming languages pie chart
 $languages = Query::where('type', 'ilike', '%Progaramming Language%')->get();
@@ -171,7 +176,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                                 <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
                                 <option selected  value=""><h3>Select a location<h3></option>
 
-                                <?php $options = array('kathmandu', 'lalitpur', 'other');?>
+                                <?php $options = array('kathmandu', 'lalitpur', 'bhaktapur', 'other');?>
                                     <?php foreach ($options as $option): ?>
                                         <option value="<?php echo $option; ?>" <?php echo (isset($_GET['location']) && $_GET['location'] == $option) ? 'selected' : ''; ?>>
                                             <?php echo $option; ?>
@@ -301,18 +306,8 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                         <img class="img-resposive center" width="170" height="120"  src="images/mostp.png">
 
 
-<form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
-  <input type="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "active") {
-    echo "checked";
-}
-?> value="active">Show active
-  <input type="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "total") {
-    echo "checked";
-}
-?> value="total">Show total
-  <input type="submit" name="submit" value="Submit">
-</form>
+
 
 
                         <div class="page-content page-container" id="page-content">
@@ -391,6 +386,49 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+
+<!-- Basic dropdown -->
+  <!-- aria-haspopup="true" aria-expanded="false">Basic dropdown</button> -->
+  <select class="mdb-select md-form " name="chartType">
+  <option value="" disabled selected <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Choose chart type</option>
+  <option value="bar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Bar</option>
+  <option value="horizontalBar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Horizonatal Bar</option>
+  <option value="pie" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Pie chart</option>
+  <option value="doughnut" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Doughnut</option>
+  <option value="line" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Line</option>
+  <option value="radar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Radar</option>
+  <option value="polarArea" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Polar Area</option>
+</select>
+
+<!-- Basic dropdown -->
+
+<span class="pl-2">
+<label>
+
+  <input type="radio" class="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "active") {
+    echo "checked";
+}
+?> value="active" > <span class="pl-2 pr-2">Show active
+     </span>
+     </label>
+
+     <label>
+  <input type="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "total") {
+    echo "checked";
+}
+?> value="total"> <span class="px-2 pr-2">Show total </span>
+</label>
+  <input type="submit" name="submit" class="btn btn-success pl-2" value="Confirm">
+  </span>
+</form>
+
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -457,4 +495,6 @@ var databaseNames = <?=json_encode($databaseNames)?>;
 var databaseCounts = <?=json_encode($databaseCounts)?>;
 var websiteNames = <?=json_encode($websiteNames)?>;
 var websiteCounts = <?=json_encode($websiteCounts)?>;
+var chartType = <?=json_encode($chartType)?>;
+var index = <?=json_encode($index)?>;
 </script>
