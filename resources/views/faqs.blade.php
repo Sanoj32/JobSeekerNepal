@@ -38,7 +38,7 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse in">
                 <div class="panel-body">
-                   First our <a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts </a> uses the Beautiful Soup library to scrape data
+                   First our Python Scripts uses the Beautiful Soup library to scrape data
                    from the most popular job sites in Nepal and stores that data as a json file. Then those json files are converted into php arrays
                    and further processing is done.
                 </div>

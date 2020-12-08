@@ -11,9 +11,9 @@ $jobStatus = $_GET['jobStatus'] ?? "total";
 // code to assign dynamic value to the programming languages pie chart
 $languages = Query::where('type', 'ilike', '%Progaramming Language%')->get();
 if ($jobStatus == "total") {
-    $popularLanguagesUnsorted = $languages->sortByDesc('total_count')->take(5);
+    $popularLanguagesUnsorted = $languages->sortByDesc('total_count')->take(6);
     $popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
-    $unpopularLanguages       = $languages->sortBy('total_count')->take(3);
+    $unpopularLanguages       = $languages->sortBy('total_count')->take(2);
     $languageNames            = [];
     $languageCounts           = [];
     foreach ($popularLanguages as $popularLanguage) {
@@ -28,9 +28,9 @@ if ($jobStatus == "total") {
     array_push($languageCounts, $unpopularLanguageCounts);
 
 } else {
-    $popularLanguagesUnsorted = $languages->sortByDesc('active_count')->take(5);
+    $popularLanguagesUnsorted = $languages->sortByDesc('active_count')->take(6);
     $popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
-    $unpopularLanguages       = $languages->sortBy('active_count')->take(3);
+    $unpopularLanguages       = $languages->sortBy('active_count')->take(2);
     $languageNames            = [];
     $languageCounts           = [];
     foreach ($popularLanguages as $popularLanguage) {
@@ -71,9 +71,9 @@ if ($jobStatus == "total") {
     array_push($frameworkNames, 'Others');
 
 } else {
-    $popularFrameworksUnSorted = $frameworks->sortByDesc('active_count')->take(6);
+    $popularFrameworksUnSorted = $frameworks->sortByDesc('active_count')->take(7);
     $popularFrameworks         = $popularFrameworksUnSorted->sortBy('name');
-    $unpopularFrameworks       = $frameworks->sortBy('active_count')->take(6);
+    $unpopularFrameworks       = $frameworks->sortBy('active_count')->take(5);
     foreach ($popularFrameworks as $popularFramework) {
         array_push($frameworkNames, $popularFramework->name);
         array_push($frameworkCounts, $popularFramework->active_count);
@@ -143,7 +143,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-10 mx-auto mb-4">
+        <div class="col-lg-10 col-xs-12 mx-auto mb-4">
             <div class="section-title text-center ">
                 <h3 class="top-c-sep">Grow your career with us </h3>
                 <p>IT and communication jobs from Nepal's most popular websites</p>
@@ -152,7 +152,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
     </div>
 
     <div class="row">
-        <div class="col-lg-10 mx-auto">
+        <div class="col-lg-12 col-xs-12 mx-auto">
             <div class="career-search mb-60">
 
                 <form action="/search" method="GET" class="career-form mb-60">
@@ -314,7 +314,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                         <div class="page-content page-container" id="page-content">
                             <div class="padding">
                                 <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-md-6 col-xs-12 pb-4">
                                             <div class="card">
                                                 <div class="card-header text-center">Programming language</div>
                                                 <div class="card-body" style="height: 400px">
@@ -332,7 +332,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-xs-12 pb-4">
                                             <div class="card">
                                                 <div class="card-header text-center">Framework/Libray/Runtime</div>
                                                 <div class="card-body" style="height: 400px">
@@ -354,9 +354,9 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                         <div class="page-content page-container" id="page-content">
                             <div class="padding" >
                                 <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-header text-center">Database</div>
+                                    <div class="col-md-6 col-xs-12 pb-4">
+                                        <div class="card">
+                                            <div class="card-header text-center">Database</div>
                                                 <div class="card-body" style="height: 400px">
                                                     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                                         <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
@@ -366,13 +366,13 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                                         </div>
                                                     </div>
-
                                                     <canvas id="chart-line3" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 400px; height: 500px;"></canvas>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+
+                                        <div class="col-md-6 col-xs-12 pb-4">
                                             <div class="card">
                                             <div class="card-header text-center">Job sites</div>
                                                 <div class="card-body" style="height: 400px">
@@ -392,7 +392,6 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                         </div>
                     </div>
                     @endif
-
                 </div>
             </div>
 
