@@ -80,11 +80,11 @@
         "type": "Database"
     },
     {
-        "name": "Postgre",
+        "name": "PostgreSQL",
         "type": "Database"
     },
     {
-        "name": "Oracle",
+        "name": "Oracle DB",
         "type": "Database"
     },
     {
@@ -92,11 +92,11 @@
         "type": "Database"
     },
     {
-        "name": "Mongo",
+        "name": "MongoDB",
         "type": "Database"
     },
     {
-        "name": "Maria",
+        "name": "MariaDB",
         "type": "Database"
     },
     {

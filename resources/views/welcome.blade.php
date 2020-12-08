@@ -120,12 +120,16 @@ foreach ($websiteNamesTemp as $websiteNameTemp) {
     } else {
         $websiteCount = $jobsCount->where('websitename', $websiteNameTemp . ".com")->where('isExpired', false)->count();
     }
+
     array_push($websiteCountsTemp, $websiteCount);
 }
 $combinedSite = array_combine($websiteNamesTemp, $websiteCountsTemp);
 arsort($combinedSite);
 $arCount = 0;
 foreach ($combinedSite as $key => $value) {
+    if ($key == "kathmandujobs") {
+        $key = "ktmjobs";
+    }
     if ($arCount < 6) {
         array_push($websiteNames, $key);
         array_push($websiteCounts, $value);
