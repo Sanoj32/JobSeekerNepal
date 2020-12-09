@@ -393,25 +393,25 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
 <!-- Basic dropdown -->
   <!-- aria-haspopup="true" aria-expanded="false">Basic dropdown</button> -->
   <select class="mdb-select md-form " name="chartType">
-  <option value="" disabled selected <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Choose chart type</option>
-  <option value="bar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Bar</option>
-  <option value="horizontalBar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Horizonatal Bar</option>
-  <option value="pie" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Pie chart</option>
-  <option value="doughnut" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Doughnut</option>
-  <option value="line" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Line</option>
-  <option value="radar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Radar</option>
-  <option value="polarArea" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == $option) ? 'selected' : ''; ?>>Polar Area</option>
+  <option value="" disabled selected >Choose chart type</option>
+  <option value="bar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "bar") ? 'selected' : ''; ?>>Bar</option>
+  <option value="horizontalBar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "horizontalBar") ? 'selected' : ''; ?>>Horizonatal Bar</option>
+  <option value="pie" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "pie") ? 'selected' : ''; ?>>Pie chart</option>
+  <option value="doughnut" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "doughnut") ? 'selected' : ''; ?>>Doughnut</option>
+  <option value="line" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "line") ? 'selected' : ''; ?>>Line</option>
+  <option value="radar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "radar") ? 'selected' : ''; ?>>Radar</option>
+  <option value="polarArea" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "polarArea") ? 'selected' : ''; ?>>Polar Area</option>
 </select>
 
 <!-- Basic dropdown -->
-
+<div class="pt-3">
 <span class="pl-2">
 <label>
 
   <input type="radio" class="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "active") {
     echo "checked";
 }
-?> value="active" > <span class="pl-2 pr-2">Show active
+?> value="active" > <span class="pl-2 pr-2 btn-light" type="button">Show active jobs
      </span>
      </label>
 
@@ -419,10 +419,11 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
   <input type="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "total") {
     echo "checked";
 }
-?> value="total"> <span class="px-2 pr-2">Show total </span>
+?> value="total"> <span class="px-2 pr-2 btn-light" type="button">Show total jobs </span>
 </label>
   <input type="submit" name="submit" class="btn btn-success pl-2" value="Confirm">
   </span>
+  <div>
 </form>
 
 

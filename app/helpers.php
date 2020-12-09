@@ -69,7 +69,7 @@ function searchJobs($searchText, $address)
 
             $jobs = Jobs::where('address', 'ILIKE', '%' . $address . '%')
                 ->where('isExpired', '=', 'false')
-                ->get();
+                ->paginate(50);
 
         } else {
 
