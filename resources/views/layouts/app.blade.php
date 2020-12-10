@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="It, programming, csit, computer engineering Jobs in Nepal" >
+    <meta name="description" content="It, programming, csit and computer engineering Jobs of most popular sites in Nepal in one place." >
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

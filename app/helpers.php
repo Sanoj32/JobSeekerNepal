@@ -53,8 +53,8 @@ function changeSearchText($searchText)
     if (Str::contains($searchText, 'maria')) {
         $searchText = "maria";
     }
-    if (Str::contains($searchText, 'sql server')) {
-        $searchText = "microsoft sql";
+    if (Str::contains($searchText, 'microsoft sql') || Str::contains($searchText, 'microsoft sql server') || $searchText == "mssql"  || $searchText == "ms-sql") {
+        $searchText = "sql server";
     }
     return $searchText;
 
