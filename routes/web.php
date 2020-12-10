@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/update', 'JobsController@store');
+// Route::get('/update', 'JobsController@store');
 Route::get('/search', 'JobsController@search');
 Route::get('/test', 'SiteController@test');
 Route::get('/references', 'SiteController@references');
