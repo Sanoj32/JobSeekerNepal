@@ -1,3 +1,4 @@
 <?php
 use App\User;
-dd(auth()->user());
+echo auth()->user()->email;
+dd('done');

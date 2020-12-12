@@ -40,7 +40,7 @@ class UpdateDatabase extends Command
      */
     public function handle()
     {
-        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json', '/merorojgari.json', '/kathmandujob.json', '/kantipurjob.json');
+        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json', '/merorojgari.json', '/kathmandujob.json', '/kantipurjob.json','/ramrojob.json');
         foreach ($websites as $website) {
             $jsondata = file_get_contents(public_path("jsondata") . $website);
             $jsondata = json_decode($jsondata, true);

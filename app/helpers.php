@@ -53,7 +53,7 @@ function changeSearchText($searchText)
     if (Str::contains($searchText, 'maria')) {
         $searchText = "maria";
     }
-    if (Str::contains($searchText, 'microsoft sql') || Str::contains($searchText, 'microsoft sql server') || $searchText == "mssql"  || $searchText == "ms-sql") {
+    if (Str::contains($searchText, 'microsoft sql') || Str::contains($searchText, 'microsoft sql server') || $searchText == "mssql" || $searchText == "ms-sql") {
         $searchText = "sql server";
     }
     return $searchText;
@@ -69,7 +69,7 @@ function searchJobs($searchText, $address)
 
             $jobs = Jobs::where('address', 'ILIKE', '%' . $address . '%')
                 ->where('isExpired', '=', 'false')
-                ->paginate(50);
+                ->get();
 
         } else {
 

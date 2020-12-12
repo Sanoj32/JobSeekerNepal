@@ -69,7 +69,7 @@ class JobsController extends Controller
     public function index()
     {
 
-        $jobs = DB::table('jobs')->orderByDesc('created_at')->where('isExpired', false)->paginate(25);
+        $jobs = DB::table('jobs')->orderByDesc('created_at')->where('isExpired', false)->paginate(50);
 
         $count = Jobs::where('isExpired', false)->count();
         foreach ($jobs as $job) {

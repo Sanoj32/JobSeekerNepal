@@ -132,9 +132,9 @@ $combinedSite = array_combine($websiteNamesTemp, $websiteCountsTemp);
 arsort($combinedSite);
 $arCount = 0;
 foreach ($combinedSite as $key => $value) {
-    if ($key == "kathmandujobs") {
-        $key = "ktmjobs";
-    }
+    // if ($key == "kathmandujobs") {
+    //     $key = "ktmjobs";
+    // }
     if ($arCount < 6) {
         array_push($websiteNames, $key);
         array_push($websiteCounts, $value);
@@ -290,7 +290,7 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
 
                     @endif
                     @endforeach
-                    Like the website? Consider bookmarking us. Control + D on windows.
+                    Like the website? Consider bookmarking us. Control + D on windows. You can also find us by searching "sanoj32" or "pravavlo" on Google. Link will be on github.
                     @else
                     <div class="align-content-center">
 
@@ -425,9 +425,11 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
   </span>
   <div>
 </form>
-
-
-
+@if($jobStatus == "total")
+<p class="pt-2 pl-2">The above chart data is aquired by scanning <?php echo App\Jobs::all()->count() ?> jobs including both active and expired jobs. </p>
+@else
+<p class="pt-2 pl-2">This data is aquired by scanning <?php echo App\Jobs::where('isExpired', false)->count() ?> active jobs. </p
+@endif
 
 
                                 </div>

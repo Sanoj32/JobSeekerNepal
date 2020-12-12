@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="It, programming, csit and computer engineering Jobs of most popular sites in Nepal in one place." >
 
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -148,7 +149,7 @@ use Illuminate\Support\Facades\DB;
         <div class="row justify-content-between">
           <div class="col-sm-12 col-md-6">
             <h6>About Us</h6>
-            <p class="text-justify"> This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/">    Lalitpur Engineering College.</a> All job posts here belog to their respective websites..</p>
+            <p class="text-justify"> This website was made as a minor project from a team of students at <a target="_blank" href="https://lec.edu.np/">    Lalitpur Engineering College.</a> All job posts here belog to their respective websites. For support contact: jobseekernepal23@gmail.com</p>
           </div>
 
           <!-- <div class="col-xs-6 col-md-3">
@@ -165,8 +166,8 @@ use Illuminate\Support\Facades\DB;
             <h6>Quick Links</h6>
             <ul class="footer-links">
               <li> <a href="https://www.facebook.com/JobSeeker-Nepal-107381447893672">Like us on Facebook </a> </li>
-              <!-- <li><a href="https://github.com/Sanoj32/Minor-Project.git">Star on Github</a></li> -->
-              <!-- <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts</a></li> -->
+              <li><a href="https://github.com/Sanoj32/Minor-Project.git">Star our Github Repo</a></li>
+             <li><a href="https://github.com/Sanoj32/Python-Scripts-Minor-Project.git">Python Scripts</a></li>
               <li><a href="https://lec.edu.np/">Our LEC College </a></li>
               <li><a href="/faqs"> Frequently Asked Questions(FAQs)</a></li>
             </ul>
