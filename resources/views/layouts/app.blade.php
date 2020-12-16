@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\DB;
     <script src="{{ asset('js/scrollup.js') }}" defer></script>
 
 
-<!-- Global site tag (gtag.js) - Google Analytics For Sanoj -->
+<!-- Global site tag (gtag.js) - Google Analytics  -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-88ZJ4XKW00"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

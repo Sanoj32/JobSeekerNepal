@@ -12,9 +12,6 @@ function changeSearchText($searchText)
     if ($searchText == 'java') {
         $searchText = "java ";
     }
-    // if ($searchText == 'intern') {
-    //     $searchText = "intern ";
-    // }
 
     if ($searchText == 'js') {
         $searchText = "javascript";
@@ -44,6 +41,9 @@ function changeSearchText($searchText)
     if ($searchText == "postgresql") {
         $searchText = "postgres";
     }
+    // if ($searchText == "intern") {
+    //     $searchText = "intern ";
+    // }
     if (Str::contains($searchText, 'oracle')) {
         $searchText = "oracle";
     }
@@ -92,6 +92,7 @@ function searchJobs($searchText, $address)
                     ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
             })
             ->get();
+
     }
 
     if ($searchText != "" && $address == 'other') {

@@ -69,7 +69,8 @@ $(document).ready(function() {
          labels: databaseNames,
          datasets: [{
              data: databaseCounts,
-             backgroundColor: [ "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)", "rgba(255, 0, 0, 0.5)", "rgba(66, 7, 7, 0.5)"]         }]
+             backgroundColor: [ "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)", "rgba(255, 0, 0, 0.5)", "rgba(66, 7, 7, 0.5)" ,"rgba(66, 245, 218,0.5)"] 
+                    }]
      },
      options: {
         maintainAspectRatio: false,

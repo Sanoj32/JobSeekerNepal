@@ -100,6 +100,10 @@
         "type": "Database"
     },
     {
+        "name": "DynamoDB",
+        "type": "Database"
+    },
+    {
         "name": "linkedin",
         "type": "website"
     },
