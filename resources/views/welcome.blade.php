@@ -491,15 +491,15 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
 
 
     <script type="text/javascript">
-        var languageNames = < ? = json_encode($languageNames) ? > ;
-        var languageCounts = < ? = json_encode($languageCounts) ? > ;
-        var frameworkNames = < ? = json_encode($frameworkNames) ? > ;
-        var frameworkCounts = < ? = json_encode($frameworkCounts) ? > ;
-        var databaseNames = < ? = json_encode($databaseNames) ? > ;
-        var databaseCounts = < ? = json_encode($databaseCounts) ? > ;
-        var websiteNames = < ? = json_encode($websiteNames) ? > ;
-        var websiteCounts = < ? = json_encode($websiteCounts) ? > ;
-        var chartType = < ? = json_encode($chartType) ? > ;
-        var index = < ? = json_encode($index) ? > ;
+        var languageNames = <?= json_encode($languageNames) ?> ;
+        var languageCounts = <?= json_encode($languageCounts) ?> ;
+        var frameworkNames = <?= json_encode($frameworkNames) ?> ;
+        var frameworkCounts = <?= json_encode($frameworkCounts) ?> ;
+        var databaseNames = <?= json_encode($databaseNames) ?> ;
+        var databaseCounts = <?= json_encode($databaseCounts) ?> ;
+        var websiteNames = <?= json_encode($websiteNames) ?> ;
+        var websiteCounts = <?= json_encode($websiteCounts) ?> ;
+        var chartType = <?= json_encode($chartType) ?> ;
+        var index = <?= json_encode($index) ?> ;
 
     </script>
