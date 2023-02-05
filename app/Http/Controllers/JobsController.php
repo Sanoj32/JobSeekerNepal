@@ -63,7 +63,6 @@ class JobsController extends Controller
         $count = $jobs->count();
 
         return view('welcome', compact('jobs', 'count', 'searchText', 'address'));
-
     }
 
     public function index()
@@ -79,8 +78,7 @@ class JobsController extends Controller
                 $job->isViewed  = true;
             } else {
                 $job->isViewed = false;
-            }
-            ;
+            };
         }
         foreach ($jobs as $job) {
             $jobstatus = (auth()->user()) ? auth()->user()->savedjobs->contains($job->id) : false;
@@ -91,13 +89,12 @@ class JobsController extends Controller
             }
         }
         return view('allJobs', compact('jobs', 'count'));
-
     }
 
     // public function liveSearch(Request $request)
     // {
     //     ;
-    //     $queries = Query::where('name', 'ILIKE', '%' . $request->get('searchText') . '%')->get();
+    //     $queries = Query::where('name', 'like', '%' . $request->get('searchText') . '%')->get();
     //     return json_encode($queries);
     // }
 

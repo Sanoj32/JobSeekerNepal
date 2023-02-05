@@ -40,7 +40,7 @@ class UpdateDatabase extends Command
      */
     public function handle()
     {
-        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json', '/merorojgari.json', '/kathmandujob.json', '/kantipurjob.json','/ramrojob.json');
+        $websites = array('/linkedin.json', '/jobsnepal.json', '/globaljob.json', '/kumarijob.json', '/merojob.json', '/merorojgari.json', '/kathmandujob.json', '/kantipurjob.json', '/ramrojob.json');
         foreach ($websites as $website) {
             $jsondata = file_get_contents(public_path("jsondata") . $website);
             $jsondata = json_decode($jsondata, true);
@@ -86,7 +86,7 @@ class UpdateDatabase extends Command
         } //end of whole data collection from different websites
         $datenow = Carbon::now('Asia/Kathmandu'); //the exact date of today
         $datenow->format('Y-m-d');
-        $jobs = Jobs::where('url', 'NOT ILIKE', '%linkedin%')
+        $jobs = Jobs::where('url', 'NOT like', '%linkedin%')
             ->where('truedeadline', '=', null)
             ->get(); //catagroize legitimate dates and calculate exact date
         if ($jobs->count() > 0) {
@@ -105,7 +105,7 @@ class UpdateDatabase extends Command
             }
         }
 
-        $jobs = Jobs::where('url', 'ILIKE', '%linkedin%')
+        $jobs = Jobs::where('url', 'like', '%linkedin%')
             ->where('truedeadline', '=', null)
             ->get();
         if ($jobs->count() > 0) {
@@ -123,7 +123,7 @@ class UpdateDatabase extends Command
         }
 
         //Adding one month to the posted date of merorojgari
-        $jobs = Jobs::where('url', 'ILIKE', '%merorojgari%')
+        $jobs = Jobs::where('url', 'like', '%merorojgari%')
             ->where('truedeadline', '=', null)
             ->get();
         if ($jobs->count() > 0) {
@@ -171,22 +171,21 @@ class UpdateDatabase extends Command
         foreach ($queries as $query) {
             $searchText = $query->name;
             $searchText = changeSearchText($searchText);
-            $jobs       = Jobs::where('name', 'ILIKE', '%' . $searchText . '%')
-                ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
-                ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                ->orwhere('desct', 'ILIKE', '%' . $searchText . '%')
+            $jobs       = Jobs::where('name', 'like', '%' . $searchText . '%')
+                ->orwhere('skills', 'like', '%' . $searchText . '%')
+                ->orwhere('skills1', 'like', '%' . $searchText . '%')
+                ->orwhere('desct', 'like', '%' . $searchText . '%')
                 ->get();
             $query->total_count   = $jobs->count();
             $query->active_count  = $jobs->where('isExpired', false)->count();
             $query->expired_count = $jobs->where('isExpired', true)->count();
             $query->save();
-
         }
         $queries = Query::where('type', 'website')->get(); // Code to count the number of jobs each sites have.
         foreach ($queries as $query) {
-            $query->active_count  = Jobs::where('url', 'ilike', '%' . $query->name . '%')->where('isExpired', false)->count();
-            $query->expired_count = Jobs::where('url', 'ilike', '%' . $query->name . '%')->where('isExpired', true)->count();
-            $query->total_count   = Jobs::where('url', 'ilike', '%' . $query->name . '%')->count();
+            $query->active_count  = Jobs::where('url', 'like', '%' . $query->name . '%')->where('isExpired', false)->count();
+            $query->expired_count = Jobs::where('url', 'like', '%' . $query->name . '%')->where('isExpired', true)->count();
+            $query->total_count   = Jobs::where('url', 'like', '%' . $query->name . '%')->count();
             $query->save();
         }
     }

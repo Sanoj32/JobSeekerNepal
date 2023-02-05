@@ -57,7 +57,6 @@ function changeSearchText($searchText)
         $searchText = "sql server";
     }
     return $searchText;
-
 }
 
 function searchJobs($searchText, $address)
@@ -67,14 +66,13 @@ function searchJobs($searchText, $address)
         //if only the searchtext is empty show jobs with the selected address
         if ($address != 'other') {
 
-            $jobs = Jobs::where('address', 'ILIKE', '%' . $address . '%')
+            $jobs = Jobs::where('address', 'like', '%' . $address . '%')
                 ->where('isExpired', '=', 'false')
                 ->get();
-
         } else {
 
-            $jobs = Jobs::where('address', 'not ILIKE', '%kathmandu%')
-                ->where('address', 'not ILIKE', '%lalitpur%')
+            $jobs = Jobs::where('address', 'not like', '%kathmandu%')
+                ->where('address', 'not like', '%lalitpur%')
                 ->where('isExpired', '=', 'false')
                 ->get();
         }
@@ -84,27 +82,26 @@ function searchJobs($searchText, $address)
         //if the address isn't empty only get the jobs containing this address and searchtext isn't empty
 
         $jobs = Jobs::where('isExpired', '=', 'false')
-            ->where('address', 'ILIKE', '%' . $address . '%')
+            ->where('address', 'like', '%' . $address . '%')
             ->where(function ($query) use ($searchText) {
-                $query->where('name', 'ILIKE', '%' . $searchText . '%')
-                    ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
-                    ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                    ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
+                $query->where('name', 'like', '%' . $searchText . '%')
+                    ->orwhere('skills', 'like', '%' . $searchText . '%')
+                    ->orwhere('skills1', 'like', '%' . $searchText . '%')
+                    ->orwhere('desct', 'like', '%' . $searchText . '%');
             })
             ->get();
-
     }
 
     if ($searchText != "" && $address == 'other') {
 
-        $jobs = Jobs::where('address', 'not ILIKE', '%kathmandu%')
-            ->where('address', 'not ILIKE', '%lalitpur%')
+        $jobs = Jobs::where('address', 'not like', '%kathmandu%')
+            ->where('address', 'not like', '%lalitpur%')
             ->where('isExpired', '=', 'false')
             ->where(function ($query) use ($searchText) {
-                $query->where('name', 'ILIKE', '%' . $searchText . '%')
-                    ->orwhere('skills', 'ILIKE', '%' . $searchText . '%')
-                    ->orwhere('skills1', 'ILIKE', '%' . $searchText . '%')
-                    ->orwhere('desct', 'ILIKE', '%' . $searchText . '%');
+                $query->where('name', 'like', '%' . $searchText . '%')
+                    ->orwhere('skills', 'like', '%' . $searchText . '%')
+                    ->orwhere('skills1', 'like', '%' . $searchText . '%')
+                    ->orwhere('desct', 'like', '%' . $searchText . '%');
             })
             ->get();
     }
@@ -139,8 +136,7 @@ function setRelevancy($jobs, $searchText)
             $job->isViewed  = true;
         } else {
             $job->isViewed = false;
-        }
-        ;
+        };
     }
     return $jobs;
 }

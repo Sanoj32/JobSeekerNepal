@@ -14,7 +14,7 @@ if ($chartType == "pie" || $chartType == "doughnut") {
 }
 
 // code to assign dynamic value to the programming languages pie chart
-$languages = Query::where('type', 'ilike', '%Progaramming Language%')->get();
+$languages = Query::where('type', 'like', '%Progaramming Language%')->get();
 if ($jobStatus == "total") {
     $popularLanguagesUnsorted = $languages->sortByDesc('total_count')->take(6);
     $popularLanguages         = $popularLanguagesUnsorted->sortBy('name');
@@ -53,9 +53,9 @@ if ($jobStatus == "total") {
 //end code
 //code to assign dynamic value to the frameworks pie chart
 
-$frameworks = Query::where('type', 'ilike', '%framework%')
-    ->orwhere('type', 'ilike', '%runtime%')
-    ->orwhere('type', 'ilike', '%library%')
+$frameworks = Query::where('type', 'like', '%framework%')
+    ->orwhere('type', 'like', '%runtime%')
+    ->orwhere('type', 'like', '%library%')
     ->get();
 
 $frameworkNames  = [];
@@ -96,7 +96,7 @@ array_push($frameworkCounts, $unpopularFrameworkCounts);
 //end code
 //code to assign dynamic values to database pichart
 
-$database = Query::where('type', 'ilike', '%database%')->get();
+$database = Query::where('type', 'like', '%database%')->get();
 
 $databaseNames   = [];
 $databaseCounts  = [];
@@ -174,13 +174,15 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                         <div class="col-md-6 col-lg-3 my-3">
                             <div class="select-container">
                                 <select class="custom-select" style="color: black;" style="font-weight: bold;" name="location">
-                                <option selected  value=""><h3>Select a location<h3></option>
+                                    <option selected value="">
+                                        <h3>Select a location<h3>
+                                    </option>
 
-                                <?php $options = array('kathmandu', 'lalitpur', 'bhaktapur', 'other');?>
+                                    <?php $options = array('kathmandu', 'lalitpur', 'bhaktapur', 'other');?>
                                     <?php foreach ($options as $option): ?>
-                                        <option value="<?php echo $option; ?>" <?php echo (isset($_GET['location']) && $_GET['location'] == $option) ? 'selected' : ''; ?>>
-                                            <?php echo $option; ?>
-                                        </option>
+                                    <option value="<?php echo $option; ?>" <?php echo (isset($_GET['location']) && $_GET['location'] == $option) ? 'selected' : ''; ?>>
+                                        <?php echo $option; ?>
+                                    </option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -196,11 +198,11 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                 <div class="filter-result">
                     <br>
                     <p class="mb-3"> There are currently <span style="font-weight: bold;"><?php echo App\Jobs::where('isExpired', '=', 'false')->count(); ?></span> total active job openings.<a href="/all"> View all </a> </p>
-                  <?php if (!isset($searchText) && !isset($address)) {?>
+                    <?php if (!isset($searchText) && !isset($address)) {?>
                     <p class="mb-3"> Type a keyword in the search bar to find the job you are searching for. Selecting a location is optional. </p>
 
 
-                  <?php }?>
+                    <?php }?>
 
 
                     @if(!empty($jobs))
@@ -213,30 +215,31 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                         in {{$address}}
                         @if(!empty($searchText))
 
-                         <p>( Jobs with your searched language or skill as a secondary requirement are also included. ) </p>
+                        <p>( Jobs with your searched language or skill as a secondary requirement are also included. ) </p>
                         @endif
                         @endif
                     </p>
                     <?php $sn = 1;?>
                     @foreach($jobs as $job)
                     @if($job->isExpired == false)
-                   <?php $id = $job->id;?>
+                    <?php $id = $job->id;?>
                     <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="job-content">
-                            <span class="d-lg-flex">   <h5  style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?=$sn;?>)
+                                <span class="d-lg-flex">
+                                    <h5 style="font-weight: bold; font-size:large; color:black" class=" pl-3 text-center text-md-left"> <?=$sn;?>)
                                         <span class="pl-1"> {{ $job->name }}
                                             @auth
-                                            <viewed-button  jobs-id="{{$job->id}}" viewedjobs="{{$job->isViewed}}" >  </viewed-button>
-                                           <saved-button  jobs-id="{{$job->id}}" savedjobs="{{$job->isSaved}}" >  </saved-button>
+                                            <viewed-button jobs-id="{{$job->id}}" viewedjobs="{{$job->isViewed}}"> </viewed-button>
+                                            <saved-button jobs-id="{{$job->id}}" savedjobs="{{$job->isSaved}}"> </saved-button>
                                             @endauth
                                             @guest
-                                           <a href="/login"> <button class="btn btn-light ml-4"> Mark as opened</button> </a>
-                                           <a href="/login"> <button class="btn btn-light ml-3">Save</button> </a>
+                                            <a href="/login"> <button class="btn btn-light ml-4"> Mark as opened</button> </a>
+                                            <a href="/login"> <button class="btn btn-light ml-3">Save</button> </a>
                                             @endguest
                                         </span>
-                                        </h5>
-                                    </span>
+                                    </h5>
+                                </span>
 
                                 <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
                                     @if(!empty($job->address))
@@ -294,8 +297,10 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                     @else
                     <div class="align-content-center">
 
-                            <img class="center" src="/images/emptyresult.png">
-                            <h3 ><p class="text-center fontweight pt-2">No results found</p></h1>
+                        <img class="center" src="/images/emptyresult.png">
+                        <h3>
+                            <p class="text-center fontweight pt-2">No results found</p>
+                            </h1>
                     </div>
                     @endif
                     @else
@@ -303,145 +308,141 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                     <script type="application/javascript" src="{{ asset('js/piechart.js') }}" defer></script>
 
 
-                        <img class="img-resposive center" width="170" height="120"  src="images/mostp.png">
+                    <img class="img-resposive center" width="170" height="120" src="images/mostp.png">
 
 
 
 
 
 
-                        <div class="page-content page-container" id="page-content">
-                            <div class="padding">
-                                <div class="row">
-                                        <div class="col-md-6 col-xs-12 pb-4">
-                                            <div class="card">
-                                                <div class="card-header text-center">Programming language</div>
-                                                <div class="card-body" style="height: 400px">
-                                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                                        </div>
-                                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <canvas id="chart-line" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 400px; height: 500px;"></canvas>
+                    <div class="page-content page-container" id="page-content">
+                        <div class="padding">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 pb-4">
+                                    <div class="card">
+                                        <div class="card-header text-center">Programming language</div>
+                                        <div class="card-body" style="height: 400px">
+                                            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                                <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                                </div>
+                                                <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-6 col-xs-12 pb-4">
-                                            <div class="card">
-                                                <div class="card-header text-center">Framework/Libray/Runtime</div>
-                                                <div class="card-body" style="height: 400px">
-                                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                                        </div>
-                                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                                        </div>
-                                                    </div> <canvas id="chart-line2" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
-                                                </div>
-                                            </div>
+                                            <canvas id="chart-line" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 400px; height: 500px;"></canvas>
                                         </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    <div class="lez">
-                        <div class="page-content page-container" id="page-content">
-                            <div class="padding" >
-                                <div class="row">
-                                    <div class="col-md-6 col-xs-12 pb-4">
-                                        <div class="card">
-                                            <div class="card-header text-center">Database</div>
-                                                <div class="card-body" style="height: 400px">
-                                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                                        </div>
-                                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                                        </div>
-                                                    </div>
-                                                    <canvas id="chart-line3" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 400px; height: 500px;"></canvas>
+
+                                <div class="col-lg-6 col-xs-12 pb-4">
+                                    <div class="card">
+                                        <div class="card-header text-center">Framework/Libray/Runtime</div>
+                                        <div class="card-body" style="height: 400px">
+                                            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                                <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-6 col-xs-12 pb-4">
-                                            <div class="card">
-                                            <div class="card-header text-center">Job sites</div>
-                                                <div class="card-body" style="height: 400px">
-                                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                                        </div>
-                                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                                        </div>
-                                                    </div> <canvas id="chart-line4" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+                                                <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                                 </div>
-                                            </div>
+                                            </div> <canvas id="chart-line2" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
                                         </div>
-
-
-                                        <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-
-<!-- Basic dropdown -->
-  <!-- aria-haspopup="true" aria-expanded="false">Basic dropdown</button> -->
-  <select class="mdb-select md-form " name="chartType">
-  <option value="" disabled selected >Choose chart type</option>
-  <option value="bar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "bar") ? 'selected' : ''; ?>>Bar</option>
-  <option value="horizontalBar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "horizontalBar") ? 'selected' : ''; ?>>Horizonatal Bar</option>
-  <option value="pie" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "pie") ? 'selected' : ''; ?>>Pie chart</option>
-  <option value="doughnut" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "doughnut") ? 'selected' : ''; ?>>Doughnut</option>
-  <option value="line" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "line") ? 'selected' : ''; ?>>Line</option>
-  <option value="radar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "radar") ? 'selected' : ''; ?>>Radar</option>
-  <option value="polarArea" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "polarArea") ? 'selected' : ''; ?>>Polar Area</option>
-</select>
-
-<!-- Basic dropdown -->
-<div class="pt-3">
-<span class="pl-2">
-<label>
-
-  <input type="radio" class="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "active") {
-    echo "checked";
-}
-?> value="active" > <span class="pl-2 pr-2 btn-light" type="button">Show active jobs
-     </span>
-     </label>
-
-     <label>
-  <input type="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "total") {
-    echo "checked";
-}
-?> value="total"> <span class="px-2 pr-2 btn-light" type="button">Show total jobs </span>
-</label>
-  <input type="submit" name="submit" class="btn btn-success pl-2" value="Confirm">
-  </span>
-  <div>
-</form>
-@if($jobStatus == "total")
-<p class="pt-2 pl-2">The above chart data is aquired by scanning <?php echo App\Jobs::all()->count() ?> jobs including both active and expired jobs. </p>
-@else
-<p class="pt-2 pl-2">This data is aquired by scanning <?php echo App\Jobs::where('isExpired', false)->count() ?> active jobs. </p
-@endif
-
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endif
-                </div>
-            </div>
+                    <div class="lez">
+                        <div class="page-content page-container" id="page-content">
+                            <div class="padding">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-12 pb-4">
+                                        <div class="card">
+                                            <div class="card-header text-center">Database</div>
+                                            <div class="card-body" style="height: 400px">
+                                                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                                    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                                    </div>
+                                                    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                                    </div>
+                                                </div>
+                                                <canvas id="chart-line3" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 400px; height: 500px;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            <!-- START Pagination -->
-            <!-- <nav aria-label="Page navigation">
+
+                                    <div class="col-md-6 col-xs-12 pb-4">
+                                        <div class="card">
+                                            <div class="card-header text-center">Job sites</div>
+                                            <div class="card-body" style="height: 400px">
+                                                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                                    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                                    </div>
+                                                    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                                    </div>
+                                                </div> <canvas id="chart-line4" width="399" height="400" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+
+                                        <!-- Basic dropdown -->
+                                        <!-- aria-haspopup="true" aria-expanded="false">Basic dropdown</button> -->
+                                        <select class="mdb-select md-form " name="chartType">
+                                            <option value="" disabled selected>Choose chart type</option>
+                                            <option value="bar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "bar") ? 'selected' : ''; ?>>Bar</option>
+                                            <option value="horizontalBar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "horizontalBar") ? 'selected' : ''; ?>>Horizonatal Bar</option>
+                                            <option value="pie" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "pie") ? 'selected' : ''; ?>>Pie chart</option>
+                                            <option value="doughnut" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "doughnut") ? 'selected' : ''; ?>>Doughnut</option>
+                                            <option value="line" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "line") ? 'selected' : ''; ?>>Line</option>
+                                            <option value="radar" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "radar") ? 'selected' : ''; ?>>Radar</option>
+                                            <option value="polarArea" <?php echo (isset($_GET['chartType']) && $_GET['chartType'] == "polarArea") ? 'selected' : ''; ?>>Polar Area</option>
+                                        </select>
+
+                                        <!-- Basic dropdown -->
+                                        <div class="pt-3">
+                                            <span class="pl-2">
+                                                <label>
+
+                                                    <input type="radio" class="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "active") {
+    echo "checked";
+}
+?> value="active"> <span class="pl-2 pr-2 btn-light" type="button">Show active jobs
+                                                    </span>
+                                                </label>
+
+                                                <label>
+                                                    <input type="radio" name="jobStatus" <?php if (isset($jobStatus) && $jobStatus == "total") {
+    echo "checked";
+}
+?> value="total"> <span class="px-2 pr-2 btn-light" type="button">Show total jobs </span>
+                                                </label>
+                                                <input type="submit" name="submit" class="btn btn-success pl-2" value="Confirm">
+                                            </span>
+                                            <div>
+                                    </form>
+                                    @if($jobStatus == "total")
+                                    <p class="pt-2 pl-2">The above chart data is aquired by scanning <?php echo App\Jobs::all()->count() ?> jobs including both active and expired jobs. </p>
+                                    @else
+                                    <p class="pt-2 pl-2">This data is aquired by scanning <?php echo App\Jobs::where('isExpired', false)->count() ?> active jobs. </p @endif </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- START Pagination -->
+                <!-- <nav aria-label="Page navigation">
                 <ul class="pagination pagination-reset justify-content-center">
                     <li class="page-item disabled">
                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
@@ -460,44 +461,45 @@ array_push($websiteCounts, $unPopularWebsiteCounts)
                     </li>
                 </ul>
             </nav> -->
-            <!-- END Pagination -->
+                <!-- END Pagination -->
+            </div>
         </div>
+
     </div>
 
-</div>
+
+    @endsection
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        p.fontweight {
+            font-weight: 100;
+            opacity: 0.5
+        }
+
+        .popular {}
+
+    </style>
 
 
-@endsection
-<style>
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-p.fontweight{
-  font-weight: 100;
-  opacity: 0.5
-
-}
-.popular{
-
-}
-</style>
+    <!-- links for the pie chart -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script> -->
 
 
-<!-- links for the pie chart -->
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script> -->
+    <script type="text/javascript">
+        var languageNames = < ? = json_encode($languageNames) ? > ;
+        var languageCounts = < ? = json_encode($languageCounts) ? > ;
+        var frameworkNames = < ? = json_encode($frameworkNames) ? > ;
+        var frameworkCounts = < ? = json_encode($frameworkCounts) ? > ;
+        var databaseNames = < ? = json_encode($databaseNames) ? > ;
+        var databaseCounts = < ? = json_encode($databaseCounts) ? > ;
+        var websiteNames = < ? = json_encode($websiteNames) ? > ;
+        var websiteCounts = < ? = json_encode($websiteCounts) ? > ;
+        var chartType = < ? = json_encode($chartType) ? > ;
+        var index = < ? = json_encode($index) ? > ;
 
-
-<script type="text/javascript">
-var languageNames = <?=json_encode($languageNames)?>;
-var languageCounts = <?=json_encode($languageCounts)?>;
-var frameworkNames = <?=json_encode($frameworkNames)?>;
-var frameworkCounts = <?=json_encode($frameworkCounts)?>;
-var databaseNames = <?=json_encode($databaseNames)?>;
-var databaseCounts = <?=json_encode($databaseCounts)?>;
-var websiteNames = <?=json_encode($websiteNames)?>;
-var websiteCounts = <?=json_encode($websiteCounts)?>;
-var chartType = <?=json_encode($chartType)?>;
-var index = <?=json_encode($index)?>;
-</script>
+    </script>
